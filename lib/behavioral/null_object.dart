@@ -4,62 +4,49 @@
 /// eliminating the need for null checks.
 library;
 
-/// A logger interface.
-abstract interface class Logger {
-  /// Logs the given [message].
+abstract class Logger {
   void log(String message);
 }
 
-/// A logger that writes to the console.
-final class ConsoleLogger implements Logger {
-  /// Creates a console logger.
-  const ConsoleLogger();
-
+class ConsoleLogger implements Logger {
   @override
   void log(String message) => print('📝 LOG: $message');
 }
 
-/// A **Null Object** logger that silently discards all messages.
-///
-/// Clients can use this instead of `null` to avoid null checks.
-final class NullLogger implements Logger {
-  /// Creates a null logger.
+// الكائن الفارغ — لا يفعل شيئًا
+// Null Object — does nothing
+class NullLogger implements Logger {
   const NullLogger();
-
   @override
   void log(String message) {
-    // Intentionally do nothing.
+    /* لا شيء | nothing */
   }
 }
 
-/// A service that optionally logs its operations.
 class PaymentService {
   final Logger _logger;
 
-  /// Creates a payment service with the given [logger].
-  ///
-  /// Uses [NullLogger] by default — no null checks needed.
+  // لا حاجة لفحص null — NullLogger هو الافتراضي
+  // No null check needed — NullLogger is the default
   PaymentService({Logger logger = const NullLogger()}) : _logger = logger;
 
-  /// Processes a payment of the given [amount].
   void processPayment(double amount) {
-    _logger.log('Processing payment: \$${amount.toStringAsFixed(2)}');
-    // ... payment logic ...
-    _logger.log('Payment completed');
+    _logger.log('Processing: \$${amount.toStringAsFixed(2)}');
     print('💰 Payment of \$${amount.toStringAsFixed(2)} processed');
+    _logger.log('Completed');
   }
 }
 
 void main() {
-  // With logging
-  print('--- With Logger ---');
-  final service1 = PaymentService(logger: const ConsoleLogger());
-  service1.processPayment(99.99);
+  print('--- 👻 الكائن الفارغ | Null Object ---');
+  // مع تسجيل | With logging
+  print('1. الدفع مع استخدام مسجل (Logger) حقيقي:');
+  PaymentService(logger: ConsoleLogger()).processPayment(99.99);
 
-  print('');
+  print('\n---\n');
 
+  // بدون تسجيل — بلا فحوصات null!
   // Without logging — no null checks needed!
-  print('--- Without Logger (Null Object) ---');
-  final service2 = PaymentService(); // Uses NullLogger by default
-  service2.processPayment(49.99);
+  print('2. الدفع بدون أداة تسجيل (استخدام الكائن الفارغ الافتراضي):');
+  PaymentService().processPayment(49.99);
 }

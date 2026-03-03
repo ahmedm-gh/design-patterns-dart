@@ -4,12 +4,12 @@
 /// to swap them at runtime.
 library;
 
-/// A function that sorts a list of integers.
 typedef SortStrategy = List<int> Function(List<int> data);
 
-/// Sorts [data] using the bubble sort algorithm.
+// --- استراتيجية الفقاعات ---
+// --- Bubble Sort Strategy ---
 List<int> bubbleSort(List<int> data) {
-  final list = List<int>.of(data);
+  final list = List.of(data);
   for (var i = 0; i < list.length; i++) {
     for (var j = 0; j < list.length - i - 1; j++) {
       if (list[j] > list[j + 1]) {
@@ -22,26 +22,29 @@ List<int> bubbleSort(List<int> data) {
   return list;
 }
 
-/// Sorts [data] using Dart's built-in sort (delegates to optimized sort).
-List<int> quickSort(List<int> data) => (List<int>.of(data)..sort());
+// --- استراتيجية سريعة ---
+// --- Quick Sort Strategy ---
+List<int> quickSort(List<int> data) => (List.of(data)..sort());
 
-/// A sorter that delegates sorting to a pluggable [strategy].
 class Sorter {
-  /// The current sorting strategy.
   SortStrategy strategy;
-
-  /// Creates a sorter with the given [strategy].
   Sorter(this.strategy);
 
-  /// Sorts [data] using the current strategy.
   List<int> sort(List<int> data) => strategy(data);
 }
 
 void main() {
-  final sorter = Sorter(bubbleSort);
-  print(sorter.sort([3, 1, 2])); // [1, 2, 3]
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 🧠 الاستراتيجية | Strategy ---');
+  final data = [3, 1, 2, 9, 5, 7];
+  print('البيانات الأصلية | Original data: $data');
 
-  // Swap strategy at runtime
+  print('\n⏳ الفرز باستخدام "الفقاعات" | Sorting using "Bubble Sort":');
+  final sorter = Sorter(bubbleSort);
+  print('النتيجة | Result: ${sorter.sort(data)}');
+
+  print('\n⚡ التبديل إلى "الفرز السريع" للبيانات | Swapping to "Quick Sort":');
   sorter.strategy = quickSort;
-  print(sorter.sort([9, 5, 7])); // [5, 7, 9]
+  print('النتيجة | Result: ${sorter.sort(data)}');
 }

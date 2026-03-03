@@ -4,65 +4,49 @@
 /// changes. The object appears to change its class.
 library;
 
-/// Represents a state in the order lifecycle.
-abstract interface class OrderState {
-  /// Transitions the [order] to its next state.
+abstract class OrderState {
   void next(Order order);
-
-  /// A human-readable label for this state.
   String get status;
 }
 
-/// The initial state — order is waiting to be processed.
-final class PendingState implements OrderState {
-  /// Creates a pending state.
-  const PendingState();
-
+class PendingState implements OrderState {
   @override
-  void next(Order order) => order.state = const ProcessingState();
-
+  void next(Order order) => order.state = ProcessingState();
   @override
-  String get status => 'Pending';
+  String get status => 'قيد الانتظار | Pending';
 }
 
-/// The order is being processed.
-final class ProcessingState implements OrderState {
-  /// Creates a processing state.
-  const ProcessingState();
-
+class ProcessingState implements OrderState {
   @override
-  void next(Order order) => order.state = const DeliveredState();
-
+  void next(Order order) => order.state = DeliveredState();
   @override
-  String get status => 'Processing';
+  String get status => 'قيد المعالجة | Processing';
 }
 
-/// The order has been delivered (terminal state).
-final class DeliveredState implements OrderState {
-  /// Creates a delivered state.
-  const DeliveredState();
-
+class DeliveredState implements OrderState {
   @override
-  void next(Order order) => print('Order already completed!');
-
+  void next(Order order) => print('اكتمل بالفعل! | Already completed!');
   @override
-  String get status => 'Delivered';
+  String get status => 'تم التوصيل | Delivered';
 }
 
-/// An order that transitions through states.
 class Order {
-  /// The current state of this order.
-  OrderState state = const PendingState();
-
-  /// Advances to the next state.
+  OrderState state = PendingState();
   void proceed() => state.next(this);
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 📦 تتبع حالة الطلب | Order State Tracker ---');
   final order = Order();
-  print(order.state.status); // Pending
+  print('الحالة الأولى | Initial State: ${order.state.status}');
+
+  print('\nتحديث الحالة... | Proceeding to next state...');
   order.proceed();
-  print(order.state.status); // Processing
+  print('الحالة الجديدة | New State: ${order.state.status}');
+
+  print('\nتحديث الحالة... | Proceeding to next state...');
   order.proceed();
-  print(order.state.status); // Delivered
+  print('الحالة النهائية | Final State: ${order.state.status}');
 }

@@ -4,107 +4,75 @@
 /// without specifying their concrete classes.
 library;
 
+// --- المُنتَجات المُجرَّدة ---
 // --- Abstract Products ---
-
-/// A UI button component.
-abstract interface class Button {
-  /// Renders this button and returns its visual representation.
+abstract class Button {
   String render();
 }
 
-/// A UI text field component.
-abstract interface class TextField {
-  /// Renders this text field and returns its visual representation.
+abstract class TextField {
   String render();
 }
 
+// --- المُنتَجات الفعلية ---
 // --- Concrete Products ---
-
-/// A Material Design button.
-final class MaterialButton implements Button {
-  /// Creates a Material Design button.
-  const MaterialButton();
-
+class MaterialButton implements Button {
   @override
   String render() => '[Material Button]';
 }
 
-/// A Cupertino (iOS-style) button.
-final class CupertinoButton implements Button {
-  /// Creates a Cupertino button.
-  const CupertinoButton();
-
+class CupertinoButton implements Button {
   @override
   String render() => '[Cupertino Button]';
 }
 
-/// A Material Design text field.
-final class MaterialTextField implements TextField {
-  /// Creates a Material Design text field.
-  const MaterialTextField();
-
+class MaterialTextField implements TextField {
   @override
   String render() => '[Material TextField]';
 }
 
-/// A Cupertino (iOS-style) text field.
-final class CupertinoTextField implements TextField {
-  /// Creates a Cupertino text field.
-  const CupertinoTextField();
-
+class CupertinoTextField implements TextField {
   @override
   String render() => '[Cupertino TextField]';
 }
 
+// --- المصنع المُجرَّد ---
 // --- Abstract Factory ---
-
-/// Creates a family of related UI widgets.
-abstract interface class WidgetFactory {
-  /// Creates a [Button] for this platform.
+abstract class WidgetFactory {
   Button createButton();
-
-  /// Creates a [TextField] for this platform.
   TextField createTextField();
 }
 
+// --- المصانع الفعلية ---
 // --- Concrete Factories ---
-
-/// Creates Material Design widgets.
-final class MaterialFactory implements WidgetFactory {
-  /// Creates a Material factory.
-  const MaterialFactory();
-
+class MaterialFactory implements WidgetFactory {
   @override
-  Button createButton() => const MaterialButton();
-
+  Button createButton() => MaterialButton();
   @override
-  TextField createTextField() => const MaterialTextField();
+  TextField createTextField() => MaterialTextField();
 }
 
-/// Creates Cupertino (iOS-style) widgets.
-final class CupertinoFactory implements WidgetFactory {
-  /// Creates a Cupertino factory.
-  const CupertinoFactory();
-
+class CupertinoFactory implements WidgetFactory {
   @override
-  Button createButton() => const CupertinoButton();
-
+  Button createButton() => CupertinoButton();
   @override
-  TextField createTextField() => const CupertinoTextField();
+  TextField createTextField() => CupertinoTextField();
 }
 
-/// Builds a UI using the given [factory].
+// --- الاستخدام ---
+// --- Usage ---
 void buildUI(WidgetFactory factory) {
+  print('--- 🛠️ بناء واجهة المستخدم | Building UI ---');
   final button = factory.createButton();
   final textField = factory.createTextField();
-  print(button.render());
-  print(textField.render());
+  print('🔘 ${button.render()}');
+  print('📝 ${textField.render()}');
 }
 
 void main() {
-  // CupertinoFactory
-  buildUI(const CupertinoFactory());
+  print('🍎 استخدام مصنع آبل | Using CupertinoFactory:');
+  buildUI(CupertinoFactory());
 
-  // MaterialFactory
-  buildUI(const MaterialFactory());
+  print('\n🤖 استخدام مصنع جوجل | Using MaterialFactory:');
+  buildUI(MaterialFactory());
 }

@@ -3,40 +3,39 @@
 /// Provides a surrogate for another object to control access to it.
 library;
 
-/// A database that can execute SQL queries.
-abstract interface class Database {
-  /// Executes the given [sql] query and returns the results.
+abstract class Database {
   String query(String sql);
 }
 
-/// A real database connection.
-final class RealDatabase implements Database {
-  /// Creates a real database connection.
+class RealDatabase implements Database {
   RealDatabase() {
-    print('⏳ Connecting to database...');
+    print('⏳ جاري الاتصال... | Connecting...');
   }
-
   @override
-  String query(String sql) => 'Results: $sql';
+  String query(String sql) => 'نتائج | Results: $sql';
 }
 
-/// A proxy that lazily initializes and logs access to a [RealDatabase].
-final class DatabaseProxy implements Database {
+class DatabaseProxy implements Database {
   RealDatabase? _db;
 
   @override
   String query(String sql) {
-    // Lazy initialization — connects on first query only.
+    // التهيئة الكسولة — الاتصال عند أول استعلام فقط
+    // Lazy initialization — connects on first query only
     _db ??= RealDatabase();
-    print('📋 Logging query: $sql');
+    print('📋 تسجيل | Logging: $sql');
     return _db!.query(sql);
   }
 }
 
 void main() {
-  final db = DatabaseProxy(); // Not connected yet
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 🛡️ استخدام الوكيل | Using Proxy ---');
+  final db = DatabaseProxy(); // لم يتصل بعد | Not connected yet
+  print('تم إنشاء الوكيل، لكن لم يتم الاتصال بقاعدة البيانات بعد.');
+  print('Proxy created, but database not connected yet.\n');
+
+  print('إرسال أول استعلام... | Sending first query...');
   print(db.query('SELECT * FROM users'));
-  // ⏳ Connecting to database...
-  // 📋 Logging query: SELECT * FROM users
-  // Results: SELECT * FROM users
 }

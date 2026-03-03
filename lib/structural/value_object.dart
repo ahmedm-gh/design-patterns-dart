@@ -4,20 +4,11 @@
 /// not its identity. Two value objects with the same data are equal.
 library;
 
-/// An immutable monetary amount with a currency.
-final class Money {
-  /// The numeric amount.
+class Money {
   final double amount;
-
-  /// The currency code (e.g., 'USD', 'SAR').
   final String currency;
-
-  /// Creates a money value with the given [amount] and [currency].
   const Money(this.amount, this.currency);
 
-  /// Adds this money to [other].
-  ///
-  /// Throws [ArgumentError] if currencies don't match.
   Money operator +(Money other) {
     if (currency != other.currency) {
       throw ArgumentError('Cannot add $currency and ${other.currency}');
@@ -25,9 +16,10 @@ final class Money {
     return Money(amount + other.amount, currency);
   }
 
-  /// Multiplies this money by a [factor].
   Money operator *(num factor) => Money(amount * factor, currency);
 
+  // المساواة بالقيمة — ليس بالهوية
+  // Equality by value — not by identity
   @override
   bool operator ==(Object other) =>
       other is Money && amount == other.amount && currency == other.currency;
@@ -39,47 +31,20 @@ final class Money {
   String toString() => '${amount.toStringAsFixed(2)} $currency';
 }
 
-/// An immutable 2D point.
-final class Point {
-  /// The x-coordinate.
-  final double x;
-
-  /// The y-coordinate.
-  final double y;
-
-  /// Creates a point at ([x], [y]).
-  const Point(this.x, this.y);
-
-  /// Returns the distance from this point to [other].
-  double distanceTo(Point other) {
-    final dx = x - other.x;
-    final dy = y - other.y;
-    return (dx * dx + dy * dy).toDouble();
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      other is Point && x == other.x && y == other.y;
-
-  @override
-  int get hashCode => Object.hash(x, y);
-
-  @override
-  String toString() => 'Point($x, $y)';
-}
-
 void main() {
-  // Money value objects
+  print('--- 💎 كائن القيمة | Value Object ---');
   const price = Money(29.99, 'SAR');
   const tax = Money(4.50, 'SAR');
+
+  print('السعر | Price: $price');
+  print('الضريبة | Tax: $tax');
+
   final total = price + tax;
-  print('Total: $total'); // Total: 34.49 SAR
+  print('\nالإجمالي | Total: $total'); // Total: 34.49 SAR
+  print('الضعف | Double price: ${price * 2}'); // 59.98 SAR
 
-  final doubled = price * 2;
-  print('Doubled: $doubled'); // Doubled: 59.98 SAR
-
-  // Equality by value, not identity
-  print(const Money(10, 'SAR') == const Money(10, 'SAR')); // true
-  print(const Point(3, 4) == const Point(3, 4)); // true
-  print(const Point(3, 4) == const Point(5, 6)); // false
+  print('\nالمساواة بالقيمة؟ | Value equality?');
+  final m1 = const Money(10, 'SAR');
+  final m2 = const Money(10, 'SAR');
+  print('هل (10 SAR) == (10 SAR)؟ ${m1 == m2}'); // true
 }

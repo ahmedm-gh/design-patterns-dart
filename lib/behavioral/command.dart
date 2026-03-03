@@ -4,34 +4,21 @@
 /// execution, undo/redo, and logging.
 library;
 
-/// A command that can be executed and undone.
-abstract interface class Command {
-  /// Executes this command.
+abstract class Command {
   void execute();
-
-  /// Reverses the effect of this command.
   void undo();
 }
 
-/// A simple text editor that supports append and remove operations.
 class TextEditor {
-  /// The current text content.
   String content = '';
-
-  /// Appends [text] to the content.
   void append(String text) => content += text;
-
-  /// Removes the last [count] characters from the content.
   void removeLast(int count) =>
       content = content.substring(0, content.length - count);
 }
 
-/// A command that types text into a [TextEditor].
-final class TypeCommand implements Command {
+class TypeCommand implements Command {
   final TextEditor _editor;
   final String _text;
-
-  /// Creates a type command for the given [editor] and [text].
   TypeCommand(this._editor, this._text);
 
   @override
@@ -42,18 +29,28 @@ final class TypeCommand implements Command {
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 📝 محرر النصوص بالأوامر | Text Editor with Commands ---');
   final editor = TextEditor();
   final commands = <Command>[];
 
   final cmd1 = TypeCommand(editor, 'Hello ');
   final cmd2 = TypeCommand(editor, 'World!');
 
+  print('1. كتابة "Hello "');
   cmd1.execute();
+  print('2. كتابة "World!"');
   cmd2.execute();
-  commands.addAll([cmd1, cmd2]);
-  print(editor.content); // Hello World!
 
-  // Undo
+  commands.addAll([cmd1, cmd2]);
+  print(
+    '✅ المحتوى الحالي | Current Content: "${editor.content}"',
+  ); // Hello World!
+
+  print('\n--- ⏪ تراجع | Undo ---');
   commands.removeLast().undo();
-  print(editor.content); // Hello
+  print(
+    '✅ المحتوى بعد التراجع | Content after undo: "${editor.content}"',
+  ); // Hello
 }

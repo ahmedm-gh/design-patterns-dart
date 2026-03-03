@@ -4,45 +4,48 @@
 /// from scratch.
 library;
 
-/// A game configuration that supports deep cloning.
 class GameConfig {
-  /// The difficulty level.
   String difficulty;
-
-  /// The maximum number of players.
   int maxPlayers;
-
-  /// The list of enabled game modes.
   List<String> enabledModes;
 
-  /// Creates a game configuration with the given settings.
   GameConfig({
     required this.difficulty,
     required this.maxPlayers,
     required this.enabledModes,
   });
 
-  /// Returns a deep copy of this configuration.
+  // نسخ عميق — نسخ القائمة لا مشاركتها
+  // Deep Copy — copy the list, don't share it
   GameConfig clone() {
     return GameConfig(
       difficulty: difficulty,
       maxPlayers: maxPlayers,
-      enabledModes: List<String>.of(enabledModes),
+      enabledModes: List.from(enabledModes),
     );
   }
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- ⚙️ إنشاء الإعدادات الافتراضية | Creating Default Config ---');
   final defaultConfig = GameConfig(
     difficulty: 'Normal',
     maxPlayers: 4,
     enabledModes: ['Survival', 'Creative'],
   );
+  print('الافتراضي | Default: ${defaultConfig.enabledModes}');
 
+  print('\n--- 🔄 استنساخ وتعديل | Cloning and Modifying ---');
   final customConfig = defaultConfig.clone()
     ..difficulty = 'Hard'
     ..enabledModes.add('Adventure');
 
-  print(defaultConfig.enabledModes); // [Survival, Creative] — unaffected
-  print(customConfig.enabledModes); // [Survival, Creative, Adventure]
+  print(
+    'الافتراضي (لم يتأثر) | Default (unaffected): ${defaultConfig.enabledModes}',
+  );
+  print(
+    'المُخصَّص (تم تغييره) | Custom (changed): ${customConfig.enabledModes}',
+  );
 }

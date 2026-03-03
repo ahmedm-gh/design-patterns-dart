@@ -4,17 +4,14 @@
 /// Each key maps to exactly one instance.
 library;
 
-/// A logger that maintains one instance per named channel.
-final class Logger {
+class Logger {
   static final Map<String, Logger> _instances = {};
 
-  /// The channel name for this logger.
   final String channel;
-
   Logger._internal(this.channel);
 
-  /// Returns the [Logger] for the given [channel], creating it
-  /// on first access.
+  // مصنع يُرجع نسخة واحدة لكل قناة
+  // Factory returns one instance per channel
   factory Logger(String channel) {
     return _instances.putIfAbsent(channel, () {
       print('🆕 Creating logger for "$channel"');
@@ -22,20 +19,28 @@ final class Logger {
     });
   }
 
-  /// Logs a [message] to this channel.
   void log(String message) => print('[$channel] $message');
 }
 
 void main() {
-  final authLogger1 = Logger('auth');
-  final authLogger2 = Logger('auth');
-  final dbLogger = Logger('database');
+  print('--- 👯 المُتعدِّد | Multiton ---');
+  print('جلب مسجل المصادقة (أول مرة)...');
+  final authLogger1 = Logger('auth'); // 🆕 Creating
 
-  print(identical(authLogger1, authLogger2)); // true — same instance
-  print(identical(authLogger1, dbLogger)); // false — different channel
+  print('جلب مسجل المصادقة (ثاني مرة)...');
+  final authLogger2 = Logger('auth'); // مُعاد استخدام | Reused
 
-  authLogger1.log('User logged in');
-  dbLogger.log('Query executed');
-  // [auth] User logged in
-  // [database] Query executed
+  print('جلب مسجل قاعدة البيانات...');
+  final dbLogger = Logger('database'); // 🆕 Creating
+
+  print(
+    '\nهل مسجل المصادقة 1 و 2 متطابقان؟ | Are auth 1 and 2 identical? ${identical(authLogger1, authLogger2)}',
+  );
+  print(
+    'هل مسجل المصادقة وقاعدة البيانات متطابقان؟ | Are auth and db identical? ${identical(authLogger1, dbLogger)}',
+  );
+
+  print('');
+  authLogger1.log('User logged in'); // [auth] User logged in
+  dbLogger.log('Query executed'); // [database] Query executed
 }

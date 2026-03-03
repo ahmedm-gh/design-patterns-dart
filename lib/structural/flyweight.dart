@@ -4,24 +4,17 @@
 /// similar objects.
 library;
 
-/// An immutable character style (intrinsic state).
-final class CharacterStyle {
-  /// The font family name.
+class CharacterStyle {
   final String font;
-
-  /// The font size in points.
   final int size;
-
-  /// Creates a character style with the given [font] and [size].
-  const CharacterStyle(this.font, this.size);
+  CharacterStyle(this.font, this.size);
 }
 
-/// A factory that caches and reuses [CharacterStyle] instances.
+// --- المصنع — يُعيد استخدام النُّسخ المُشتركة ---
+// --- Factory — reuses shared instances ---
 class StyleFactory {
   final Map<String, CharacterStyle> _cache = {};
 
-  /// Returns a cached [CharacterStyle] for the given [font] and [size],
-  /// creating one if it doesn't already exist.
   CharacterStyle getStyle(String font, int size) {
     final key = '$font-$size';
     return _cache.putIfAbsent(key, () => CharacterStyle(font, size));
@@ -29,8 +22,21 @@ class StyleFactory {
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 🦋 استخدام وزن الذبابة | Using Flyweight ---');
   final factory = StyleFactory();
+
+  print('طلب تنسيق (Arial, 12)... | Requesting style...');
   final s1 = factory.getStyle('Arial', 12);
+
+  print('طلب نفس التنسيق مرة أخرى... | Requesting same style again...');
   final s2 = factory.getStyle('Arial', 12);
-  print(identical(s1, s2)); // true — same object in memory
+
+  print(
+    '\nهل هما نفس الكائن في الذاكرة؟ | Are they the same object in memory?',
+  );
+  print(
+    identical(s1, s2),
+  ); // true — نفس الكائن في الذاكرة | same object in memory
 }

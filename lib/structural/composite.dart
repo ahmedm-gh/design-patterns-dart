@@ -4,41 +4,33 @@
 /// through a tree structure.
 library;
 
-/// A shared interface for files and folders.
-abstract interface class FileSystemEntity {
-  /// The name of this entity.
+// --- الواجهة المشتركة ---
+// --- Shared Interface ---
+abstract class FileSystemEntity {
   String get name;
-
-  /// Returns the total size in bytes.
   int getSize();
 }
 
-/// A file with a fixed size (leaf node).
-final class File implements FileSystemEntity {
+// --- الورقة ---
+// --- Leaf ---
+class File implements FileSystemEntity {
   @override
   final String name;
-
-  /// The size of this file in bytes.
   final int size;
-
-  /// Creates a file with the given [name] and [size].
-  const File(this.name, this.size);
+  File(this.name, this.size);
 
   @override
   int getSize() => size;
 }
 
-/// A folder that can contain other [FileSystemEntity] children (composite node).
-final class Folder implements FileSystemEntity {
+// --- المُركَّب ---
+// --- Composite ---
+class Folder implements FileSystemEntity {
   @override
   final String name;
-
   final List<FileSystemEntity> _children = [];
-
-  /// Creates a folder with the given [name].
   Folder(this.name);
 
-  /// Adds a child [entity] to this folder.
   void add(FileSystemEntity entity) => _children.add(entity);
 
   @override
@@ -46,13 +38,20 @@ final class Folder implements FileSystemEntity {
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 🗂️ حساب حجم المجلدات | Calculating Folders Size ---');
   final root = Folder('root')
-    ..add(const File('readme.md', 100))
+    ..add(File('readme.md', 100))
     ..add(
       Folder('src')
-        ..add(const File('main.dart', 500))
-        ..add(const File('utils.dart', 300)),
+        ..add(File('main.dart', 500))
+        ..add(File('utils.dart', 300)),
     );
 
-  print(root.getSize()); // 900
+  print('حجم "readme.md" هو 100 | Size of readme.md = 100');
+  print('حجم المجلد الداخلي "src" هو 800 | Size of src = 800');
+  print(
+    '📁 إجمالي حجم المجلد الأم | Total root size: ${root.getSize()} byte',
+  ); // 900
 }

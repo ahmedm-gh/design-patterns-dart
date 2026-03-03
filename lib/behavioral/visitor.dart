@@ -4,71 +4,59 @@
 /// operations without modifying element classes.
 library;
 
-import 'dart:math' as math;
-
-/// A geometric shape that accepts a [ShapeVisitor].
-abstract interface class Shape {
-  /// Accepts the given [visitor] for double-dispatch.
+// --- العناصر ---
+// --- Elements ---
+abstract class Shape {
   void accept(ShapeVisitor visitor);
 }
 
-/// A circle with a given [radius].
-final class Circle implements Shape {
-  /// The radius of this circle.
+class Circle implements Shape {
   final double radius;
-
-  /// Creates a circle with the given [radius].
-  const Circle(this.radius);
+  Circle(this.radius);
 
   @override
   void accept(ShapeVisitor visitor) => visitor.visitCircle(this);
 }
 
-/// A rectangle with a given [width] and [height].
-final class Rectangle implements Shape {
-  /// The width of this rectangle.
-  final double width;
-
-  /// The height of this rectangle.
-  final double height;
-
-  /// Creates a rectangle with the given [width] and [height].
-  const Rectangle(this.width, this.height);
+class Rectangle implements Shape {
+  final double width, height;
+  Rectangle(this.width, this.height);
 
   @override
   void accept(ShapeVisitor visitor) => visitor.visitRectangle(this);
 }
 
-/// A visitor that can operate on various [Shape] types.
-abstract interface class ShapeVisitor {
-  /// Visits a [circle].
+// --- الزائر ---
+// --- Visitor ---
+abstract class ShapeVisitor {
   void visitCircle(Circle circle);
-
-  /// Visits a [rectangle].
   void visitRectangle(Rectangle rectangle);
 }
 
-/// Calculates and prints the area of each shape.
-final class AreaCalculator implements ShapeVisitor {
-  /// Creates an area calculator.
-  const AreaCalculator();
-
+// --- زائر حساب المساحة ---
+// --- Area Calculator Visitor ---
+class AreaCalculator implements ShapeVisitor {
   @override
   void visitCircle(Circle c) =>
-      print('Circle area: ${math.pi * c.radius * c.radius}');
+      print('مساحة الدائرة | Circle area: ${3.14159 * c.radius * c.radius}');
 
   @override
   void visitRectangle(Rectangle r) =>
-      print('Rectangle area: ${r.width * r.height}');
+      print('مساحة المستطيل | Rectangle area: ${r.width * r.height}');
 }
 
 void main() {
-  final shapes = <Shape>[const Circle(5), const Rectangle(4, 6)];
-  const calculator = AreaCalculator();
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 🚶‍♂️ الزائر (حساب المساحات) | Visitor (Area Calculation) ---');
+  final shapes = <Shape>[Circle(5), Rectangle(4, 6)];
+  print(
+    'الأشكال: دائرة (5)، مستطيل (4x6) | Shapes: Circle(5), Rectangle(4, 6)\n',
+  );
+
+  final calculator = AreaCalculator();
 
   for (final shape in shapes) {
     shape.accept(calculator);
   }
-  // Circle area: 78.53981633974483
-  // Rectangle area: 24.0
 }

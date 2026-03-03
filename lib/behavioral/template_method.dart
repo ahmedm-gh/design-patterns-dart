@@ -4,29 +4,21 @@
 /// override specific steps.
 library;
 
-/// A base class for exporting data in various formats.
 abstract class DataExporter {
-  /// Exports data by fetching, formatting, and saving it.
-  ///
-  /// This is the **template method** — the fixed skeleton.
+  // أسلوب القالب — الهيكل الثابت
+  // Template Method — the fixed skeleton
   void export() {
     final data = fetchData();
     final formatted = format(data);
     save(formatted);
   }
 
-  /// Fetches the raw data to export (primitive operation).
-  List<String> fetchData();
-
-  /// Formats the [data] into the target format (primitive operation).
-  String format(List<String> data);
-
-  /// Saves the formatted [output] (hook — can be overridden).
-  void save(String output) => print('💾 Saved: $output');
+  List<String> fetchData(); // عملية أوّلية | Primitive operation
+  String format(List<String> data); // عملية أوّلية | Primitive operation
+  void save(String output) => print('💾 حفظ | Saved: $output'); // خُطّاف | Hook
 }
 
-/// Exports data in CSV format.
-final class CsvExporter extends DataExporter {
+class CsvExporter extends DataExporter {
   @override
   List<String> fetchData() => ['name', 'age', 'city'];
 
@@ -34,8 +26,7 @@ final class CsvExporter extends DataExporter {
   String format(List<String> data) => data.join(',');
 }
 
-/// Exports data in JSON format.
-final class JsonExporter extends DataExporter {
+class JsonExporter extends DataExporter {
   @override
   List<String> fetchData() => ['name', 'age', 'city'];
 
@@ -45,6 +36,15 @@ final class JsonExporter extends DataExporter {
 }
 
 void main() {
-  CsvExporter().export(); // 💾 Saved: name,age,city
-  JsonExporter().export(); // 💾 Saved: {"fields": ["name", "age", "city"]}
+  // --- الاستخدام ---
+  // --- Usage ---
+  print(
+    '--- 📄 أسلوب القالب (تصدير كـ CSV) | Template Method (CSV Export) ---',
+  );
+  CsvExporter().export();
+
+  print(
+    '\n--- � أسلوب القالب (تصدير كـ JSON) | Template Method (JSON Export) ---',
+  );
+  JsonExporter().export();
 }

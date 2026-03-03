@@ -4,68 +4,58 @@
 /// decoupling domain logic from storage details.
 library;
 
-/// A user entity.
-final class User {
-  /// The unique identifier.
+class User {
   final int id;
-
-  /// The user's name.
   final String name;
-
-  /// The user's email.
   final String email;
-
-  /// Creates a user.
   const User({required this.id, required this.name, required this.email});
 
   @override
-  String toString() => 'User(id: $id, name: $name, email: $email)';
+  String toString() => 'User($id, $name)';
 }
 
-/// An abstract repository for [User] entities.
-abstract interface class UserRepository {
-  /// Returns all users.
+// واجهة المستودع — مُجرَّدة عن التخزين
+// Repository interface — abstracted from storage
+abstract class UserRepository {
   List<User> findAll();
-
-  /// Returns the user with the given [id], or `null` if not found.
   User? findById(int id);
-
-  /// Saves a [user] (insert or update).
   void save(User user);
-
-  /// Deletes the user with the given [id].
   void delete(int id);
 }
 
-/// An in-memory implementation of [UserRepository].
-final class InMemoryUserRepository implements UserRepository {
+// تنفيذ في الذاكرة — يمكن استبداله بقاعدة بيانات أو API
+// In-memory implementation — can be swapped with DB or API
+class InMemoryUserRepository implements UserRepository {
   final Map<int, User> _store = {};
 
   @override
   List<User> findAll() => _store.values.toList();
-
   @override
   User? findById(int id) => _store[id];
-
   @override
   void save(User user) => _store[user.id] = user;
-
   @override
   void delete(int id) => _store.remove(id);
 }
 
 void main() {
+  print('--- 🗄️ المستودع | Repository ---');
+  print('تهيئة مستودع في الذاكرة... | Initializing in-memory repo...');
   final UserRepository repo = InMemoryUserRepository();
 
-  // Create
+  print('\nحفظ مستخدمين جدد... | Saving new users...');
   repo.save(const User(id: 1, name: 'Ali', email: 'ali@mail.com'));
   repo.save(const User(id: 2, name: 'Sara', email: 'sara@mail.com'));
 
-  // Read
-  print('All: ${repo.findAll()}');
-  print('Find #1: ${repo.findById(1)}');
+  print('جميع المستخدمين | All users:');
+  repo.findAll().forEach((u) => print('  - \$u'));
 
-  // Delete
+  print('\nالبحث عن المستخدم رقم 1 | Find user #1:');
+  print('  -> \${repo.findById(1)}');
+
+  print('\nحذف المستخدم رقم 2... | Deleting user #2...');
   repo.delete(2);
-  print('After delete: ${repo.findAll()}');
+
+  print('المستخدمون بعد الحذف | Users after delete:');
+  repo.findAll().forEach((u) => print('  - \$u'));
 }

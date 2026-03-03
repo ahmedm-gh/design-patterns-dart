@@ -4,78 +4,59 @@
 /// An alternative to Dependency Injection for simpler setups.
 library;
 
-/// A central registry for locating services by type.
 class ServiceLocator {
   static final ServiceLocator _instance = ServiceLocator._internal();
-  final _factories = <Type, Object Function()>{};
   final _singletons = <Type, Object>{};
-
   ServiceLocator._internal();
-
-  /// Returns the global [ServiceLocator] instance.
   factory ServiceLocator() => _instance;
 
-  /// Registers a factory that creates a new instance each time.
-  void register<T extends Object>(T Function() factory) {
-    _factories[T] = factory;
-  }
-
-  /// Registers a single instance (singleton).
-  void registerSingleton<T extends Object>(T instance) {
+  // تسجيل خدمة | Register a service
+  void register<T extends Object>(T instance) {
     _singletons[T] = instance;
   }
 
-  /// Retrieves a service of type [T].
-  ///
-  /// Throws [StateError] if no service of type [T] is registered.
+  // استرجاع خدمة | Retrieve a service
   T get<T extends Object>() {
-    if (_singletons.containsKey(T)) return _singletons[T] as T;
-    final factory = _factories[T];
-    if (factory != null) return factory() as T;
-    throw StateError('Service not registered: $T');
+    final service = _singletons[T];
+    if (service == null) throw StateError('Not registered: $T');
+    return service as T;
   }
 
-  /// Removes all registered services (useful for testing).
-  void reset() {
-    _factories.clear();
-    _singletons.clear();
-  }
+  void reset() => _singletons.clear();
 }
 
-// --- Usage Example ---
+// --- مثال | Example ---
 
-/// An analytics service interface.
-abstract interface class AnalyticsService {
-  /// Tracks an event with the given [name].
+abstract class AnalyticsService {
   void track(String name);
 }
 
-/// A real analytics service.
-final class FirebaseAnalytics implements AnalyticsService {
+class FirebaseAnalytics implements AnalyticsService {
   @override
   void track(String name) => print('🔥 Firebase: $name');
 }
 
-/// A fake analytics service for testing.
-final class FakeAnalytics implements AnalyticsService {
+class FakeAnalytics implements AnalyticsService {
   @override
   void track(String name) => print('🧪 Fake: $name');
 }
 
 void main() {
+  print('--- 📍 مُحدِّد الخدمات | Service Locator ---');
   final locator = ServiceLocator();
 
-  // Register services
-  locator.registerSingleton<AnalyticsService>(FirebaseAnalytics());
+  // تسجيل | Register
+  print('تسجيل خدمة Firebase... | Registering Firebase service...');
+  locator.register<AnalyticsService>(FirebaseAnalytics());
 
-  // Retrieve from anywhere in the app
-  final analytics = locator.get<AnalyticsService>();
-  analytics.track('page_view'); // 🔥 Firebase: page_view
+  // استرجاع من أي مكان | Retrieve from anywhere
+  print('استرجاع الخدمة وتتبع حدث... | Retrieving service and tracking...');
+  locator.get<AnalyticsService>().track('page_view');
 
-  // For testing: swap implementation
+  print('\n--- للاختبار | For Testing ---');
+  // للاختبار: تبديل التنفيذ | For testing: swap
+  print('تبديل التنفيذ إلى خدمة وهمية... | Swapping to fake service...');
   locator.reset();
-  locator.registerSingleton<AnalyticsService>(FakeAnalytics());
-
-  final testAnalytics = locator.get<AnalyticsService>();
-  testAnalytics.track('page_view'); // 🧪 Fake: page_view
+  locator.register<AnalyticsService>(FakeAnalytics());
+  locator.get<AnalyticsService>().track('page_view');
 }

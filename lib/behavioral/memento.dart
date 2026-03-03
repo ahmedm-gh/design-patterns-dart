@@ -4,52 +4,54 @@
 /// restored later without violating encapsulation.
 library;
 
-/// An immutable snapshot of an [Editor]'s content.
-final class EditorMemento {
-  /// The saved content.
+// --- اللقطة ---
+// --- Snapshot ---
+class EditorMemento {
   final String content;
-
-  /// Creates a memento with the given [content].
-  const EditorMemento(this.content);
+  EditorMemento(this.content);
 }
 
-/// A text editor whose state can be saved and restored.
+// --- المُنشئ ---
+// --- Originator ---
 class Editor {
-  /// The current text content.
   String content = '';
 
-  /// Saves the current state and returns a [EditorMemento].
   EditorMemento save() => EditorMemento(content);
-
-  /// Restores this editor's state from the given [memento].
   void restore(EditorMemento memento) => content = memento.content;
 }
 
-/// A caretaker that manages a stack of [EditorMemento] snapshots.
+// --- الحارس ---
+// --- Caretaker ---
 class History {
   final _snapshots = <EditorMemento>[];
 
-  /// Pushes a [memento] onto the history stack.
   void push(EditorMemento memento) => _snapshots.add(memento);
-
-  /// Pops and returns the most recent snapshot, or `null` if empty.
   EditorMemento? pop() =>
       _snapshots.isNotEmpty ? _snapshots.removeLast() : null;
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 💾 التذكار (حفظ واستعادة) | Memento (Save/Restore) ---');
   final editor = Editor();
   final history = History();
 
-  editor.content = 'Chapter 1';
+  print('📝 كتابة الفصل الأول... | Writing Chapter 1...');
+  editor.content = 'الفصل الأول | Chapter 1';
   history.push(editor.save());
 
-  editor.content = 'Chapter 2';
+  print('📝 كتابة الفصل الثاني... | Writing Chapter 2...');
+  editor.content = 'الفصل الثاني | Chapter 2';
   history.push(editor.save());
 
-  editor.content = 'Wrong text!';
+  print('❌ خطأ مطبعي! | Typo made!');
+  editor.content = 'نص خاطئ! | Wrong text!';
+  print('المحتوى الحالي | Current content: ${editor.content}');
 
-  // Restore last snapshot
+  print('\n--- ⏪ استعادة اللقطة السابقة | Restoring previous snapshot ---');
   editor.restore(history.pop()!);
-  print(editor.content); // Chapter 2
+  print(
+    '✅ المحتوى بعد الاستعادة | Content after restore: ${editor.content}',
+  ); // الفصل الثاني | Chapter 2
 }

@@ -4,17 +4,14 @@
 /// state, all dependents are notified automatically.
 library;
 
-/// A generic event emitter that notifies listeners of type [T] events.
 class EventEmitter<T> {
   final _listeners = <void Function(T)>[];
 
-  /// Registers a [listener] to be called on each event.
+  // الاشتراك | Subscribe
   void on(void Function(T) listener) => _listeners.add(listener);
-
-  /// Removes a previously registered [listener].
+  // إلغاء الاشتراك | Unsubscribe
   void off(void Function(T) listener) => _listeners.remove(listener);
-
-  /// Emits an [event], notifying all registered listeners.
+  // إخطار الجميع | Notify all
   void emit(T event) {
     for (final listener in _listeners) {
       listener(event);
@@ -23,13 +20,23 @@ class EventEmitter<T> {
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 👀 المُراقِب | Observer ---');
   final priceTracker = EventEmitter<double>();
 
-  priceTracker.on((price) => print('📊 New price: $price'));
+  print('إضافة مراقب للسعر... | Adding price observer...');
+  priceTracker.on((price) => print('📊 السعر الجديد | New price: \$$price'));
+
+  print('إضافة مراقب للتنبيهات... | Adding alert observer...');
   priceTracker.on((price) {
-    if (price < 50) print('🔔 Alert: Price is low!');
+    if (price < 50)
+      print('� تنبيه: السعر منخفض جدًا! | Alert: Price is too low!');
   });
 
-  priceTracker.emit(75.0); // 📊 New price: 75.0
-  priceTracker.emit(45.0); // 📊 New price: 45.0  +  🔔 Alert: Price is low!
+  print('\nتحديث السعر إلى 75 | Updating price to 75:');
+  priceTracker.emit(75.0);
+
+  print('\nتحديث السعر إلى 45 | Updating price to 45:');
+  priceTracker.emit(45.0);
 }

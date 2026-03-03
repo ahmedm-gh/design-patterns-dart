@@ -4,48 +4,46 @@
 /// allowing step-by-step construction.
 library;
 
-/// A pizza with configurable options.
 class Pizza {
-  /// The size of the pizza.
   String? size;
-
-  /// The crust type.
   String? crust;
-
-  /// The list of toppings.
-  final List<String> toppings = [];
+  List<String> toppings = [];
 
   @override
   String toString() => 'Pizza($size, $crust, toppings: $toppings)';
 }
 
-/// Builds a [Pizza] step by step using method chaining.
 class PizzaBuilder {
   final Pizza _pizza = Pizza();
 
-  /// Sets the pizza [size].
+  // تحديد الحجم | Set size
   PizzaBuilder setSize(String size) {
     _pizza.size = size;
-    return this;
+    return this; // لتمكين سلسلة الاستدعاءات | Enables method chaining
   }
 
-  /// Sets the [crust] type.
+  // تحديد العجينة | Set crust
   PizzaBuilder setCrust(String crust) {
     _pizza.crust = crust;
     return this;
   }
 
-  /// Adds a [topping] to the pizza.
+  // إضافة طبقة | Add topping
   PizzaBuilder addTopping(String topping) {
     _pizza.toppings.add(topping);
     return this;
   }
 
-  /// Returns the constructed [Pizza].
+  // بناء المُنتَج النهائي | Build final product
   Pizza build() => _pizza;
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- 🍕 بناء بيتزا مخصصة | Building Custom Pizza ---');
+  print('جارٍ إضافة المكونات... | Adding ingredients...');
+
   final pizza = PizzaBuilder()
       .setSize('Large')
       .setCrust('Thin')
@@ -53,5 +51,5 @@ void main() {
       .addTopping('Olives')
       .build();
 
-  print(pizza); // Pizza(Large, Thin, toppings: [Cheese, Olives])
+  print('✅ النتيجة النهائية | Final Result: $pizza');
 }

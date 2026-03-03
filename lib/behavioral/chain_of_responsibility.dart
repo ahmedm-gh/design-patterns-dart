@@ -4,48 +4,52 @@
 /// processes it or forwards it to the next handler.
 library;
 
-/// A handler in a support chain.
 abstract class SupportHandler {
   SupportHandler? _next;
 
-  /// Sets the [handler] as the next in the chain and returns it.
+  // تحديد المُعالِج التالي
+  // Set the next handler
   SupportHandler setNext(SupportHandler handler) {
     _next = handler;
     return handler;
   }
 
-  /// Handles the given [issue], or forwards it to the next handler.
   String handle(String issue) {
     if (_next != null) return _next!.handle(issue);
-    return '❌ Unresolved issue: $issue';
+    return '❌ لم يتم الحل | Unresolved: $issue';
   }
 }
 
-/// Handles common issues automatically.
-final class BotSupport extends SupportHandler {
+class BotSupport extends SupportHandler {
   @override
   String handle(String issue) {
-    if (issue == 'password_reset') return '🤖 Password reset link sent';
+    if (issue == 'password_reset') return '🤖 تم إرسال الرابط | Link sent';
     return super.handle(issue);
   }
 }
 
-/// Handles issues that require human intervention.
-final class HumanSupport extends SupportHandler {
+class HumanSupport extends SupportHandler {
   @override
   String handle(String issue) {
-    if (issue == 'billing') {
-      return '👨‍💼 Transferring to billing department';
-    }
+    if (issue == 'billing')
+      return '👨‍💼 تحويل للفوترة | Transferring to billing';
     return super.handle(issue);
   }
 }
 
 void main() {
+  // --- الاستخدام ---
+  // --- Usage ---
+  print('--- ⛓️ سلسلة المسؤولية | Chain of Responsibility ---');
   final bot = BotSupport();
   bot.setNext(HumanSupport());
 
-  print(bot.handle('password_reset')); // 🤖 Password reset link sent
-  print(bot.handle('billing')); // 👨‍💼 Transferring to billing department
-  print(bot.handle('unknown')); // ❌ Unresolved issue: unknown
+  print('\nإرسال طلب استعادة كلمة المرور | Requesting password reset:');
+  print('النتيجة | Result: ${bot.handle('password_reset')}');
+
+  print('\nإرسال طلب فواتير | Requesting billing details:');
+  print('النتيجة | Result: ${bot.handle('billing')}');
+
+  print('\nإرسال طلب غير معروف | Requesting unknown issue:');
+  print('النتيجة | Result: ${bot.handle('unknown')}');
 }
