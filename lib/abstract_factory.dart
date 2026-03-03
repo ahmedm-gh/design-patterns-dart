@@ -61,6 +61,6 @@ void main() {
   // CupertinoFactory
   buildUI(CupertinoFactory());
 
-  // CupertinoFactory
-  buildUI(CupertinoFactory());
+  // MaterialFactory
+  buildUI(MaterialFactory());
 }

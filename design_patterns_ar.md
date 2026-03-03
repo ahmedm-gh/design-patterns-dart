@@ -97,10 +97,11 @@ void main() {
   // CupertinoFactory
   buildUI(CupertinoFactory());
 
-  // CupertinoFactory
-  buildUI(CupertinoFactory());
+  // MaterialFactory
+  buildUI(MaterialFactory());
 }
 ```
+> 📄 [الكود المصدري](lib/abstract_factory.dart)
 
 **متى تستخدمه؟** عندما يحتاج تطبيقك دعم منصات أو سمات (Themes) مختلفة بعناصر واجهة متناسقة.
 
@@ -166,6 +167,7 @@ void main() {
   print(pizza); // Pizza(Large, Thin, toppings: [Cheese, Olives])
 }
 ```
+> 📄 [الكود المصدري](lib/builder.dart)
 
 **متى تستخدمه؟** عندما يكون لديك كائن يحتوي خيارات بناء كثيرة ومتنوعة.
 
@@ -223,6 +225,7 @@ void main() {
   notification.send('مرحبًا!'); // Email: مرحبًا!
 }
 ```
+> 📄 [الكود المصدري](lib/factory_method.dart)
 
 **متى تستخدمه؟** عندما لا تعرف مُسبقًا النوع الدقيق للكائنات التي سيُنشئها الكود.
 
@@ -282,6 +285,7 @@ void main() {
   print(customConfig.enabledModes);  // [Survival, Creative, Adventure]
 }
 ```
+> 📄 [الكود المصدري](lib/prototype.dart)
 
 **متى تستخدمه؟** عندما تريد إنشاء كائنات مُشابهة بتكلفة أقل من البناء الكامل.
 
@@ -328,6 +332,7 @@ void main() {
   print(config2.debugMode);           // true — التغيير ظهر في كليهما
 }
 ```
+> 📄 [الكود المصدري](lib/singleton.dart)
 
 **متى تستخدمه؟** عندما تحتاج نسخة واحدة مُشتركة يصل إليها التطبيق بالكامل.
 
@@ -387,6 +392,7 @@ void main() {
   logger.logJson({'event': 'login', 'user': 'ahmad'}); // LOG FILE: event=login, user=ahmad
 }
 ```
+> 📄 [الكود المصدري](lib/adapter.dart)
 
 **متى تستخدمه؟** عند الحاجة لدمج مكتبة قديمة أو خارجية مع كودك الحالي.
 
@@ -445,6 +451,7 @@ void main() {
   urgentSms.notify('الخادم توقف!'); // SMS: 🚨 عاجل: الخادم توقف!
 }
 ```
+> 📄 [الكود المصدري](lib/bridge.dart)
 
 **متى تستخدمه؟** عندما يكون لديك بُعدان مستقلان من التنوُّع وتريد تجنُّب انفجار عدد الأصناف.
 
@@ -501,6 +508,7 @@ void main() {
   print(root.getSize()); // 900
 }
 ```
+> 📄 [الكود المصدري](lib/composite.dart)
 
 **متى تستخدمه؟** عند التعامل مع بنى شجرية (ملفات، قوائم، واجهات رسومية).
 
@@ -563,6 +571,7 @@ void main() {
   print(order.cost);        // 7.0
 }
 ```
+> 📄 [الكود المصدري](lib/decorator.dart)
 
 **متى تستخدمه؟** عند الحاجة لإضافة سلوكيات اختيارية ومُركَّبة لكائن بشكل ديناميكي.
 
@@ -614,6 +623,7 @@ void main() {
   MediaPlayer().play('movie.mp4'); // ▶ عرض: video_data(movie.mp4) مع audio_data(movie.mp4)
 }
 ```
+> 📄 [الكود المصدري](lib/facade.dart)
 
 **متى تستخدمه؟** عندما تريد تبسيط التخاطب مع نظام فرعي مُعقَّد.
 
@@ -657,6 +667,7 @@ void main() {
   print(identical(s1, s2)); // true — نفس الكائن في الذاكرة
 }
 ```
+> 📄 [الكود المصدري](lib/flyweight.dart)
 
 **متى تستخدمه؟** عند وجود آلاف الكائنات التي تتشارك بيانات مُتشابهة.
 
@@ -707,6 +718,7 @@ void main() {
   print(db.query('SELECT * FROM users')); // يتصل الآن ثم يُسجِّل ويُنفِّذ
 }
 ```
+> 📄 [الكود المصدري](lib/proxy.dart)
 
 **متى تستخدمه؟** عند الحاجة للتحميل الكسول (Lazy Loading)، أو التخزين المؤقت (Caching)، أو التحكُّم في الصلاحيات.
 
@@ -772,6 +784,7 @@ void main() {
   print(bot.handle('unknown'));        // ❌ لم يتم حل المشكلة: unknown
 }
 ```
+> 📄 [الكود المصدري](lib/chain_of_responsibility.dart)
 
 ---
 
@@ -829,6 +842,7 @@ void main() {
   print(editor.content); // مرحبًا
 }
 ```
+> 📄 [الكود المصدري](lib/command.dart)
 
 ---
 
@@ -872,6 +886,7 @@ void main() {
   print(expression.interpret({'x': 10, 'y': 20})); // 30
 }
 ```
+> 📄 [الكود المصدري](lib/interpreter.dart)
 
 ---
 
@@ -944,6 +959,7 @@ void main() {
   //   ▶ Hotel California — Eagles
 }
 ```
+> 📄 [الكود المصدري](lib/iterator_pattern.dart)
 
 ---
 
@@ -994,6 +1010,7 @@ void main() {
   ali.send('مرحبًا!'); // سارة تلقّى من علي: مرحبًا!
 }
 ```
+> 📄 [الكود المصدري](lib/mediator.dart)
 
 ---
 
@@ -1046,6 +1063,7 @@ void main() {
   print(editor.content); // الفصل الثاني
 }
 ```
+> 📄 [الكود المصدري](lib/memento.dart)
 
 ---
 
@@ -1087,6 +1105,7 @@ void main() {
   priceTracker.emit(45.0); // 📊 السعر الجديد: 45.0  +  🔔 تنبيه: السعر منخفض!
 }
 ```
+> 📄 [الكود المصدري](lib/observer.dart)
 
 ---
 
@@ -1143,6 +1162,7 @@ void main() {
   print(order.state.status); // تم التوصيل
 }
 ```
+> 📄 [الكود المصدري](lib/state.dart)
 
 ---
 
@@ -1192,6 +1212,7 @@ void main() {
   print(sorter.sort([9, 5, 7])); // [5, 7, 9]
 }
 ```
+> 📄 [الكود المصدري](lib/strategy.dart)
 
 ---
 
@@ -1242,6 +1263,7 @@ void main() {
   JsonExporter().export(); // 💾 حفظ: {"fields": ["اسم", "عمر", "مدينة"]}
 }
 ```
+> 📄 [الكود المصدري](lib/template_method.dart)
 
 ---
 
@@ -1305,6 +1327,7 @@ void main() {
   // مساحة المستطيل: 24.0
 }
 ```
+> 📄 [الكود المصدري](lib/visitor.dart)
 
 ---
 

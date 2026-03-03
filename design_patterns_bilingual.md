@@ -108,10 +108,11 @@ void main() {
   // CupertinoFactory
   buildUI(CupertinoFactory());
 
-  // CupertinoFactory
-  buildUI(CupertinoFactory());
+  // MaterialFactory
+  buildUI(MaterialFactory());
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/abstract_factory.dart)
 
 > **متى تستخدمه؟** عندما يحتاج تطبيقك دعم منصات أو سمات (Themes) مختلفة بعناصر واجهة متناسقة.
 >
@@ -189,6 +190,7 @@ void main() {
   print(pizza); // Pizza(Large, Thin, toppings: [Cheese, Olives])
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/builder.dart)
 
 > **متى تستخدمه؟** عندما يكون لديك كائن يحتوي خيارات بناء كثيرة ومتنوعة.
 >
@@ -259,6 +261,7 @@ void main() {
   notification.send('مرحبًا! | Hello!'); // Email: مرحبًا! | Hello!
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/factory_method.dart)
 
 > **متى تستخدمه؟** عندما لا تعرف مُسبقًا النوع الدقيق للكائنات التي سيُنشئها الكود.
 >
@@ -327,6 +330,7 @@ void main() {
   print(customConfig.enabledModes);  // [Survival, Creative, Adventure]
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/prototype.dart)
 
 > **متى تستخدمه؟** عندما تريد إنشاء كائنات مُشابهة بتكلفة أقل من البناء الكامل.
 >
@@ -384,6 +388,7 @@ void main() {
   print(config2.debugMode);           // true — التغيير ظهر | change reflected
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/singleton.dart)
 
 > **متى تستخدمه؟** عندما تحتاج نسخة واحدة مُشتركة يصل إليها التطبيق بالكامل.
 >
@@ -450,6 +455,7 @@ void main() {
   // LOG FILE: event=login, user=ahmad
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/adapter.dart)
 
 > **متى تستخدمه؟** عند دمج مكتبة قديمة أو خارجية مع كودك الحالي.
 >
@@ -517,6 +523,7 @@ void main() {
   // SMS: 🚨 عاجل | URGENT: الخادم توقف! | Server down!
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/bridge.dart)
 
 > **متى تستخدمه؟** عندما يكون لديك بُعدان مستقلان من التنوُّع وتريد تجنُّب انفجار عدد الأصناف.
 >
@@ -587,6 +594,7 @@ void main() {
   print(root.getSize()); // 900
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/composite.dart)
 
 > **متى تستخدمه؟** عند التعامل مع بنى شجرية (ملفات، قوائم، واجهات رسومية).
 >
@@ -658,6 +666,7 @@ void main() {
   print(order.cost);        // 7.0
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/decorator.dart)
 
 > **متى تستخدمه؟** عند الحاجة لإضافة سلوكيات اختيارية ومُركَّبة ديناميكيًا.
 >
@@ -718,6 +727,7 @@ void main() {
   // ▶ عرض | Playing: video_data(movie.mp4) + audio_data(movie.mp4)
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/facade.dart)
 
 > **متى تستخدمه؟** عندما تريد تبسيط التخاطب مع نظام فرعي مُعقَّد.
 >
@@ -769,6 +779,7 @@ void main() {
   print(identical(s1, s2)); // true — نفس الكائن في الذاكرة | same object in memory
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/flyweight.dart)
 
 > **متى تستخدمه؟** عند وجود آلاف الكائنات التي تتشارك بيانات مُتشابهة.
 >
@@ -826,6 +837,7 @@ void main() {
   print(db.query('SELECT * FROM users'));
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/proxy.dart)
 
 > **متى تستخدمه؟** عند الحاجة للتحميل الكسول، التخزين المؤقت، أو التحكُّم في الصلاحيات.
 >
@@ -901,6 +913,7 @@ void main() {
   print(bot.handle('unknown'));        // ❌ لم يتم الحل | Unresolved: unknown
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/chain_of_responsibility.dart)
 
 ---
 
@@ -965,6 +978,7 @@ void main() {
   print(editor.content); // Hello
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/command.dart)
 
 ---
 
@@ -1018,6 +1032,7 @@ void main() {
   print(expression.interpret({'x': 10, 'y': 20})); // 30
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/interpreter.dart)
 
 ---
 
@@ -1098,6 +1113,7 @@ void main() {
   //   ▶ Hotel California — Eagles
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/iterator_pattern.dart)
 
 ---
 
@@ -1159,6 +1175,7 @@ void main() {
   // Sara تلقّى من | received from Ali: مرحبًا! | Hello!
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/mediator.dart)
 
 ---
 
@@ -1224,6 +1241,7 @@ void main() {
   print(editor.content); // الفصل الثاني | Chapter 2
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/memento.dart)
 
 ---
 
@@ -1274,6 +1292,7 @@ void main() {
   priceTracker.emit(45.0); // 📊 ... + 🔔 تنبيه | Alert
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/observer.dart)
 
 ---
 
@@ -1337,6 +1356,7 @@ void main() {
   print(order.state.status); // تم التوصيل | Delivered
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/state.dart)
 
 ---
 
@@ -1398,6 +1418,7 @@ void main() {
   print(sorter.sort([9, 5, 7])); // [5, 7, 9]
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/strategy.dart)
 
 ---
 
@@ -1457,6 +1478,7 @@ void main() {
   JsonExporter().export(); // 💾 حفظ | Saved: {"fields": ["name", "age", "city"]}
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/template_method.dart)
 
 ---
 
@@ -1532,8 +1554,11 @@ void main() {
   // مساحة المستطيل | Rectangle area: 24.0
 }
 ```
+> 📄 [الكود المصدري | View source code](lib/visitor.dart)
 
 ---
+
+<a id="summary"></a>
 
 # 📊 التوزيع النهائي | Summary
 

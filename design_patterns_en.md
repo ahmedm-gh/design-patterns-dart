@@ -96,10 +96,11 @@ void main() {
   // CupertinoFactory
   buildUI(CupertinoFactory());
 
-  // CupertinoFactory
-  buildUI(CupertinoFactory());
+  // MaterialFactory
+  buildUI(MaterialFactory());
 }
 ```
+> 📄 [View source code](lib/abstract_factory.dart)
 
 **When to use?** When your app needs to support multiple platforms or themes with consistent UI components.
 
@@ -165,6 +166,7 @@ void main() {
   print(pizza); // Pizza(Large, Thin, toppings: [Cheese, Olives])
 }
 ```
+> 📄 [View source code](lib/builder.dart)
 
 **When to use?** When you have an object with many diverse construction options.
 
@@ -222,6 +224,7 @@ void main() {
   notification.send('Hello!'); // Email: Hello!
 }
 ```
+> 📄 [View source code](lib/factory_method.dart)
 
 **When to use?** When you don't know in advance the exact type of objects your code will create.
 
@@ -281,6 +284,7 @@ void main() {
   print(customConfig.enabledModes);  // [Survival, Creative, Adventure]
 }
 ```
+> 📄 [View source code](lib/prototype.dart)
 
 **When to use?** When you want to create similar objects at a lower cost than full construction.
 
@@ -327,6 +331,7 @@ void main() {
   print(config2.debugMode);           // true — change reflected
 }
 ```
+> 📄 [View source code](lib/singleton.dart)
 
 **When to use?** When you need one shared instance accessible by the entire application.
 
@@ -386,6 +391,7 @@ void main() {
   logger.logJson({'event': 'login', 'user': 'ahmad'}); // LOG FILE: event=login, user=ahmad
 }
 ```
+> 📄 [View source code](lib/adapter.dart)
 
 **When to use?** When integrating legacy or third-party libraries with your current codebase.
 
@@ -444,6 +450,7 @@ void main() {
   urgentSms.notify('Server down!'); // SMS: 🚨 URGENT: Server down!
 }
 ```
+> 📄 [View source code](lib/bridge.dart)
 
 **When to use?** When you have two independent dimensions of variation and want to avoid class explosion.
 
@@ -500,6 +507,7 @@ void main() {
   print(root.getSize()); // 900
 }
 ```
+> 📄 [View source code](lib/composite.dart)
 
 **When to use?** When dealing with tree structures (files, menus, UI widgets).
 
@@ -562,6 +570,7 @@ void main() {
   print(order.cost);        // 7.0
 }
 ```
+> 📄 [View source code](lib/decorator.dart)
 
 **When to use?** When you need to add optional, composable behaviors to an object dynamically.
 
@@ -613,6 +622,7 @@ void main() {
   MediaPlayer().play('movie.mp4'); // ▶ Playing: video_data(movie.mp4) with audio_data(movie.mp4)
 }
 ```
+> 📄 [View source code](lib/facade.dart)
 
 **When to use?** When you want to simplify interaction with a complex subsystem.
 
@@ -656,6 +666,7 @@ void main() {
   print(identical(s1, s2)); // true — same object in memory
 }
 ```
+> 📄 [View source code](lib/flyweight.dart)
 
 **When to use?** When you have thousands of objects sharing similar data.
 
@@ -706,6 +717,7 @@ void main() {
   print(db.query('SELECT * FROM users')); // Connects now, then logs and executes
 }
 ```
+> 📄 [View source code](lib/proxy.dart)
 
 **When to use?** For lazy loading, caching, or access control scenarios.
 
@@ -771,6 +783,7 @@ void main() {
   print(bot.handle('unknown'));        // ❌ Unresolved issue: unknown
 }
 ```
+> 📄 [View source code](lib/chain_of_responsibility.dart)
 
 ---
 
@@ -828,6 +841,7 @@ void main() {
   print(editor.content); // Hello
 }
 ```
+> 📄 [View source code](lib/command.dart)
 
 ---
 
@@ -871,6 +885,7 @@ void main() {
   print(expression.interpret({'x': 10, 'y': 20})); // 30
 }
 ```
+> 📄 [View source code](lib/interpreter.dart)
 
 ---
 
@@ -941,6 +956,7 @@ void main() {
   //   ▶ Hotel California — Eagles
 }
 ```
+> 📄 [View source code](lib/iterator_pattern.dart)
 
 ---
 
@@ -991,6 +1007,7 @@ void main() {
   ali.send('Hello!'); // Sara received from Ali: Hello!
 }
 ```
+> 📄 [View source code](lib/mediator.dart)
 
 ---
 
@@ -1043,6 +1060,7 @@ void main() {
   print(editor.content); // Chapter 2
 }
 ```
+> 📄 [View source code](lib/memento.dart)
 
 ---
 
@@ -1084,6 +1102,7 @@ void main() {
   priceTracker.emit(45.0); // 📊 New price: 45.0  +  🔔 Alert: Price is low!
 }
 ```
+> 📄 [View source code](lib/observer.dart)
 
 ---
 
@@ -1140,6 +1159,7 @@ void main() {
   print(order.state.status); // Delivered
 }
 ```
+> 📄 [View source code](lib/state.dart)
 
 ---
 
@@ -1189,6 +1209,7 @@ void main() {
   print(sorter.sort([9, 5, 7])); // [5, 7, 9]
 }
 ```
+> 📄 [View source code](lib/strategy.dart)
 
 ---
 
@@ -1240,6 +1261,7 @@ void main() {
   JsonExporter().export(); // 💾 Saved: {"fields": ["name", "age", "city"]}
 }
 ```
+> 📄 [View source code](lib/template_method.dart)
 
 ---
 
@@ -1303,6 +1325,7 @@ void main() {
   // Rectangle area: 24.0
 }
 ```
+> 📄 [View source code](lib/visitor.dart)
 
 ---
 
