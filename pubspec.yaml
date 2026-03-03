@@ -1,15 +1,12 @@
 name: dart_design_patterns
 description: The 23 GoF Design Patterns — explained and implemented in Dart.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+
+repository: https://github.com/ahmedm-gh/design-patterns-dart
+
 environment:
   sdk: ^3.11.0
 
-# Add regular dependencies here.
-dependencies:
-  get_it: ^9.2.1
-  path: ^1.9.0
-
 dev_dependencies:
-  lints: ^6.0.0
-  test: ^1.25.6
+  lints: ^6.1.0
+  test: ^1.30.0
