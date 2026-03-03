@@ -112,15 +112,24 @@ A comprehensive reference for all **23 GoF Design Patterns**, each explained wit
 
 ## 🚀 البداية السريعة | Quick Start
 
-كل نمط له ملف Dart مستقل في `lib/` يمكنك تشغيله مباشرة:
+كل نمط له ملف Dart مستقل في `lib/` مُنظَّم حسب الفئة، يمكنك تشغيله مباشرة:
 
-Each pattern has a standalone Dart file in `lib/` you can run directly:
+Each pattern has a standalone Dart file in `lib/`, organized by category, you can run directly:
 
 ```bash
-dart run lib/singleton.dart
-dart run lib/observer.dart
-dart run lib/builder.dart
-dart run lib/repository.dart
+# الإنشائية | Creational
+dart run lib/creational/singleton.dart
+dart run lib/creational/builder.dart
+dart run lib/creational/factory_method.dart
+
+# البنائية | Structural
+dart run lib/structural/adapter.dart
+dart run lib/structural/decorator.dart
+
+# السلوكية | Behavioral
+dart run lib/behavioral/observer.dart
+dart run lib/behavioral/strategy.dart
+dart run lib/behavioral/repository.dart
 # ... etc.
 ```
 
