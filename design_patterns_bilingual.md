@@ -1,4 +1,3 @@
-> [النسخة العربية (هنا)](design_patterns_ar.md) | [ENGLISH VERSION (HERE)](design_patterns_en.md)
 # 🎯 أنماط التصميم | Design Patterns
 
 **الأنماط الثلاثة والعشرون (GoF) — شرح مُفصَّل بأمثلة Dart**
@@ -7,6 +6,10 @@
 > أنماط التصميم هي حلول مُجرَّبة لمشكلات شائعة في تصميم البرمجيات. لا تُمثِّل كودًا جاهزًا، بل هي **قوالب فكرية** يمكن تطبيقها على مواقف مختلفة.
 >
 > Design patterns are proven, reusable solutions to common problems in software design. They are not ready-made code, but rather **conceptual templates** that can be applied to various situations.
+
+> 💡 الأمثلة هنا مُبسَّطة للشرح. ملفات `lib/` تتبع [Effective Dart](https://dart.dev/effective-dart) بالكامل (`final class`, `interface class`, `const` constructors, `///` doc comments).
+>
+> 💡 Examples here are simplified for learning. The `lib/` files follow full [Effective Dart](https://dart.dev/effective-dart) guidelines (`final class`, `interface class`, `const` constructors, `///` doc comments).
 
 ---
 

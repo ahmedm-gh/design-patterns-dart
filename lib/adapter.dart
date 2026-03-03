@@ -1,18 +1,28 @@
-// --- Target Interface ---
-abstract class JsonLogger {
+/// Demonstrates the **Adapter** pattern.
+///
+/// Converts one class's interface into another interface expected
+/// by the client. Acts as a compatibility bridge.
+library;
+
+/// The target interface the client expects.
+abstract interface class JsonLogger {
+  /// Logs structured [data] in JSON format.
   void logJson(Map<String, dynamic> data);
 }
 
-// --- Incompatible Legacy Class (Adaptee) ---
+/// A legacy logger with an incompatible interface (adaptee).
 class LegacyFileLogger {
+  /// Writes [text] to a log file.
   void writeToFile(String text) => print('LOG FILE: $text');
 }
 
-// --- Adapter ---
-class FileLoggerAdapter implements JsonLogger {
+/// Adapts [LegacyFileLogger] to the [JsonLogger] interface.
+final class FileLoggerAdapter implements JsonLogger {
   final LegacyFileLogger _legacyLogger;
 
-  FileLoggerAdapter(this._legacyLogger);
+  /// Creates an adapter wrapping the given [legacyLogger].
+  FileLoggerAdapter(LegacyFileLogger legacyLogger)
+    : _legacyLogger = legacyLogger;
 
   @override
   void logJson(Map<String, dynamic> data) {
@@ -21,9 +31,10 @@ class FileLoggerAdapter implements JsonLogger {
   }
 }
 
-
 void main() {
-  // --- Usage ---
   final JsonLogger logger = FileLoggerAdapter(LegacyFileLogger());
-  logger.logJson({'event': 'login', 'user': 'ahmad'}); // LOG FILE: event=login, user=ahmad
+  logger.logJson({
+    'event': 'login',
+    'user': 'ahmad',
+  }); // LOG FILE: event=login, user=ahmad
 }

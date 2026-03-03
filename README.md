@@ -1,75 +1,86 @@
 <div align="center">
 
-# 🎯 Design Patterns in Dart
+# 🎯 أنماط التصميم في دارت | Design Patterns in Dart
 
-### The 23 Gang of Four (GoF) Design Patterns — Explained with Dart Examples
+### الأنماط الثلاثة والعشرون (GoF) — بأمثلة دارت عملية
+### The 23 Gang of Four (GoF) Patterns — with Practical Dart Examples
 
 [![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
 [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-**Available in: [English](design_patterns_en.md) | [العربية](design_patterns_ar.md) | [Bilingual | مدمج](design_patterns_bilingual.md)**
+**[📖 الشرح الكامل | Full Documentation](design_patterns_bilingual.md)**
 
 </div>
 
 ---
 
-## 📖 About
+## 📖 عن المشروع | About
+
+مرجع شامل لجميع **23 نمط تصميم GoF**، كل نمط مشروح بـ:
 
 A comprehensive reference for all **23 GoF Design Patterns**, each explained with:
 
-- ✅ Clear description of the pattern and the problem it solves
-- ✅ Key terminology with definitions
-- ✅ Practical, runnable **Dart** code examples
-- ✅ "When to use?" guidance for real-world scenarios
+- ✅ وصف واضح للنمط والمشكلة التي يحُلّها | Clear description of the pattern and its problem
+- ✅ المصطلحات بالعربية والإنجليزية | Key terminology in Arabic and English
+- ✅ أمثلة **Dart** عملية وقابلة للتشغيل | Practical, runnable **Dart** code examples
+- ✅ إرشادات "متى تستخدمه؟" | "When to use?" guidance
+- ✅ يتبع [Effective Dart](https://dart.dev/effective-dart) best practices
 
-> Whether you're preparing for interviews, learning OOP, or building Flutter/Dart applications — this repo has you covered.
+> سواء كنت تستعد لمقابلات العمل، أو تتعلم البرمجة الكائنية، أو تبني تطبيقات Flutter/Dart — هذا المرجع يُغطّيك.
+>
+> Whether you're preparing for interviews, learning OOP, or building Flutter/Dart apps — this repo has you covered.
 
 ---
 
-## 🏗️ Patterns Overview
+## 🏗️ الأنماط | Patterns Overview
 
+### الأنماط الإنشائية — *كيف نُنشئ الكائنات؟*
 ### Creational Patterns — *How do we create objects?*
 
-| # | Pattern | Description |
-|---|---------|-------------|
-| 1 | [**Abstract Factory**](design_patterns_bilingual.md#abstract-factory) | Create families of related objects without specifying concrete classes |
-| 2 | [**Builder**](design_patterns_bilingual.md#builder) | Construct complex objects step by step |
-| 3 | [**Factory Method**](design_patterns_bilingual.md#factory-method) | Let subclasses decide which class to instantiate |
-| 4 | [**Prototype**](design_patterns_bilingual.md#prototype) | Clone existing objects instead of building from scratch |
-| 5 | [**Singleton**](design_patterns_bilingual.md#singleton) | Ensure a class has only one instance globally |
+| # | النمط | Pattern | الوصف — Description |
+|---|-------|---------|---------------------|
+| 1 | [**المصنع المُجرَّد**](design_patterns_bilingual.md#abstract-factory) | Abstract Factory | إنشاء عائلة كائنات مترابطة — Create families of related objects |
+| 2 | [**الباني**](design_patterns_bilingual.md#builder) | Builder | بناء كائنات مُعقَّدة خطوة بخطوة — Construct complex objects step by step |
+| 3 | [**دالّة المصنع**](design_patterns_bilingual.md#factory-method) | Factory Method | ترك قرار الإنشاء للأصناف الفرعية — Let subclasses decide which class to instantiate |
+| 4 | [**النموذج الأوَّلي**](design_patterns_bilingual.md#prototype) | Prototype | نسخ كائنات بدلًا من البناء من الصفر — Clone objects instead of building from scratch |
+| 5 | [**الكائن الوحيد**](design_patterns_bilingual.md#singleton) | Singleton | ضمان نسخة واحدة فقط — Ensure a single instance globally |
 
+### الأنماط البنائية — *كيف نُركِّب الكائنات؟*
 ### Structural Patterns — *How do we compose objects?*
 
-| # | Pattern | Description |
-|---|---------|-------------|
-| 6 | [**Adapter**](design_patterns_bilingual.md#adapter) | Bridge between two incompatible interfaces |
-| 7 | [**Bridge**](design_patterns_bilingual.md#bridge) | Decouple abstraction from implementation |
-| 8 | [**Composite**](design_patterns_bilingual.md#composite) | Treat individual objects and groups uniformly (tree structure) |
-| 9 | [**Decorator**](design_patterns_bilingual.md#decorator) | Add responsibilities to objects dynamically |
-| 10 | [**Facade**](design_patterns_bilingual.md#facade) | Provide a simplified interface to a complex subsystem |
-| 11 | [**Flyweight**](design_patterns_bilingual.md#flyweight) | Share data to reduce memory consumption |
-| 12 | [**Proxy**](design_patterns_bilingual.md#proxy) | Control access to another object |
+| # | النمط | Pattern | الوصف — Description |
+|---|-------|---------|---------------------|
+| 6 | [**المُحوِّل**](design_patterns_bilingual.md#adapter) | Adapter | جسر توافق بين واجهتين — Bridge between incompatible interfaces |
+| 7 | [**الجسر**](design_patterns_bilingual.md#bridge) | Bridge | فصل التجريد عن التنفيذ — Decouple abstraction from implementation |
+| 8 | [**المُركَّب**](design_patterns_bilingual.md#composite) | Composite | التعامل مع بنى شجرية — Treat individual/groups uniformly (tree) |
+| 9 | [**المُزخرِف**](design_patterns_bilingual.md#decorator) | Decorator | إضافة مسؤوليات ديناميكيًا — Add responsibilities dynamically |
+| 10 | [**الواجهة المُبسَّطة**](design_patterns_bilingual.md#facade) | Facade | تبسيط نظام فرعي مُعقَّد — Simplified interface to a complex subsystem |
+| 11 | [**وزن الذبابة**](design_patterns_bilingual.md#flyweight) | Flyweight | مشاركة البيانات لتقليل الذاكرة — Share data to reduce memory |
+| 12 | [**الوكيل**](design_patterns_bilingual.md#proxy) | Proxy | التحكم في الوصول لكائن آخر — Control access to another object |
 
+### الأنماط السلوكية — *كيف تتواصل الكائنات؟*
 ### Behavioral Patterns — *How do objects communicate?*
 
-| # | Pattern | Description |
-|---|---------|-------------|
-| 13 | [**Chain of Responsibility**](design_patterns_bilingual.md#chain-of-responsibility) | Pass requests along a chain of handlers |
-| 14 | [**Command**](design_patterns_bilingual.md#command) | Encapsulate requests as standalone objects |
-| 15 | [**Interpreter**](design_patterns_bilingual.md#interpreter) | Define a grammar and interpret sentences |
-| 16 | [**Iterator**](design_patterns_bilingual.md#iterator) | Access elements sequentially without exposing internals |
-| 17 | [**Mediator**](design_patterns_bilingual.md#mediator) | Reduce direct coupling via a mediator object |
-| 18 | [**Memento**](design_patterns_bilingual.md#memento) | Capture and restore object state (snapshots) |
-| 19 | [**Observer**](design_patterns_bilingual.md#observer) | Notify dependents automatically on state changes |
-| 20 | [**State**](design_patterns_bilingual.md#state) | Change behavior based on internal state |
-| 21 | [**Strategy**](design_patterns_bilingual.md#strategy) | Swap algorithms at runtime |
-| 22 | [**Template Method**](design_patterns_bilingual.md#template-method) | Define algorithm skeleton, let subclasses fill in steps |
-| 23 | [**Visitor**](design_patterns_bilingual.md#visitor) | Separate operations from object structure |
+| # | النمط | Pattern | الوصف — Description |
+|---|-------|---------|---------------------|
+| 13 | [**سلسلة المسؤولية**](design_patterns_bilingual.md#chain-of-responsibility) | Chain of Responsibility | تمرير الطلبات عبر سلسلة — Pass requests along a chain |
+| 14 | [**الأمر**](design_patterns_bilingual.md#command) | Command | تغليف الطلبات ككائنات — Encapsulate requests as objects |
+| 15 | [**المُفسِّر**](design_patterns_bilingual.md#interpreter) | Interpreter | تعريف قواعد لغة وتفسيرها — Define grammar and interpret sentences |
+| 16 | [**المُكرِّر**](design_patterns_bilingual.md#iterator) | Iterator | الوصول التسلسلي للعناصر — Access elements sequentially |
+| 17 | [**الوسيط**](design_patterns_bilingual.md#mediator) | Mediator | تقليل الاقتران عبر وسيط — Reduce coupling via a mediator |
+| 18 | [**التذكار**](design_patterns_bilingual.md#memento) | Memento | حفظ واستعادة الحالة — Capture and restore state |
+| 19 | [**المُراقِب**](design_patterns_bilingual.md#observer) | Observer | إخطار تلقائي عند تغيُّر الحالة — Auto-notify on state changes |
+| 20 | [**الحالة**](design_patterns_bilingual.md#state) | State | تغيير السلوك حسب الحالة — Change behavior based on state |
+| 21 | [**الاستراتيجية**](design_patterns_bilingual.md#strategy) | Strategy | تبديل الخوارزميات أثناء التشغيل — Swap algorithms at runtime |
+| 22 | [**أسلوب القالب**](design_patterns_bilingual.md#template-method) | Template Method | هيكل ثابت مع خطوات قابلة للتخصيص — Fixed skeleton, customizable steps |
+| 23 | [**الزائر**](design_patterns_bilingual.md#visitor) | Visitor | فصل العمليات عن بنية الكائنات — Separate operations from structure |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 البداية السريعة | Quick Start
+
+كل نمط له ملف Dart مستقل في `lib/` يمكنك تشغيله مباشرة:
 
 Each pattern has a standalone Dart file in `lib/` you can run directly:
 
@@ -82,34 +93,41 @@ dart run lib/builder.dart
 
 ---
 
-## 📊 Summary
+## 📊 الملخص | Summary
 
-| Category | Count |
-|----------|:-----:|
-| Creational | 5 |
-| Structural | 7 |
-| Behavioral | 11 |
-| **Total** | **23** |
-
----
-
-## 🌐 Languages
-
-| Language | File |
-|----------|------|
-| English | [design_patterns_en.md](design_patterns_en.md) |
-| العربية | [design_patterns_ar.md](design_patterns_ar.md) |
-| Bilingual / مدمج | [design_patterns_bilingual.md](design_patterns_bilingual.md) |
+| الفئة — Category | العدد — Count |
+|-------------------|:---:|
+| الإنشائية — Creational | 5 |
+| البنائية — Structural | 7 |
+| السلوكية — Behavioral | 11 |
+| **الإجمالي — Total** | **23** |
 
 ---
 
-## 🤝 Contributing
+## ✅ Effective Dart
+
+يتبع هذا المشروع إرشادات [Effective Dart](https://dart.dev/effective-dart):
+
+This project follows [Effective Dart](https://dart.dev/effective-dart) guidelines:
+
+- 📏 **Style**: `final class`, `interface class`, `const` constructors
+- 📝 **Documentation**: `///` doc comments for all public APIs
+- 🔧 **Usage**: initializing formals, `=>` for simple members, `const` where possible
+- 🏛️ **Design**: class modifiers, `final` fields, `sealed`/`interface` types
+
+---
+
+## 🤝 المساهمة | Contributing
+
+المساهمات والمقترحات مرحّب بها! لا تتردد في فتح PR أو issue.
 
 Contributions, issues, and feature requests are welcome! Feel free to open a PR or issue.
 
 ---
 
-## 📄 License
+## 📄 الرخصة | License
+
+هذا المشروع مُرخَّص تحت [رخصة MIT](LICENSE).
 
 This project is licensed under the [MIT License](LICENSE).
 
@@ -117,6 +135,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 <div align="center">
 
-**⭐ If you found this helpful, give it a star! ⭐**
+**⭐ إذا وجدته مفيدًا، لا تنسَ النجمة! | If you found this helpful, give it a star! ⭐**
 
 </div>
