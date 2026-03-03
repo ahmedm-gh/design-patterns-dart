@@ -78,6 +78,38 @@ A comprehensive reference for all **23 GoF Design Patterns**, each explained wit
 
 ---
 
+### ⭐ أنماط إضافية (خارج GoF) | Additional Patterns (Beyond GoF)
+
+> ⚠️ الأنماط التالية **ليست** من الـ 23 GoF — هي أنماط حديثة ومُكمِّلة.
+>
+> ⚠️ These are **NOT** GoF patterns — they are modern, complementary patterns.
+
+#### إنشائية إضافية | Additional Creational
+
+| # | النمط | Pattern | الأصل — Origin |
+|---|-------|---------|----------------|
+| 24 | [**تجمُّع الكائنات**](design_patterns_bilingual.md#object-pool) | Object Pool | كلاسيكي (1990s) |
+| 25 | [**حقن الاعتمادية**](design_patterns_bilingual.md#dependency-injection) | Dependency Injection | Fowler (2004) |
+| 26 | [**المُتعدِّد**](design_patterns_bilingual.md#multiton) | Multiton | امتداد Singleton |
+
+#### بنائية إضافية | Additional Structural
+
+| # | النمط | Pattern | الأصل — Origin |
+|---|-------|---------|----------------|
+| 27 | [**كائن الامتداد**](design_patterns_bilingual.md#extension-object) | Extension Object | Gamma (1996) / Dart 2.7 |
+| 28 | [**كائن القيمة**](design_patterns_bilingual.md#value-object) | Value Object | Evans DDD (2003) |
+
+#### سلوكية إضافية | Additional Behavioral
+
+| # | النمط | Pattern | الأصل — Origin |
+|---|-------|---------|----------------|
+| 29 | [**الكائن الفارغ**](design_patterns_bilingual.md#null-object) | Null Object | Woolf (1998) |
+| 30 | [**المواصفة**](design_patterns_bilingual.md#specification) | Specification | Evans & Fowler (2005) |
+| 31 | [**مُحدِّد الخدمات**](design_patterns_bilingual.md#service-locator) | Service Locator | Fowler (2004) |
+| 32 | [**المستودع**](design_patterns_bilingual.md#repository) | Repository | Evans DDD (2003) |
+
+---
+
 ## 🚀 البداية السريعة | Quick Start
 
 كل نمط له ملف Dart مستقل في `lib/` يمكنك تشغيله مباشرة:
@@ -88,6 +120,7 @@ Each pattern has a standalone Dart file in `lib/` you can run directly:
 dart run lib/singleton.dart
 dart run lib/observer.dart
 dart run lib/builder.dart
+dart run lib/repository.dart
 # ... etc.
 ```
 
@@ -95,12 +128,23 @@ dart run lib/builder.dart
 
 ## 📊 الملخص | Summary
 
+### الأنماط الأساسية (GoF 23) | Core Patterns
+
 | الفئة — Category | العدد — Count |
 |-------------------|:---:|
 | الإنشائية — Creational | 5 |
 | البنائية — Structural | 7 |
 | السلوكية — Behavioral | 11 |
 | **الإجمالي — Total** | **23** |
+
+### الأنماط الإضافية (خارج GoF) | Additional Patterns
+
+| الفئة — Category | العدد — Count |
+|-------------------|:---:|
+| الإنشائية — Creational | 3 |
+| البنائية — Structural | 2 |
+| السلوكية — Behavioral | 4 |
+| **الإجمالي — Total** | **9** |
 
 ---
 

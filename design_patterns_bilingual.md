@@ -1561,9 +1561,722 @@ void main() {
 
 ---
 
+# رابعًا: أنماط إضافية (خارج GoF) | Part IV: Additional Patterns (Beyond GoF)
+
+> ⚠️ الأنماط التالية **ليست** من الـ 23 نمطًا الأساسيين (GoF). هي أنماط حديثة ومُكمِّلة ظهرت وتطوَّرت بعد كتاب GoF (1994).
+>
+> ⚠️ The following patterns are **NOT** part of the original 23 GoF patterns. They are modern, complementary patterns that emerged after the GoF book (1994).
+
+---
+
+## إنشائي إضافي | Additional Creational
+
+---
+
+<a id="object-pool"></a>
+
+## 24. تجمُّع الكائنات | Object Pool
+
+> 🏷️ **ليس من GoF** — نمط كلاسيكي من التسعينيات، شائع في إدارة الموارد المُكلفة.
+>
+> 🏷️ **Not GoF** — Classic 1990s pattern, common for managing expensive resources.
+
+**الوصف:** يُدير مجموعة من الكائنات القابلة لإعادة الاستخدام لتجنُّب تكلفة الإنشاء والتدمير المتكرر.
+
+**Description:** Manages a pool of reusable objects to avoid the cost of repeated creation and destruction.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| التجمُّع | Pool |
+| الاستحواذ | Acquire |
+| التحرير | Release |
+
+```dart
+// DART EXAMPLE
+
+class DatabaseConnection {
+  final int id;
+  bool inUse = false;
+
+  DatabaseConnection(this.id) {
+    print('⏳ Creating connection #$id (expensive!)');
+  }
+
+  String query(String sql) => 'Connection #$id: $sql';
+}
+
+class ConnectionPool {
+  final List<DatabaseConnection> _pool = [];
+  int _nextId = 1;
+  final int maxSize;
+
+  ConnectionPool({this.maxSize = 3});
+
+  // الاستحواذ — إعادة استخدام أو إنشاء جديد
+  // Acquire — reuse or create new
+  DatabaseConnection acquire() {
+    for (final conn in _pool) {
+      if (!conn.inUse) {
+        conn.inUse = true;
+        print('♻️ Reusing connection #${conn.id}');
+        return conn;
+      }
+    }
+    if (_pool.length < maxSize) {
+      final conn = DatabaseConnection(_nextId++)..inUse = true;
+      _pool.add(conn);
+      return conn;
+    }
+    throw StateError('Pool exhausted!');
+  }
+
+  // التحرير — إعادة للتجمُّع
+  // Release — return to pool
+  void release(DatabaseConnection connection) {
+    connection.inUse = false;
+    print('🔓 Released connection #${connection.id}');
+  }
+}
+
+
+void main() {
+  final pool = ConnectionPool(maxSize: 2);
+
+  final conn1 = pool.acquire(); // ⏳ Creating connection #1
+  final conn2 = pool.acquire(); // ⏳ Creating connection #2
+  print(conn1.query('SELECT * FROM users'));
+
+  pool.release(conn1);          // 🔓 Released connection #1
+  final conn3 = pool.acquire(); // ♻️ Reusing connection #1
+
+  print(identical(conn1, conn3)); // true — نفس الكائن | same object
+  pool.release(conn2);
+  pool.release(conn3);
+}
+```
+> 📄 [الكود المصدري | View source code](lib/object_pool.dart)
+
+> **متى تستخدمه؟** عند إنشاء كائنات مُكلفة (اتصالات شبكة، threads) وتريد إعادة استخدامها.
+>
+> **When to use?** When creating expensive objects (connections, threads) and you want to reuse them.
+
+---
+
+<a id="dependency-injection"></a>
+
+## 25. حقن الاعتمادية | Dependency Injection
+
+> 🏷️ **ليس من GoF** — صاغه Martin Fowler عام 2004. أساسي في تطبيقات Flutter/Dart الحديثة.
+>
+> 🏷️ **Not GoF** — Coined by Martin Fowler in 2004. Essential in modern Flutter/Dart apps.
+
+**الوصف:** يُوفِّر الاعتماديات من الخارج بدلًا من أن يُنشئها الصنف بنفسه، مما يُحسِّن قابلية الاختبار والمرونة.
+
+**Description:** Provides dependencies from the outside instead of having classes create their own, improving testability and flexibility.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| حقن المُنشئ | Constructor Injection |
+| الاعتمادية | Dependency |
+| عكس التحكُّم | Inversion of Control |
+
+```dart
+// DART EXAMPLE
+
+abstract class EmailService {
+  void send(String to, String body);
+}
+
+class SmtpEmailService implements EmailService {
+  @override
+  void send(String to, String body) => print('📧 SMTP → $to: $body');
+}
+
+// خدمة وهمية للاختبار | Fake for testing
+class FakeEmailService implements EmailService {
+  final sent = <String>[];
+  @override
+  void send(String to, String body) {
+    sent.add('$to: $body');
+    print('🧪 Fake → $to: $body');
+  }
+}
+
+// حقن المُنشئ — الاعتمادية تأتي من الخارج
+// Constructor Injection — dependency comes from outside
+class UserService {
+  final EmailService _emailService;
+  UserService(this._emailService);
+
+  void register(String email) {
+    print('✅ User registered: $email');
+    _emailService.send(email, 'Welcome!');
+  }
+}
+
+
+void main() {
+  // إنتاج: حقن الخدمة الحقيقية | Production: inject real service
+  UserService(SmtpEmailService()).register('user@example.com');
+  // ✅ User registered: user@example.com
+  // 📧 SMTP → user@example.com: Welcome!
+
+  print('---');
+
+  // اختبار: حقن خدمة وهمية | Testing: inject fake service
+  final fakeEmail = FakeEmailService();
+  UserService(fakeEmail).register('test@example.com');
+  print('Sent: ${fakeEmail.sent}');
+  // [test@example.com: Welcome!]
+}
+```
+> 📄 [الكود المصدري | View source code](lib/dependency_injection.dart)
+
+> **متى تستخدمه؟** دائمًا! خاصة عند الحاجة لاختبار الوحدات أو تبديل التنفيذات.
+>
+> **When to use?** Always! Especially when you need unit testing or swappable implementations.
+
+---
+
+<a id="multiton"></a>
+
+## 26. المُتعدِّد | Multiton
+
+> 🏷️ **ليس من GoF** — امتداد لنمط Singleton. يُدير سجلًا من النُّسخ المُسمَّاة.
+>
+> 🏷️ **Not GoF** — Extension of the Singleton pattern. Manages a registry of named instances.
+
+**الوصف:** مثل Singleton، لكن يحتفظ بسجل من النُّسخ المُفهرسة بمفتاح. كل مفتاح يُعطي نسخة واحدة فقط.
+
+**Description:** Like Singleton, but maintains a registry of instances indexed by key. Each key maps to exactly one instance.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| المفتاح | Key |
+| السجل | Registry |
+
+```dart
+// DART EXAMPLE
+
+class Logger {
+  static final Map<String, Logger> _instances = {};
+
+  final String channel;
+  Logger._internal(this.channel);
+
+  // مصنع يُرجع نسخة واحدة لكل قناة
+  // Factory returns one instance per channel
+  factory Logger(String channel) {
+    return _instances.putIfAbsent(channel, () {
+      print('🆕 Creating logger for "$channel"');
+      return Logger._internal(channel);
+    });
+  }
+
+  void log(String message) => print('[$channel] $message');
+}
+
+
+void main() {
+  final authLogger1 = Logger('auth');    // 🆕 Creating
+  final authLogger2 = Logger('auth');    // مُعاد استخدام | Reused
+  final dbLogger = Logger('database');   // 🆕 Creating
+
+  print(identical(authLogger1, authLogger2)); // true — نفس النسخة | same
+  print(identical(authLogger1, dbLogger));    // false — مختلفة | different
+
+  authLogger1.log('User logged in');   // [auth] User logged in
+  dbLogger.log('Query executed');      // [database] Query executed
+}
+```
+> 📄 [الكود المصدري | View source code](lib/multiton.dart)
+
+> **متى تستخدمه؟** عندما تحتاج نسخة واحدة لكل فئة/قناة (مثل loggers, database connections بحسب الاسم).
+>
+> **When to use?** When you need one instance per category/channel (e.g., loggers, named connections).
+
+---
+
+## بنائي إضافي | Additional Structural
+
+---
+
+<a id="extension-object"></a>
+
+## 27. كائن الامتداد | Extension Object
+
+> 🏷️ **ليس من GoF** — اقترحه Erich Gamma عام 1996. دارت تدعمه أصلًا عبر `extension methods` (منذ Dart 2.7، 2019).
+>
+> 🏷️ **Not GoF** — Proposed by Erich Gamma in 1996. Dart has first-class support via `extension methods` (since Dart 2.7, 2019).
+
+**الوصف:** يُضيف وظائف جديدة لأنواع موجودة **دون تعديلها**. في دارت، يتم ذلك عبر `extension`.
+
+**Description:** Adds new functionality to existing types **without modifying them**. In Dart, this is done via `extension`.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| الامتداد | Extension |
+| النوع الأصلي | Base Type |
+
+```dart
+// DART EXAMPLE
+
+// إضافة قدرات لـ String
+// Adding capabilities to String
+extension StringFormatting on String {
+  String get titleCase => split(' ')
+      .map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1).toLowerCase()}')
+      .join(' ');
+
+  String truncate(int maxLength) =>
+      length <= maxLength ? this : '${substring(0, maxLength)}…';
+
+  bool get isEmail => RegExp(r'^[\w\-.]+@[\w\-.]+\.\w+$').hasMatch(this);
+}
+
+// إضافة إحصائيات لـ List<num>
+// Adding statistics to List<num>
+extension NumListStats on List<num> {
+  num get sum => fold<num>(0, (a, b) => a + b);
+  double get average => isEmpty ? 0 : sum / length;
+}
+
+
+void main() {
+  print('hello world'.titleCase);        // Hello World
+  print('Long text here'.truncate(8));   // Long tex…
+  print('user@mail.com'.isEmail);        // true
+
+  final List<num> scores = [85, 92, 78, 95, 88];
+  print('Sum: ${scores.sum}');       // Sum: 438
+  print('Average: ${scores.average}'); // Average: 87.6
+}
+```
+> 📄 [الكود المصدري | View source code](lib/extension_object.dart)
+
+> **متى تستخدمه؟** عند الحاجة لإضافة دوال مساعدة لأنواع لا تتحكم فيها (String, int, List...).
+>
+> **When to use?** When adding helper methods to types you don't control (String, int, List...).
+
+---
+
+<a id="value-object"></a>
+
+## 28. كائن القيمة | Value Object
+
+> 🏷️ **ليس من GoF** — من كتاب Domain-Driven Design لـ Eric Evans (2003). أساسي في البرمجة الوظيفية.
+>
+> 🏷️ **Not GoF** — From Eric Evans' Domain-Driven Design (2003). Fundamental in functional programming.
+
+**الوصف:** كائن غير قابل للتغيير (Immutable) تُحدَّد مساواته بقيمته لا بهويته. كائنان بنفس البيانات مُتساويان.
+
+**Description:** An immutable object whose equality is based on its **value**, not its identity. Two objects with the same data are equal.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| المساواة بالقيمة | Value Equality |
+| غير قابل للتغيير | Immutable |
+| عامل المساواة | Equality Operator |
+
+```dart
+// DART EXAMPLE
+
+class Money {
+  final double amount;
+  final String currency;
+  const Money(this.amount, this.currency);
+
+  Money operator +(Money other) {
+    if (currency != other.currency) {
+      throw ArgumentError('Cannot add $currency and ${other.currency}');
+    }
+    return Money(amount + other.amount, currency);
+  }
+
+  Money operator *(num factor) => Money(amount * factor, currency);
+
+  // المساواة بالقيمة — ليس بالهوية
+  // Equality by value — not by identity
+  @override
+  bool operator ==(Object other) =>
+      other is Money && amount == other.amount && currency == other.currency;
+
+  @override
+  int get hashCode => Object.hash(amount, currency);
+
+  @override
+  String toString() => '${amount.toStringAsFixed(2)} $currency';
+}
+
+
+void main() {
+  const price = Money(29.99, 'SAR');
+  const tax = Money(4.50, 'SAR');
+  final total = price + tax;
+
+  print('Total: $total'); // Total: 34.49 SAR
+  print(price * 2);       // 59.98 SAR
+
+  // المساواة بالقيمة | Value equality
+  print(const Money(10, 'SAR') == const Money(10, 'SAR')); // true
+}
+```
+> 📄 [الكود المصدري | View source code](lib/value_object.dart)
+
+> **متى تستخدمه؟** لتمثيل المفاهيم المالية، الإحداثيات، الألوان — أي قيمة يُحدَّد معناها بمحتواها.
+>
+> **When to use?** For monetary values, coordinates, colors — any value defined by its content.
+
+---
+
+## سلوكي إضافي | Additional Behavioral
+
+---
+
+<a id="null-object"></a>
+
+## 29. الكائن الفارغ | Null Object
+
+> 🏷️ **ليس من GoF** — وصفه Bobby Woolf عام 1998. بديل أنيق لفحوصات `null`.
+>
+> 🏷️ **Not GoF** — Described by Bobby Woolf in 1998. An elegant alternative to `null` checks.
+
+**الوصف:** يُوفِّر كائنًا افتراضيًا "لا يفعل شيئًا" بدلًا من `null`، مُزيلًا الحاجة لفحوصات null.
+
+**Description:** Provides a default "do-nothing" object instead of `null`, eliminating the need for null checks.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| الكائن الفارغ | Null Object |
+| السلوك الافتراضي | Default Behavior |
+
+```dart
+// DART EXAMPLE
+
+abstract class Logger {
+  void log(String message);
+}
+
+class ConsoleLogger implements Logger {
+  @override
+  void log(String message) => print('📝 LOG: $message');
+}
+
+// الكائن الفارغ — لا يفعل شيئًا
+// Null Object — does nothing
+class NullLogger implements Logger {
+  const NullLogger();
+  @override
+  void log(String message) { /* لا شيء | nothing */ }
+}
+
+class PaymentService {
+  final Logger _logger;
+
+  // لا حاجة لفحص null — NullLogger هو الافتراضي
+  // No null check needed — NullLogger is the default
+  PaymentService({Logger logger = const NullLogger()}) : _logger = logger;
+
+  void processPayment(double amount) {
+    _logger.log('Processing: \$${amount.toStringAsFixed(2)}');
+    print('💰 Payment of \$${amount.toStringAsFixed(2)} processed');
+    _logger.log('Completed');
+  }
+}
+
+
+void main() {
+  // مع تسجيل | With logging
+  PaymentService(logger: ConsoleLogger()).processPayment(99.99);
+  // 📝 LOG: Processing: $99.99
+  // 💰 Payment of $99.99 processed
+
+  print('---');
+
+  // بدون تسجيل — بلا فحوصات null!
+  // Without logging — no null checks needed!
+  PaymentService().processPayment(49.99);
+  // 💰 Payment of $49.99 processed
+}
+```
+> 📄 [الكود المصدري | View source code](lib/null_object.dart)
+
+> **متى تستخدمه؟** عند الحاجة لسلوك افتراضي "لا يفعل شيئًا" بدلًا من null وفحوصاته.
+>
+> **When to use?** When you need a "do-nothing" default behavior instead of null and its checks.
+
+---
+
+<a id="specification"></a>
+
+## 30. المواصفة | Specification
+
+> 🏷️ **ليس من GoF** — صاغه Eric Evans و Martin Fowler عام 2005. أساسي في Domain-Driven Design.
+>
+> 🏷️ **Not GoF** — Coined by Eric Evans & Martin Fowler in 2005. Central to Domain-Driven Design.
+
+**الوصف:** يُغلِّف قواعد العمل (Business Rules) ككائنات قابلة للتركيب والدمج بعمليات AND و OR و NOT.
+
+**Description:** Encapsulates business rules as composable objects that can be combined with AND, OR, and NOT operators.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| المواصفة | Specification |
+| التركيب | Composition |
+| قاعدة العمل | Business Rule |
+
+```dart
+// DART EXAMPLE
+
+abstract class Specification<T> {
+  bool isSatisfiedBy(T candidate);
+
+  // التركيب — AND, OR, NOT
+  // Composition — AND, OR, NOT
+  Specification<T> and(Specification<T> other) => _AndSpec(this, other);
+  Specification<T> or(Specification<T> other) => _OrSpec(this, other);
+  Specification<T> not() => _NotSpec(this);
+}
+
+class _AndSpec<T> extends Specification<T> {
+  final Specification<T> _left, _right;
+  _AndSpec(this._left, this._right);
+  @override
+  bool isSatisfiedBy(T c) => _left.isSatisfiedBy(c) && _right.isSatisfiedBy(c);
+}
+
+class _OrSpec<T> extends Specification<T> {
+  final Specification<T> _left, _right;
+  _OrSpec(this._left, this._right);
+  @override
+  bool isSatisfiedBy(T c) => _left.isSatisfiedBy(c) || _right.isSatisfiedBy(c);
+}
+
+class _NotSpec<T> extends Specification<T> {
+  final Specification<T> _spec;
+  _NotSpec(this._spec);
+  @override
+  bool isSatisfiedBy(T c) => !_spec.isSatisfiedBy(c);
+}
+
+// --- المجال | Domain ---
+
+class Product {
+  final String name;
+  final double price;
+  final String category;
+  const Product(this.name, this.price, this.category);
+
+  @override
+  String toString() => '$name (\$$price, $category)';
+}
+
+class CheapProduct extends Specification<Product> {
+  final double maxPrice;
+  CheapProduct(this.maxPrice);
+  @override
+  bool isSatisfiedBy(Product p) => p.price <= maxPrice;
+}
+
+class InCategory extends Specification<Product> {
+  final String category;
+  InCategory(this.category);
+  @override
+  bool isSatisfiedBy(Product p) => p.category == category;
+}
+
+
+void main() {
+  final products = [
+    const Product('Phone', 999, 'Electronics'),
+    const Product('Book', 15, 'Education'),
+    const Product('Cable', 8, 'Electronics'),
+    const Product('Pen', 2, 'Education'),
+  ];
+
+  // قواعد عمل قابلة للتركيب
+  // Composable business rules
+  final cheapElectronics = CheapProduct(50).and(InCategory('Electronics'));
+
+  print('Cheap Electronics:');
+  products.where(cheapElectronics.isSatisfiedBy).forEach(print);
+  // Cable ($8.0, Electronics)
+}
+```
+> 📄 [الكود المصدري | View source code](lib/specification.dart)
+
+> **متى تستخدمه؟** عند وجود قواعد تصفية مُعقَّدة يمكن تركيبها ديناميكيًا.
+>
+> **When to use?** When you have complex filtering rules that can be composed dynamically.
+
+---
+
+<a id="service-locator"></a>
+
+## 31. مُحدِّد الخدمات | Service Locator
+
+> 🏷️ **ليس من GoF** — وصفه Martin Fowler عام 2004. بديل لـ Dependency Injection في الإعدادات البسيطة (مثل `get_it` في Flutter).
+>
+> 🏷️ **Not GoF** — Described by Martin Fowler in 2004. Alternative to DI for simpler setups (like `get_it` in Flutter).
+
+**الوصف:** سجل مركزي يُوفِّر وصولًا عامًا للخدمات حسب نوعها.
+
+**Description:** A central registry that provides global access to services by type.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| السجل | Registry |
+| مُحدِّد الخدمات | Service Locator |
+| نقطة الوصول | Access Point |
+
+```dart
+// DART EXAMPLE
+
+class ServiceLocator {
+  static final ServiceLocator _instance = ServiceLocator._internal();
+  final _singletons = <Type, Object>{};
+  ServiceLocator._internal();
+  factory ServiceLocator() => _instance;
+
+  // تسجيل خدمة | Register a service
+  void register<T extends Object>(T instance) {
+    _singletons[T] = instance;
+  }
+
+  // استرجاع خدمة | Retrieve a service
+  T get<T extends Object>() {
+    final service = _singletons[T];
+    if (service == null) throw StateError('Not registered: $T');
+    return service as T;
+  }
+
+  void reset() => _singletons.clear();
+}
+
+// --- مثال | Example ---
+
+abstract class AnalyticsService {
+  void track(String name);
+}
+
+class FirebaseAnalytics implements AnalyticsService {
+  @override
+  void track(String name) => print('🔥 Firebase: $name');
+}
+
+class FakeAnalytics implements AnalyticsService {
+  @override
+  void track(String name) => print('🧪 Fake: $name');
+}
+
+
+void main() {
+  final locator = ServiceLocator();
+
+  // تسجيل | Register
+  locator.register<AnalyticsService>(FirebaseAnalytics());
+
+  // استرجاع من أي مكان | Retrieve from anywhere
+  locator.get<AnalyticsService>().track('page_view');
+  // 🔥 Firebase: page_view
+
+  // للاختبار: تبديل التنفيذ | For testing: swap
+  locator.reset();
+  locator.register<AnalyticsService>(FakeAnalytics());
+  locator.get<AnalyticsService>().track('page_view');
+  // 🧪 Fake: page_view
+}
+```
+> 📄 [الكود المصدري | View source code](lib/service_locator.dart)
+
+> **متى تستخدمه؟** عند الحاجة لوصول عام للخدمات بدون تمرير يدوي (مثل حزمة `get_it` في Flutter).
+>
+> **When to use?** When you need global service access without manual passing (like the `get_it` package in Flutter).
+
+---
+
+<a id="repository"></a>
+
+## 32. المستودع | Repository
+
+> 🏷️ **ليس من GoF** — من كتاب Domain-Driven Design لـ Eric Evans (2003). شائع جدًا في Flutter.
+>
+> 🏷️ **Not GoF** — From Eric Evans' Domain-Driven Design (2003). Very common in Flutter.
+
+**الوصف:** يُجرِّد الوصول للبيانات خلف واجهة تُشبه المجموعة (Collection)، فاصلًا منطق المجال عن تفاصيل التخزين.
+
+**Description:** Abstracts data access behind a collection-like interface, decoupling domain logic from storage details.
+
+| المصطلح بالعربية | English Term |
+|---|---|
+| المستودع | Repository |
+| مصدر البيانات | Data Source |
+| الكيان | Entity |
+
+```dart
+// DART EXAMPLE
+
+class User {
+  final int id;
+  final String name;
+  final String email;
+  const User({required this.id, required this.name, required this.email});
+
+  @override
+  String toString() => 'User($id, $name)';
+}
+
+// واجهة المستودع — مُجرَّدة عن التخزين
+// Repository interface — abstracted from storage
+abstract class UserRepository {
+  List<User> findAll();
+  User? findById(int id);
+  void save(User user);
+  void delete(int id);
+}
+
+// تنفيذ في الذاكرة — يمكن استبداله بقاعدة بيانات أو API
+// In-memory implementation — can be swapped with DB or API
+class InMemoryUserRepository implements UserRepository {
+  final Map<int, User> _store = {};
+
+  @override
+  List<User> findAll() => _store.values.toList();
+  @override
+  User? findById(int id) => _store[id];
+  @override
+  void save(User user) => _store[user.id] = user;
+  @override
+  void delete(int id) => _store.remove(id);
+}
+
+
+void main() {
+  final UserRepository repo = InMemoryUserRepository();
+
+  repo.save(const User(id: 1, name: 'Ali', email: 'ali@mail.com'));
+  repo.save(const User(id: 2, name: 'Sara', email: 'sara@mail.com'));
+
+  print('All: ${repo.findAll()}');   // [User(1, Ali), User(2, Sara)]
+  print('Find #1: ${repo.findById(1)}'); // User(1, Ali)
+
+  repo.delete(2);
+  print('After delete: ${repo.findAll()}'); // [User(1, Ali)]
+}
+```
+> 📄 [الكود المصدري | View source code](lib/repository.dart)
+
+> **متى تستخدمه؟** دائمًا في تطبيقات Flutter لعزل طبقة البيانات عن منطق التطبيق.
+>
+> **When to use?** Always in Flutter apps to isolate the data layer from application logic.
+
+---
+
 <a id="summary"></a>
 
 # 📊 التوزيع النهائي | Summary
+
+## الأنماط الأساسية (GoF 23) | Core Patterns (GoF 23)
 
 | الفئة | Category | العدد | Count |
 |---|---|:---:|:---:|
@@ -1572,12 +2285,26 @@ void main() {
 | السلوكية | Behavioral | 11 | 11 |
 | **الإجمالي** | **Total** | **23** | **23** |
 
+## الأنماط الإضافية (خارج GoF) | Additional Patterns (Beyond GoF)
+
+| # | النمط — Pattern | الفئة — Category | الأصل — Origin |
+|---|---|---|---|
+| 24 | تجمُّع الكائنات — Object Pool | إنشائي — Creational | كلاسيكي (1990s) |
+| 25 | حقن الاعتمادية — Dependency Injection | إنشائي — Creational | Fowler (2004) |
+| 26 | المُتعدِّد — Multiton | إنشائي — Creational | امتداد Singleton |
+| 27 | كائن الامتداد — Extension Object | بنائي — Structural | Gamma (1996) / Dart 2.7 |
+| 28 | كائن القيمة — Value Object | بنائي — Structural | Evans DDD (2003) |
+| 29 | الكائن الفارغ — Null Object | سلوكي — Behavioral | Woolf (1998) |
+| 30 | المواصفة — Specification | سلوكي — Behavioral | Evans & Fowler (2005) |
+| 31 | مُحدِّد الخدمات — Service Locator | سلوكي — Behavioral | Fowler (2004) |
+| 32 | المستودع — Repository | سلوكي — Behavioral | Evans DDD (2003) |
+
 ---
 
 # 🧠 الخلاصة | Quick Mental Model
 
 | الفئة — Category | السؤال — Core Question | أشهر الأمثلة — Examples |
 |---|---|---|
-| **الإنشائية — Creational** | كيف نُنشئ؟ — How do we create? | Singleton, Factory |
-| **البنائية — Structural** | كيف نُركِّب؟ — How do we compose? | Adapter, Decorator |
-| **السلوكية — Behavioral** | كيف نتواصل؟ — How do we communicate? | Observer, Strategy |
+| **الإنشائية — Creational** | كيف نُنشئ؟ — How do we create? | Singleton, Factory, DI |
+| **البنائية — Structural** | كيف نُركِّب؟ — How do we compose? | Adapter, Decorator, Extension |
+| **السلوكية — Behavioral** | كيف نتواصل؟ — How do we communicate? | Observer, Strategy, Repository |
