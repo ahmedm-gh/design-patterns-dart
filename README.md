@@ -97,9 +97,9 @@ dart run lib/builder.dart
 
 | Language | File |
 |----------|------|
-| 🇬🇧 English | [design_patterns_en.md](design_patterns_en.md) |
-| 🇸🇦 العربية | [design_patterns_ar.md](design_patterns_ar.md) |
-| 🇬🇧🇸🇦 Bilingual / مدمج | [design_patterns_bilingual.md](design_patterns_bilingual.md) |
+| English | [design_patterns_en.md](design_patterns_en.md) |
+| العربية | [design_patterns_ar.md](design_patterns_ar.md) |
+| Bilingual / مدمج | [design_patterns_bilingual.md](design_patterns_bilingual.md) |
 
 ---
 
