@@ -44,13 +44,13 @@ void main() {
   // البيانات الأصلية
   print('Original data: $data');
 
-  // \n⏳ الفرز باستخدام "الفقاعات"
+  // ⏳ الفرز باستخدام "الفقاعات"
   print('Sorting using "Bubble Sort":');
   final sorter = Sorter(bubbleSort);
   // النتيجة
   print('Result: ${sorter.sort(data)}');
 
-  // \n⚡ التبديل إلى "الفرز السريع" للبيانات
+  // ⚡ التبديل إلى "الفرز السريع" للبيانات
   print('Swapping to "Quick Sort":');
   sorter.strategy = quickSort;
   // النتيجة

@@ -36,7 +36,7 @@ void main() {
   print('جلب مسجل قاعدة البيانات...');
   final dbLogger = Logger('database'); // 🆕 Creating
 
-  // \nهل مسجل المصادقة 1 و 2 متطابقان؟
+  // هل مسجل المصادقة 1 و 2 متطابقان؟
   print('Are auth 1 and 2 identical? ${identical(authLogger1, authLogger2)}');
   // هل مسجل المصادقة وقاعدة البيانات متطابقان؟
   print('Are auth and db identical? ${identical(authLogger1, dbLogger)}');

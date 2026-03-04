@@ -51,7 +51,7 @@ void main() {
     ..register(ali)
     ..register(sara);
 
-  // \nعلي يُرسل رسالة
+  // علي يُرسل رسالة
   print('Ali sends a message:');
   ali.send('مرحبًا! | Hello!');
 }

@@ -38,15 +38,17 @@ void main() {
   // إضافة مراقب للتنبيهات...
   print('Adding alert observer...');
   priceTracker.on((price) {
-    if (price < 50) // � تنبيه: السعر منخفض جدًا!
+    if (price < 50) {
+      // � تنبيه: السعر منخفض جدًا!
       print('Alert: Price is too low!');
+    }
   });
 
-  // \nتحديث السعر إلى 75
+  // تحديث السعر إلى 75
   print('Updating price to 75:');
   priceTracker.emit(75.0);
 
-  // \nتحديث السعر إلى 45
+  // تحديث السعر إلى 45
   print('Updating price to 45:');
   priceTracker.emit(45.0);
 }

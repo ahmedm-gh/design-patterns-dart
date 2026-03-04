@@ -48,15 +48,19 @@ void main() {
   // الحالة الأولى
   print('Initial State: ${order.state.status}');
 
-  // \nتحديث الحالة...
+  // تحديث الحالة...
   print('Proceeding to next state...');
   order.proceed();
   // الحالة الجديدة
   print('New State: ${order.state.status}');
 
-  // \nتحديث الحالة...
+  // تحديث الحالة...
   print('Proceeding to next state...');
   order.proceed();
   // الحالة النهائية
   print('Final State: ${order.state.status}');
+
+  // تحديث الحالة...
+  print('Delivered to next state...');
+  order.proceed();
 }

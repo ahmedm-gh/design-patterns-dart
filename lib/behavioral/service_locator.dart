@@ -58,7 +58,7 @@ void main() {
   print('Retrieving service and tracking...');
   locator.get<AnalyticsService>().track('page_view');
 
-  // \n--- للاختبار
+  // --- للاختبار
   print('For Testing ---');
   // للاختبار: تبديل التنفيذ | For testing: swap
   // تبديل التنفيذ إلى خدمة وهمية...

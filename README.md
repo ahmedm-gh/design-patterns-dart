@@ -1,6 +1,10 @@
 <div align="center">
 
-# 🎯 أنماط التصميم في دارت | Design Patterns in Dart
+<h1>
+🎯<br>
+أنماط التصميم في دارت<br>
+Design Patterns in Dart
+</h1>
 
 ### الأنماط الثلاثة والعشرون (GoF) — بأمثلة دارت عملية
 ### The 23 Gang of Four (GoF) Patterns — with Practical Dart Examples
@@ -56,7 +60,7 @@ A comprehensive reference for all **23 GoF Design Patterns**, each explained wit
 | 8 | [**المُركَّب**](design_patterns_bilingual.md#composite) | Composite | التعامل مع بنى شجرية — Treat individual/groups uniformly (tree) |
 | 9 | [**المُزخرِف**](design_patterns_bilingual.md#decorator) | Decorator | إضافة مسؤوليات ديناميكيًا — Add responsibilities dynamically |
 | 10 | [**الواجهة المُبسَّطة**](design_patterns_bilingual.md#facade) | Facade | تبسيط نظام فرعي مُعقَّد — Simplified interface to a complex subsystem |
-| 11 | [**وزن الذبابة**](design_patterns_bilingual.md#flyweight) | Flyweight | مشاركة البيانات لتقليل الذاكرة — Share data to reduce memory |
+| 11 | [**وزن الفراشة**](design_patterns_bilingual.md#flyweight) | Flyweight | مشاركة البيانات لتقليل الذاكرة — Share data to reduce memory |
 | 12 | [**الوكيل**](design_patterns_bilingual.md#proxy) | Proxy | التحكم في الوصول لكائن آخر — Control access to another object |
 
 ### الأنماط السلوكية — *كيف تتواصل الكائنات؟*
@@ -178,16 +182,18 @@ Contributions, issues, and feature requests are welcome! Feel free to open a PR 
 
 ---
 
-## 📄 الرخصة | License
+<div align="center">
 
-هذا المشروع مُرخَّص تحت [رخصة MIT](LICENSE).
+**الرخصة**: هذا المشروع مُرخَّص تحت [رخصة MIT](LICENSE).
 
-This project is licensed under the [MIT License](LICENSE).
+**License** This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-<div align="center">
+⭐ 
 
-**⭐ إذا وجدته مفيدًا، لا تنسَ النجمة! | If you found this helpful, give it a star! ⭐**
+**إذا وجدته هذه المقالة مفيدة، من فضلك لا تنسَ النجمة!**
+
+**If you found this helpful, please give it a star!**
 
 </div>

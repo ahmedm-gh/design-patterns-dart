@@ -46,7 +46,7 @@ void main() {
   print('Template Method (CSV Export) ---');
   CsvExporter().export();
 
-  // \n--- � أسلوب القالب (تصدير كـ JSON)
+  // --- � أسلوب القالب (تصدير كـ JSON)
   print('Template Method (JSON Export) ---');
   JsonExporter().export();
 }

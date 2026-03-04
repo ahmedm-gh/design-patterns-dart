@@ -26,7 +26,7 @@ class StyleFactory {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  // --- 🦋 استخدام وزن الذبابة
+  // --- 🦋 استخدام وزن الفراشة
   print('Using Flyweight ---');
   final factory = StyleFactory();
 
@@ -38,7 +38,7 @@ void main() {
   print('Requesting same style again...');
   final s2 = factory.getStyle('Arial', 12);
 
-  // \nهل هما نفس الكائن في الذاكرة؟
+  // هل هما نفس الكائن في الذاكرة؟
   print('Are they the same object in memory?');
   print(
     identical(s1, s2),

@@ -75,7 +75,9 @@ void main() {
 
   // المنتجات المتاحة
   print('Available products:');
-  products.forEach((p) => print('  - \$p'));
+  for (final p in products) {
+    print('  - $p');
+  }
 
   // قواعد عمل قابلة للتركيب
   // Composable business rules
@@ -83,9 +85,9 @@ void main() {
   print('Filter rule: Electronics AND price <= 50');
   final cheapElectronics = CheapProduct(50).and(InCategory('Electronics'));
 
-  // \n✅ الإلكترونيات الرخيصة المطابقة
+  // ✅ الإلكترونيات الرخيصة المطابقة
   print('Matching Cheap Electronics:');
-  products
-      .where(cheapElectronics.isSatisfiedBy)
-      .forEach((p) => print('  -> \$p'));
+  for (final p in products.where(cheapElectronics.isSatisfiedBy)) {
+    print('  -> $p');
+  }
 }

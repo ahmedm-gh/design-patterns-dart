@@ -45,82 +45,82 @@
 
 // --- المُنتَجات المُجرَّدة ---
 // --- Abstract Products ---
-abstract class Button {
-  String render();
+abstract class Connection {
+  String connect();
 }
 
-abstract class TextField {
-  String render();
+abstract class Command {
+  String execute();
 }
 
 // --- المُنتَجات الفعلية ---
 // --- Concrete Products ---
-class MaterialButton implements Button {
+class MySqlConnection implements Connection {
   @override
-  String render() => '[Material Button]';
+  String connect() => '[MySQL Connection]';
 }
 
-class CupertinoButton implements Button {
+class PostgreSqlConnection implements Connection {
   @override
-  String render() => '[Cupertino Button]';
+  String connect() => '[PostgreSQL Connection]';
 }
 
-class MaterialTextField implements TextField {
+class MySqlCommand implements Command {
   @override
-  String render() => '[Material TextField]';
+  String execute() => '[MySQL Command]';
 }
 
-class CupertinoTextField implements TextField {
+class PostgreSqlCommand implements Command {
   @override
-  String render() => '[Cupertino TextField]';
+  String execute() => '[PostgreSQL Command]';
 }
 
 // --- المصنع المُجرَّد ---
 // --- Abstract Factory ---
-abstract class WidgetFactory {
-  Button createButton();
-  TextField createTextField();
+abstract class DatabaseFactory {
+  Connection createConnection();
+  Command createCommand();
 }
 
 // --- المصانع الفعلية ---
 // --- Concrete Factories ---
-class MaterialFactory implements WidgetFactory {
+class MySqlFactory implements DatabaseFactory {
   @override
-  Button createButton() => MaterialButton();
+  Connection createConnection() => MySqlConnection();
   @override
-  TextField createTextField() => MaterialTextField();
+  Command createCommand() => MySqlCommand();
 }
 
-class CupertinoFactory implements WidgetFactory {
+class PostgreSqlFactory implements DatabaseFactory {
   @override
-  Button createButton() => CupertinoButton();
+  Connection createConnection() => PostgreSqlConnection();
   @override
-  TextField createTextField() => CupertinoTextField();
+  Command createCommand() => PostgreSqlCommand();
 }
-
 
 // --- الاستخدام ---
 // --- Usage ---
-void buildUI(WidgetFactory factory) {
-  // --- 🛠️ بناء واجهة المستخدم
-  print('Building UI ---');
-  final button = factory.createButton();
-  final textField = factory.createTextField();
-  print('🔘 ${button.render()}');
-  print('📝 ${textField.render()}');
+void executeOperations(DatabaseFactory factory) {
+  // --- 🛠️ تنفيذ العمليات
+  print('Executing DB Operations ---');
+  final connection = factory.createConnection();
+  final command = factory.createCommand();
+  print('🔌 ${connection.connect()}');
+  print('⚡ ${command.execute()}');
 }
 
 void main() {
-  // 🍎 استخدام مصنع آبل
-  print('Using CupertinoFactory:');
-  buildUI(CupertinoFactory());
+  // 🐬 استخدام مصنع MySQL
+  print('Using MySqlFactory:');
+  executeOperations(MySqlFactory());
 
-  // \n🤖 استخدام مصنع جوجل
-  print('Using MaterialFactory:');
-  buildUI(MaterialFactory());
+  // 🐘 استخدام مصنع PostgreSQL
+  print('Using PostgreSqlFactory:');
+  executeOperations(PostgreSqlFactory());
 }
+
 ```
-> 📄 [الكود المصدري | View source code](lib/creational/abstract_factory.dart)
+> 📄 [نمط المصنع المُجرَّد | Abstract Factory Pattern](lib/creational/abstract_factory.dart)
 
 > **متى تستخدمه؟** عندما يحتاج تطبيقك دعم منصات أو سمات (Themes) مختلفة بعناصر واجهة متناسقة.
 >
@@ -204,7 +204,7 @@ void main() {
   print('Final Result: $pizza');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/creational/builder.dart)
+> 📄 [نمط الباني | Builder Pattern](lib/creational/builder.dart)
 
 > **متى تستخدمه؟** عندما يكون لديك كائن يحتوي خيارات بناء كثيرة ومتنوعة.
 >
@@ -277,7 +277,7 @@ void main() {
   notification.send('مرحبًا بك في تطبيقنا! | Welcome to our app!');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/creational/factory_method.dart)
+> 📄 [نمط دالّة المصنع | Factory Method Pattern](lib/creational/factory_method.dart)
 
 > **متى تستخدمه؟** عندما لا تعرف مُسبقًا النوع الدقيق للكائنات التي سيُنشئها الكود.
 >
@@ -342,7 +342,7 @@ void main() {
   // الافتراضي
   print('Default: ${defaultConfig.enabledModes}');
 
-  // \n--- 🔄 استنساخ وتعديل
+  // --- 🔄 استنساخ وتعديل
   print('Cloning and Modifying ---');
   final customConfig = defaultConfig.clone()
     ..difficulty = 'Hard'
@@ -354,7 +354,7 @@ void main() {
   print('Custom (changed): ${customConfig.enabledModes}');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/creational/prototype.dart)
+> 📄 [نمط النموذج الأوَّلي | Prototype Pattern](lib/creational/prototype.dart)
 
 > **متى تستخدمه؟** عندما تريد إنشاء كائنات مُشابهة بتكلفة أقل من البناء الكامل.
 >
@@ -412,11 +412,11 @@ void main() {
   print('Requesting second config instance ---');
   final config2 = AppConfig();
   
-  // \nتعديل النسخة الأولى...
+  // تعديل النسخة الأولى...
   print('Modifying first instance...');
   config1.debugMode = true;
 
-  // \nهل النسختان متطابقتان في الذاكرة؟
+  // هل النسختان متطابقتان في الذاكرة؟
   print('Are instances identical in memory?');
   print(identical(config1, config2)); // true — نفس النسخة | same instance
   
@@ -426,7 +426,7 @@ void main() {
   print('Debug Mode = ${config2.debugMode}'); // true
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/creational/singleton.dart)
+> 📄 [نمط الكائن الوحيد | Singleton Pattern](lib/creational/singleton.dart)
 
 > **متى تستخدمه؟** عندما تحتاج نسخة واحدة مُشتركة يصل إليها التطبيق بالكامل.
 >
@@ -496,7 +496,7 @@ void main() {
   logger.logJson({'event': 'login', 'user': 'ahmad'});
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/adapter.dart)
+> 📄 [نمط المُحوِّل | Adapter Pattern](lib/structural/adapter.dart)
 
 > **متى تستخدمه؟** عند دمج مكتبة قديمة أو خارجية مع كودك الحالي.
 >
@@ -567,7 +567,7 @@ void main() {
   urgentSms.notify('الخادم توقف! | Server down!');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/bridge.dart)
+> 📄 [نمط الجسر | Bridge Pattern](lib/structural/bridge.dart)
 
 > **متى تستخدمه؟** عندما يكون لديك بُعدان مستقلان من التنوُّع وتريد تجنُّب انفجار عدد الأصناف.
 >
@@ -645,7 +645,7 @@ void main() {
   print('Total root size: ${root.getSize()} byte'); // 900
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/composite.dart)
+> 📄 [نمط المُركَّب | Composite Pattern](lib/structural/composite.dart)
 
 > **متى تستخدمه؟** عند التعامل مع بنى شجرية (ملفات، قوائم، واجهات رسومية).
 >
@@ -723,13 +723,13 @@ void main() {
   // 3. إضافة سكر
   print('Adding sugar -> السعر: \$${order.cost}');
 
-  // \n✅ الطلب النهائي
+  // ✅ الطلب النهائي
   print('Final Order:');
   // ${order.description}
   print('الإجمالي: \$${order.cost}');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/decorator.dart)
+> 📄 [نمط المُزخرِف | Decorator Pattern](lib/structural/decorator.dart)
 
 > **متى تستخدمه؟** عند الحاجة لإضافة سلوكيات اختيارية ومُركَّبة ديناميكيًا.
 >
@@ -792,7 +792,7 @@ void main() {
   MediaPlayer().play('movie.mp4');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/facade.dart)
+> 📄 [نمط الواجهة المُبسَّطة | Facade Pattern](lib/structural/facade.dart)
 
 > **متى تستخدمه؟** عندما تريد تبسيط التخاطب مع نظام فرعي مُعقَّد.
 >
@@ -802,7 +802,7 @@ void main() {
 
 <a id="flyweight"></a>
 
-## 11. وزن الذبابة | Flyweight
+## 11. وزن الفراشة | Flyweight
 
 **الوصف:** يُقلِّل استهلاك الذاكرة بمشاركة البيانات المُشتركة بين الكائنات المتشابهة.
 
@@ -812,7 +812,7 @@ void main() {
 |---|---|
 | الحالة الداخلية | Intrinsic State |
 | الحالة الخارجية | Extrinsic State |
-| مصنع وزن الذبابة | Flyweight Factory |
+| مصنع وزن الفراشة | Flyweight Factory |
 
 ```dart
 // DART EXAMPLE
@@ -838,7 +838,7 @@ class StyleFactory {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  // --- 🦋 استخدام وزن الذبابة
+  // --- 🦋 استخدام وزن الفراشة
   print('Using Flyweight ---');
   final factory = StyleFactory();
   
@@ -850,12 +850,12 @@ void main() {
   print('Requesting same style again...');
   final s2 = factory.getStyle('Arial', 12);
   
-  // \nهل هما نفس الكائن في الذاكرة؟
+  // هل هما نفس الكائن في الذاكرة؟
   print('Are they the same object in memory?');
   print(identical(s1, s2)); // true — نفس الكائن في الذاكرة | same object in memory
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/flyweight.dart)
+> 📄 [نمط وزن الفراشة | Flyweight Pattern](lib/structural/flyweight.dart)
 
 > **متى تستخدمه؟** عند وجود آلاف الكائنات التي تتشارك بيانات مُتشابهة.
 >
@@ -922,7 +922,7 @@ void main() {
   print(db.query('SELECT * FROM users'));
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/proxy.dart)
+> 📄 [نمط الوكيل | Proxy Pattern](lib/structural/proxy.dart)
 
 > **متى تستخدمه؟** عند الحاجة للتحميل الكسول، التخزين المؤقت، أو التحكُّم في الصلاحيات.
 >
@@ -995,23 +995,23 @@ void main() {
   final bot = BotSupport();
   bot.setNext(HumanSupport());
 
-  // \nإرسال طلب استعادة كلمة المرور
+  // إرسال طلب استعادة كلمة المرور
   print('Requesting password reset:');
   // النتيجة
   print('Result: ${bot.handle('password_reset')}');
   
-  // \nإرسال طلب فواتير
+  // إرسال طلب فواتير
   print('Requesting billing details:');
   // النتيجة
   print('Result: ${bot.handle('billing')}');
   
-  // \nإرسال طلب غير معروف
+  // إرسال طلب غير معروف
   print('Requesting unknown issue:');
   // النتيجة
   print('Result: ${bot.handle('unknown')}');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/chain_of_responsibility.dart)
+> 📄 [نمط سلسلة المسؤولية | Chain of Responsibility Pattern](lib/behavioral/chain_of_responsibility.dart)
 
 ---
 
@@ -1077,14 +1077,14 @@ void main() {
   // ✅ المحتوى الحالي
   print('Current Content: "${editor.content}"'); // Hello World!
 
-  // \n--- ⏪ تراجع
+  // --- ⏪ تراجع
   print('Undo ---');
   commands.removeLast().undo();
   // ✅ المحتوى بعد التراجع
   print('Content after undo: "${editor.content}"'); // Hello
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/command.dart)
+> 📄 [نمط الأمر | Command Pattern](lib/behavioral/command.dart)
 
 ---
 
@@ -1147,7 +1147,7 @@ void main() {
   print('Result: $result'); // 30
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/interpreter.dart)
+> 📄 [نمط المُفسِّر | Interpreter Pattern](lib/behavioral/interpreter.dart)
 
 ---
 
@@ -1226,7 +1226,7 @@ void main() {
   }
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/iterator_pattern.dart)
+> 📄 [نمط المُكرِّر | Iterator Pattern](lib/behavioral/iterator_pattern.dart)
 
 ---
 
@@ -1290,12 +1290,12 @@ void main() {
   print('Registering Ali and Sara...');
   room..register(ali)..register(sara);
 
-  // \nعلي يُرسل رسالة
+  // علي يُرسل رسالة
   print('Ali sends a message:');
   ali.send('مرحبًا! | Hello!');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/mediator.dart)
+> 📄 [نمط الوسيط | Mediator Pattern](lib/behavioral/mediator.dart)
 
 ---
 
@@ -1366,14 +1366,14 @@ void main() {
   // المحتوى الحالي
   print('Current content: ${editor.content}');
 
-  // \n--- ⏪ استعادة اللقطة السابقة
+  // --- ⏪ استعادة اللقطة السابقة
   print('Restoring previous snapshot ---');
   editor.restore(history.pop()!);
   // ✅ المحتوى بعد الاستعادة
   print('Content after restore: ${editor.content}'); // الفصل الثاني | Chapter 2
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/memento.dart)
+> 📄 [نمط التذكار | Memento Pattern](lib/behavioral/memento.dart)
 
 ---
 
@@ -1429,16 +1429,16 @@ void main() {
   print('Alert: Price is too low!');
   });
 
-  // \nتحديث السعر إلى 75
+  // تحديث السعر إلى 75
   print('Updating price to 75:');
   priceTracker.emit(75.0);
   
-  // \nتحديث السعر إلى 45
+  // تحديث السعر إلى 45
   print('Updating price to 45:');
   priceTracker.emit(45.0);
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/observer.dart)
+> 📄 [نمط المُراقِب | Observer Pattern](lib/behavioral/observer.dart)
 
 ---
 
@@ -1501,20 +1501,20 @@ void main() {
   // الحالة الأولى
   print('Initial State: ${order.state.status}');
   
-  // \nتحديث الحالة...
+  // تحديث الحالة...
   print('Proceeding to next state...');
   order.proceed();
   // الحالة الجديدة
   print('New State: ${order.state.status}');
   
-  // \nتحديث الحالة...
+  // تحديث الحالة...
   print('Proceeding to next state...');
   order.proceed();
   // الحالة النهائية
   print('Final State: ${order.state.status}');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/state.dart)
+> 📄 [نمط الحالة | State Pattern](lib/behavioral/state.dart)
 
 ---
 
@@ -1573,20 +1573,20 @@ void main() {
   // البيانات الأصلية
   print('Original data: $data');
 
-  // \n⏳ الفرز باستخدام "الفقاعات"
+  // ⏳ الفرز باستخدام "الفقاعات"
   print('Sorting using "Bubble Sort":');
   final sorter = Sorter(bubbleSort);
   // النتيجة
   print('Result: ${sorter.sort(data)}');
 
-  // \n⚡ التبديل إلى "الفرز السريع" للبيانات
+  // ⚡ التبديل إلى "الفرز السريع" للبيانات
   print('Swapping to "Quick Sort":');
   sorter.strategy = quickSort;
   // النتيجة
   print('Result: ${sorter.sort(data)}');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/strategy.dart)
+> 📄 [نمط الاستراتيجية | Strategy Pattern](lib/behavioral/strategy.dart)
 
 ---
 
@@ -1647,12 +1647,12 @@ void main() {
   print('Template Method (CSV Export) ---');
   CsvExporter().export();
   
-  // \n--- � أسلوب القالب (تصدير كـ JSON)
+  // --- � أسلوب القالب (تصدير كـ JSON)
   print('Template Method (JSON Export) ---');
   JsonExporter().export();
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/template_method.dart)
+> 📄 [نمط أسلوب القالب | Template Method Pattern](lib/behavioral/template_method.dart)
 
 ---
 
@@ -1733,7 +1733,7 @@ void main() {
   }
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/visitor.dart)
+> 📄 [نمط الزائر | Visitor Pattern](lib/behavioral/visitor.dart)
 
 ---
 
@@ -1825,11 +1825,11 @@ void main() {
   print('طلب ثاني اتصال...');
   final conn2 = pool.acquire(); // ⏳ Creating connection #2
   
-  // \nتنفيذ استعلام...
+  // تنفيذ استعلام...
   print('Executing query...');
   print(conn1.query('SELECT * FROM users'));
 
-  // \nإعادة الاتصال الأول للتجمُّع...
+  // إعادة الاتصال الأول للتجمُّع...
   print('Releasing first connection...');
   pool.release(conn1);          // 🔓 Released connection #1
   
@@ -1843,7 +1843,7 @@ void main() {
   pool.release(conn3);
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/creational/object_pool.dart)
+> 📄 [نمط تجمُّع الكائنات | Object Pool Pattern](lib/creational/object_pool.dart)
 
 > **متى تستخدمه؟** عند إنشاء كائنات مُكلفة (اتصالات شبكة، threads) وتريد إعادة استخدامها.
 >
@@ -1923,7 +1923,7 @@ void main() {
   print('Sent list (fake): ${fakeEmail.sent}');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/creational/dependency_injection.dart)
+> 📄 [نمط حقن الاعتمادية | Dependency Injection Pattern](lib/creational/dependency_injection.dart)
 
 > **متى تستخدمه؟** دائمًا! خاصة عند الحاجة لاختبار الوحدات أو تبديل التنفيذات.
 >
@@ -1982,7 +1982,7 @@ void main() {
   print('جلب مسجل قاعدة البيانات...');
   final dbLogger = Logger('database');   // 🆕 Creating
 
-  // \nهل مسجل المصادقة 1 و 2 متطابقان؟
+  // هل مسجل المصادقة 1 و 2 متطابقان؟
   print('Are auth 1 and 2 identical? ${identical(authLogger1, authLogger2)}');
   // هل مسجل المصادقة وقاعدة البيانات متطابقان؟
   print('Are auth and db identical? ${identical(authLogger1, dbLogger)}');
@@ -1992,7 +1992,7 @@ void main() {
   dbLogger.log('Query executed');      // [database] Query executed
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/creational/multiton.dart)
+> 📄 [نمط المُتعدِّد | Multiton Pattern](lib/creational/multiton.dart)
 
 > **متى تستخدمه؟** عندما تحتاج نسخة واحدة لكل فئة/قناة (مثل loggers, database connections بحسب الاسم).
 >
@@ -2053,7 +2053,7 @@ void main() {
   print('النص الأصلي: "Long text here" -> القص (8): "${'Long text here'.truncate(8)}"');
   print('هل "user@mail.com" بريد إلكتروني؟ ${'user@mail.com'.isEmail}');
 
-  // \n2. امتداد على القوائم
+  // 2. امتداد على القوائم
   print('List Extension:');
   final List<num> scores = [85, 92, 78, 95, 88];
   // الدرجات
@@ -2064,7 +2064,7 @@ void main() {
   print('Average: ${scores.average}'); // Average: 87.6
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/extension_object.dart)
+> 📄 [نمط كائن الامتداد | Extension Object Pattern](lib/structural/extension_object.dart)
 
 > **متى تستخدمه؟** عند الحاجة لإضافة دوال مساعدة لأنواع لا تتحكم فيها (String, int, List...).
 >
@@ -2133,19 +2133,19 @@ void main() {
   print('Tax: $tax');
   
   final total = price + tax;
-  // \nالإجمالي
+  // الإجمالي
   print('Total: $total'); // Total: 34.49 SAR
   // الضعف
   print('Double price: ${price * 2}'); // 59.98 SAR
 
-  // \nالمساواة بالقيمة؟
+  // المساواة بالقيمة؟
   print('Value equality?');
   final m1 = const Money(10, 'SAR');
   final m2 = const Money(10, 'SAR');
   print('هل (10 SAR) == (10 SAR)؟ ${m1 == m2}'); // true
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/structural/value_object.dart)
+> 📄 [نمط كائن القيمة | Value Object Pattern](lib/structural/value_object.dart)
 
 > **متى تستخدمه؟** لتمثيل المفاهيم المالية، الإحداثيات، الألوان — أي قيمة يُحدَّد معناها بمحتواها.
 >
@@ -2224,7 +2224,7 @@ void main() {
   PaymentService().processPayment(49.99);
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/null_object.dart)
+> 📄 [نمط الكائن الفارغ | Null Object Pattern](lib/behavioral/null_object.dart)
 
 > **متى تستخدمه؟** عند الحاجة لسلوك افتراضي "لا يفعل شيئًا" بدلًا من null وفحوصاته.
 >
@@ -2331,12 +2331,12 @@ void main() {
   print('Filter rule: Electronics AND price <= 50');
   final cheapElectronics = CheapProduct(50).and(InCategory('Electronics'));
 
-  // \n✅ الإلكترونيات الرخيصة المطابقة
+  // ✅ الإلكترونيات الرخيصة المطابقة
   print('Matching Cheap Electronics:');
   products.where(cheapElectronics.isSatisfiedBy).forEach((p) => print('  -> \$p'));
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/specification.dart)
+> 📄 [نمط المواصفة | Specification Pattern](lib/behavioral/specification.dart)
 
 > **متى تستخدمه؟** عند وجود قواعد تصفية مُعقَّدة يمكن تركيبها ديناميكيًا.
 >
@@ -2418,7 +2418,7 @@ void main() {
   print('Retrieving service and tracking...');
   locator.get<AnalyticsService>().track('page_view');
 
-  // \n--- للاختبار
+  // --- للاختبار
   print('For Testing ---');
   // للاختبار: تبديل التنفيذ | For testing: swap
   // تبديل التنفيذ إلى خدمة وهمية...
@@ -2428,7 +2428,7 @@ void main() {
   locator.get<AnalyticsService>().track('page_view');
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/service_locator.dart)
+> 📄 [نمط مُحدِّد الخدمات | Service Locator Pattern](lib/behavioral/service_locator.dart)
 
 > **متى تستخدمه؟** عند الحاجة لوصول عام للخدمات بدون تمرير يدوي (مثل حزمة `get_it` في Flutter).
 >
@@ -2499,7 +2499,7 @@ void main() {
   print('Initializing in-memory repo...');
   final UserRepository repo = InMemoryUserRepository();
 
-  // \nحفظ مستخدمين جدد...
+  // حفظ مستخدمين جدد...
   print('Saving new users...');
   repo.save(const User(id: 1, name: 'Ali', email: 'ali@mail.com'));
   repo.save(const User(id: 2, name: 'Sara', email: 'sara@mail.com'));
@@ -2508,11 +2508,11 @@ void main() {
   print('All users:');
   repo.findAll().forEach((u) => print('  - \$u'));
   
-  // \nالبحث عن المستخدم رقم 1
+  // البحث عن المستخدم رقم 1
   print('Find user #1:');
   print('  -> \${repo.findById(1)}');
 
-  // \nحذف المستخدم رقم 2...
+  // حذف المستخدم رقم 2...
   print('Deleting user #2...');
   repo.delete(2);
   
@@ -2521,7 +2521,7 @@ void main() {
   repo.findAll().forEach((u) => print('  - \$u'));
 }
 ```
-> 📄 [الكود المصدري | View source code](lib/behavioral/repository.dart)
+> 📄 [نمط المستودع | Repository Pattern](lib/behavioral/repository.dart)
 
 > **متى تستخدمه؟** دائمًا في تطبيقات Flutter لعزل طبقة البيانات عن منطق التطبيق.
 >

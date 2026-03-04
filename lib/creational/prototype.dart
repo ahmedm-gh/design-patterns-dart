@@ -41,7 +41,7 @@ void main() {
   // الافتراضي
   print('Default: ${defaultConfig.enabledModes}');
 
-  // \n--- 🔄 استنساخ وتعديل
+  // --- 🔄 استنساخ وتعديل
   print('Cloning and Modifying ---');
   final customConfig = defaultConfig.clone()
     ..difficulty = 'Hard'

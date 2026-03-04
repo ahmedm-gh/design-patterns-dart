@@ -47,7 +47,7 @@ void main() {
   print('Initializing in-memory repo...');
   final UserRepository repo = InMemoryUserRepository();
 
-  // \nحفظ مستخدمين جدد...
+  // حفظ مستخدمين جدد...
   print('Saving new users...');
   repo.save(const User(id: 1, name: 'Ali', email: 'ali@mail.com'));
   repo.save(const User(id: 2, name: 'Sara', email: 'sara@mail.com'));
@@ -56,11 +56,11 @@ void main() {
   print('All users:');
   repo.findAll().forEach((u) => print('  - \$u'));
 
-  // \nالبحث عن المستخدم رقم 1
+  // البحث عن المستخدم رقم 1
   print('Find user #1:');
   print('  -> \${repo.findById(1)}');
 
-  // \nحذف المستخدم رقم 2...
+  // حذف المستخدم رقم 2...
   print('Deleting user #2...');
   repo.delete(2);
 

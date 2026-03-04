@@ -50,7 +50,7 @@ void main() {
   // ✅ المحتوى الحالي
   print('Current Content: "${editor.content}"'); // Hello World!
 
-  // \n--- ⏪ تراجع
+  // --- ⏪ تراجع
   print('Undo ---');
   commands.removeLast().undo();
   // ✅ المحتوى بعد التراجع

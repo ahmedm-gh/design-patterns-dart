@@ -60,11 +60,11 @@ void main() {
   print('طلب ثاني اتصال...');
   final conn2 = pool.acquire(); // ⏳ Creating connection #2
 
-  // \nتنفيذ استعلام...
+  // تنفيذ استعلام...
   print('Executing query...');
   print(conn1.query('SELECT * FROM users'));
 
-  // \nإعادة الاتصال الأول للتجمُّع...
+  // إعادة الاتصال الأول للتجمُّع...
   print('Releasing first connection...');
   pool.release(conn1); // 🔓 Released connection #1
 

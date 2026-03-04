@@ -42,7 +42,7 @@ void main() {
   );
   print('هل "user@mail.com" بريد إلكتروني؟ ${'user@mail.com'.isEmail}');
 
-  // \n2. امتداد على القوائم
+  // 2. امتداد على القوائم
   print('List Extension:');
   final List<num> scores = [85, 92, 78, 95, 88];
   // الدرجات

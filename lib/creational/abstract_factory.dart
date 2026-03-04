@@ -8,76 +8,76 @@ library;
 
 // --- المُنتَجات المُجرَّدة ---
 // --- Abstract Products ---
-abstract class Button {
-  String render();
+abstract class Connection {
+  String connect();
 }
 
-abstract class TextField {
-  String render();
+abstract class Command {
+  String execute();
 }
 
 // --- المُنتَجات الفعلية ---
 // --- Concrete Products ---
-class MaterialButton implements Button {
+class MySqlConnection implements Connection {
   @override
-  String render() => '[Material Button]';
+  String connect() => '[MySQL Connection]';
 }
 
-class CupertinoButton implements Button {
+class PostgreSqlConnection implements Connection {
   @override
-  String render() => '[Cupertino Button]';
+  String connect() => '[PostgreSQL Connection]';
 }
 
-class MaterialTextField implements TextField {
+class MySqlCommand implements Command {
   @override
-  String render() => '[Material TextField]';
+  String execute() => '[MySQL Command]';
 }
 
-class CupertinoTextField implements TextField {
+class PostgreSqlCommand implements Command {
   @override
-  String render() => '[Cupertino TextField]';
+  String execute() => '[PostgreSQL Command]';
 }
 
 // --- المصنع المُجرَّد ---
 // --- Abstract Factory ---
-abstract class WidgetFactory {
-  Button createButton();
-  TextField createTextField();
+abstract class DatabaseFactory {
+  Connection createConnection();
+  Command createCommand();
 }
 
 // --- المصانع الفعلية ---
 // --- Concrete Factories ---
-class MaterialFactory implements WidgetFactory {
+class MySqlFactory implements DatabaseFactory {
   @override
-  Button createButton() => MaterialButton();
+  Connection createConnection() => MySqlConnection();
   @override
-  TextField createTextField() => MaterialTextField();
+  Command createCommand() => MySqlCommand();
 }
 
-class CupertinoFactory implements WidgetFactory {
+class PostgreSqlFactory implements DatabaseFactory {
   @override
-  Button createButton() => CupertinoButton();
+  Connection createConnection() => PostgreSqlConnection();
   @override
-  TextField createTextField() => CupertinoTextField();
+  Command createCommand() => PostgreSqlCommand();
 }
 
 // --- الاستخدام ---
 // --- Usage ---
-void buildUI(WidgetFactory factory) {
-  // --- 🛠️ بناء واجهة المستخدم
-  print('Building UI ---');
-  final button = factory.createButton();
-  final textField = factory.createTextField();
-  print('🔘 ${button.render()}');
-  print('📝 ${textField.render()}');
+void executeOperations(DatabaseFactory factory) {
+  // --- 🛠️ تنفيذ العمليات
+  print('Executing DB Operations ---');
+  final connection = factory.createConnection();
+  final command = factory.createCommand();
+  print('🔌 ${connection.connect()}');
+  print('⚡ ${command.execute()}');
 }
 
 void main() {
-  // 🍎 استخدام مصنع آبل
-  print('Using CupertinoFactory:');
-  buildUI(CupertinoFactory());
+  // 🐬 استخدام مصنع MySQL
+  print('Using MySqlFactory:');
+  executeOperations(MySqlFactory());
 
-  // \n🤖 استخدام مصنع جوجل
-  print('Using MaterialFactory:');
-  buildUI(MaterialFactory());
+  // 🐘 استخدام مصنع PostgreSQL
+  print('Using PostgreSqlFactory:');
+  executeOperations(PostgreSqlFactory());
 }

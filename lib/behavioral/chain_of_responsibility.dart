@@ -33,8 +33,9 @@ class BotSupport extends SupportHandler {
 class HumanSupport extends SupportHandler {
   @override
   String handle(String issue) {
-    if (issue == 'billing')
+    if (issue == 'billing') {
       return '👨‍💼 تحويل للفوترة | Transferring to billing';
+    }
     return super.handle(issue);
   }
 }
@@ -47,17 +48,17 @@ void main() {
   final bot = BotSupport();
   bot.setNext(HumanSupport());
 
-  // \nإرسال طلب استعادة كلمة المرور
+  // إرسال طلب استعادة كلمة المرور
   print('Requesting password reset:');
   // النتيجة
   print('Result: ${bot.handle('password_reset')}');
 
-  // \nإرسال طلب فواتير
+  // إرسال طلب فواتير
   print('Requesting billing details:');
   // النتيجة
   print('Result: ${bot.handle('billing')}');
 
-  // \nإرسال طلب غير معروف
+  // إرسال طلب غير معروف
   print('Requesting unknown issue:');
   // النتيجة
   print('Result: ${bot.handle('unknown')}');

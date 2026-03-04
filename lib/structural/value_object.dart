@@ -45,12 +45,12 @@ void main() {
   print('Tax: $tax');
 
   final total = price + tax;
-  // \nالإجمالي
+  // الإجمالي
   print('Total: $total'); // Total: 34.49 SAR
   // الضعف
   print('Double price: ${price * 2}'); // 59.98 SAR
 
-  // \nالمساواة بالقيمة؟
+  // المساواة بالقيمة؟
   print('Value equality?');
   final m1 = const Money(10, 'SAR');
   final m2 = const Money(10, 'SAR');

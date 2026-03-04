@@ -34,11 +34,11 @@ void main() {
   print('Requesting second config instance ---');
   final config2 = AppConfig();
 
-  // \nتعديل النسخة الأولى...
+  // تعديل النسخة الأولى...
   print('Modifying first instance...');
   config1.debugMode = true;
 
-  // \nهل النسختان متطابقتان في الذاكرة؟
+  // هل النسختان متطابقتان في الذاكرة؟
   print('Are instances identical in memory?');
   print(identical(config1, config2)); // true — نفس النسخة | same instance
 

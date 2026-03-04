@@ -56,7 +56,7 @@ void main() {
   // المحتوى الحالي
   print('Current content: ${editor.content}');
 
-  // \n--- ⏪ استعادة اللقطة السابقة
+  // --- ⏪ استعادة اللقطة السابقة
   print('Restoring previous snapshot ---');
   editor.restore(history.pop()!);
   // ✅ المحتوى بعد الاستعادة
