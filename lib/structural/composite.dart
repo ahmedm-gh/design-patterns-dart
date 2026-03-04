@@ -4,6 +4,8 @@
 /// through a tree structure.
 library;
 
+// DART EXAMPLE
+
 // --- الواجهة المشتركة ---
 // --- Shared Interface ---
 abstract class FileSystemEntity {
@@ -40,7 +42,8 @@ class Folder implements FileSystemEntity {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🗂️ حساب حجم المجلدات | Calculating Folders Size ---');
+  // --- 🗂️ حساب حجم المجلدات
+  print('Calculating Folders Size ---');
   final root = Folder('root')
     ..add(File('readme.md', 100))
     ..add(
@@ -49,9 +52,10 @@ void main() {
         ..add(File('utils.dart', 300)),
     );
 
-  print('حجم "readme.md" هو 100 | Size of readme.md = 100');
-  print('حجم المجلد الداخلي "src" هو 800 | Size of src = 800');
-  print(
-    '📁 إجمالي حجم المجلد الأم | Total root size: ${root.getSize()} byte',
-  ); // 900
+  // حجم "readme.md" هو 100
+  print('Size of readme.md = 100');
+  // حجم المجلد الداخلي "src" هو 800
+  print('Size of src = 800');
+  // 📁 إجمالي حجم المجلد الأم
+  print('Total root size: ${root.getSize()} byte'); // 900
 }

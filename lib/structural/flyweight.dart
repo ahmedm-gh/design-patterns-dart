@@ -4,6 +4,8 @@
 /// similar objects.
 library;
 
+// DART EXAMPLE
+
 class CharacterStyle {
   final String font;
   final int size;
@@ -24,18 +26,20 @@ class StyleFactory {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🦋 استخدام وزن الذبابة | Using Flyweight ---');
+  // --- 🦋 استخدام وزن الذبابة
+  print('Using Flyweight ---');
   final factory = StyleFactory();
 
-  print('طلب تنسيق (Arial, 12)... | Requesting style...');
+  // طلب تنسيق (Arial, 12)...
+  print('Requesting style...');
   final s1 = factory.getStyle('Arial', 12);
 
-  print('طلب نفس التنسيق مرة أخرى... | Requesting same style again...');
+  // طلب نفس التنسيق مرة أخرى...
+  print('Requesting same style again...');
   final s2 = factory.getStyle('Arial', 12);
 
-  print(
-    '\nهل هما نفس الكائن في الذاكرة؟ | Are they the same object in memory?',
-  );
+  // \nهل هما نفس الكائن في الذاكرة؟
+  print('Are they the same object in memory?');
   print(
     identical(s1, s2),
   ); // true — نفس الكائن في الذاكرة | same object in memory

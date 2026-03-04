@@ -4,6 +4,8 @@
 /// without specifying their concrete classes.
 library;
 
+// DART EXAMPLE
+
 // --- المُنتَجات المُجرَّدة ---
 // --- Abstract Products ---
 abstract class Button {
@@ -62,7 +64,8 @@ class CupertinoFactory implements WidgetFactory {
 // --- الاستخدام ---
 // --- Usage ---
 void buildUI(WidgetFactory factory) {
-  print('--- 🛠️ بناء واجهة المستخدم | Building UI ---');
+  // --- 🛠️ بناء واجهة المستخدم
+  print('Building UI ---');
   final button = factory.createButton();
   final textField = factory.createTextField();
   print('🔘 ${button.render()}');
@@ -70,9 +73,11 @@ void buildUI(WidgetFactory factory) {
 }
 
 void main() {
-  print('🍎 استخدام مصنع آبل | Using CupertinoFactory:');
+  // 🍎 استخدام مصنع آبل
+  print('Using CupertinoFactory:');
   buildUI(CupertinoFactory());
 
-  print('\n🤖 استخدام مصنع جوجل | Using MaterialFactory:');
+  // \n🤖 استخدام مصنع جوجل
+  print('Using MaterialFactory:');
   buildUI(MaterialFactory());
 }

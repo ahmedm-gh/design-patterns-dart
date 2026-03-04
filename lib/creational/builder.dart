@@ -4,6 +4,8 @@
 /// allowing step-by-step construction.
 library;
 
+// DART EXAMPLE
+
 class Pizza {
   String? size;
   String? crust;
@@ -41,8 +43,10 @@ class PizzaBuilder {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🍕 بناء بيتزا مخصصة | Building Custom Pizza ---');
-  print('جارٍ إضافة المكونات... | Adding ingredients...');
+  // --- 🍕 بناء بيتزا مخصصة
+  print('Building Custom Pizza ---');
+  // جارٍ إضافة المكونات...
+  print('Adding ingredients...');
 
   final pizza = PizzaBuilder()
       .setSize('Large')
@@ -51,5 +55,6 @@ void main() {
       .addTopping('Olives')
       .build();
 
-  print('✅ النتيجة النهائية | Final Result: $pizza');
+  // ✅ النتيجة النهائية
+  print('Final Result: $pizza');
 }

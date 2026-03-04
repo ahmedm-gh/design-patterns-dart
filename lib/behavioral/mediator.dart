@@ -4,6 +4,8 @@
 /// a mediator instead of directly with each other.
 library;
 
+// DART EXAMPLE
+
 // --- الوسيط ---
 // --- Mediator ---
 class ChatRoom {
@@ -30,22 +32,26 @@ class User {
 
   void send(String message) => _room?.sendMessage(message, this);
   void receive(String message, String from) =>
-      print('$name تلقّى من | received from $from: $message');
+      // $name تلقّى من
+      print('received from $from: $message');
 }
 
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 💬 غرفة الدردشة | Chat Room Mediator ---');
+  // --- 💬 غرفة الدردشة
+  print('Chat Room Mediator ---');
   final room = ChatRoom();
   final ali = User('Ali');
   final sara = User('Sara');
 
-  print('تسجيل علي وسارة في الغرفة... | Registering Ali and Sara...');
+  // تسجيل علي وسارة في الغرفة...
+  print('Registering Ali and Sara...');
   room
     ..register(ali)
     ..register(sara);
 
-  print('\nعلي يُرسل رسالة | Ali sends a message:');
+  // \nعلي يُرسل رسالة
+  print('Ali sends a message:');
   ali.send('مرحبًا! | Hello!');
 }

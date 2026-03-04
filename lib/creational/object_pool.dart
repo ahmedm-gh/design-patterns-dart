@@ -4,6 +4,8 @@
 /// creation and destruction.
 library;
 
+// DART EXAMPLE
+
 class DatabaseConnection {
   final int id;
   bool inUse = false;
@@ -49,7 +51,8 @@ class ConnectionPool {
 }
 
 void main() {
-  print('--- ♻️ تجمُّع الكائنات | Object Pool ---');
+  // --- ♻️ تجمُّع الكائنات
+  print('Object Pool ---');
   final pool = ConnectionPool(maxSize: 2);
 
   print('طلب أول اتصال...');
@@ -57,18 +60,20 @@ void main() {
   print('طلب ثاني اتصال...');
   final conn2 = pool.acquire(); // ⏳ Creating connection #2
 
-  print('\nتنفيذ استعلام... | Executing query...');
+  // \nتنفيذ استعلام...
+  print('Executing query...');
   print(conn1.query('SELECT * FROM users'));
 
-  print('\nإعادة الاتصال الأول للتجمُّع... | Releasing first connection...');
+  // \nإعادة الاتصال الأول للتجمُّع...
+  print('Releasing first connection...');
   pool.release(conn1); // 🔓 Released connection #1
 
-  print('طلب اتصال ثالث... | Requesting third connection...');
+  // طلب اتصال ثالث...
+  print('Requesting third connection...');
   final conn3 = pool.acquire(); // ♻️ Reusing connection #1
 
-  print(
-    'هل الاتصال 3 هو نفسه 1؟ | Is conn3 same as conn1? ${identical(conn1, conn3)}',
-  ); // true
+  // هل الاتصال 3 هو نفسه 1؟
+  print('Is conn3 same as conn1? ${identical(conn1, conn3)}'); // true
   pool.release(conn2);
   pool.release(conn3);
 }

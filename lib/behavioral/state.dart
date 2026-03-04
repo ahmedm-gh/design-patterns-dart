@@ -4,6 +4,8 @@
 /// changes. The object appears to change its class.
 library;
 
+// DART EXAMPLE
+
 abstract class OrderState {
   void next(Order order);
   String get status;
@@ -25,7 +27,9 @@ class ProcessingState implements OrderState {
 
 class DeliveredState implements OrderState {
   @override
-  void next(Order order) => print('اكتمل بالفعل! | Already completed!');
+  void next(Order order) =>
+      // اكتمل بالفعل!
+      print('Already completed!');
   @override
   String get status => 'تم التوصيل | Delivered';
 }
@@ -38,15 +42,21 @@ class Order {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 📦 تتبع حالة الطلب | Order State Tracker ---');
+  // --- 📦 تتبع حالة الطلب
+  print('Order State Tracker ---');
   final order = Order();
-  print('الحالة الأولى | Initial State: ${order.state.status}');
+  // الحالة الأولى
+  print('Initial State: ${order.state.status}');
 
-  print('\nتحديث الحالة... | Proceeding to next state...');
+  // \nتحديث الحالة...
+  print('Proceeding to next state...');
   order.proceed();
-  print('الحالة الجديدة | New State: ${order.state.status}');
+  // الحالة الجديدة
+  print('New State: ${order.state.status}');
 
-  print('\nتحديث الحالة... | Proceeding to next state...');
+  // \nتحديث الحالة...
+  print('Proceeding to next state...');
   order.proceed();
-  print('الحالة النهائية | Final State: ${order.state.status}');
+  // الحالة النهائية
+  print('Final State: ${order.state.status}');
 }

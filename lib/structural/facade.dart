@@ -3,6 +3,8 @@
 /// Provides a simplified, unified interface to a complex subsystem.
 library;
 
+// DART EXAMPLE
+
 // --- أصناف النظام الفرعي المُعقَّد ---
 // --- Complex Subsystem Classes ---
 class AudioDecoder {
@@ -15,7 +17,8 @@ class VideoDecoder {
 
 class ScreenRenderer {
   void render(String video, String audio) =>
-      print('▶ عرض | Playing: $video + $audio');
+      // ▶ عرض
+      print('Playing: $video + $audio');
 }
 
 // --- الواجهة المُبسَّطة ---
@@ -35,6 +38,7 @@ class MediaPlayer {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🎬 بدء تشغيل الفيلم | Starting Movie ---');
+  // --- 🎬 بدء تشغيل الفيلم
+  print('Starting Movie ---');
   MediaPlayer().play('movie.mp4');
 }

@@ -4,6 +4,8 @@
 /// state, all dependents are notified automatically.
 library;
 
+// DART EXAMPLE
+
 class EventEmitter<T> {
   final _listeners = <void Function(T)>[];
 
@@ -22,21 +24,29 @@ class EventEmitter<T> {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 👀 المُراقِب | Observer ---');
+  // --- 👀 المُراقِب
+  print('Observer ---');
   final priceTracker = EventEmitter<double>();
 
-  print('إضافة مراقب للسعر... | Adding price observer...');
-  priceTracker.on((price) => print('📊 السعر الجديد | New price: \$$price'));
+  // إضافة مراقب للسعر...
+  print('Adding price observer...');
+  priceTracker.on(
+    (price) => // 📊 السعر الجديد
+        print('New price: \$$price'),
+  );
 
-  print('إضافة مراقب للتنبيهات... | Adding alert observer...');
+  // إضافة مراقب للتنبيهات...
+  print('Adding alert observer...');
   priceTracker.on((price) {
-    if (price < 50)
-      print('� تنبيه: السعر منخفض جدًا! | Alert: Price is too low!');
+    if (price < 50) // � تنبيه: السعر منخفض جدًا!
+      print('Alert: Price is too low!');
   });
 
-  print('\nتحديث السعر إلى 75 | Updating price to 75:');
+  // \nتحديث السعر إلى 75
+  print('Updating price to 75:');
   priceTracker.emit(75.0);
 
-  print('\nتحديث السعر إلى 45 | Updating price to 45:');
+  // \nتحديث السعر إلى 45
+  print('Updating price to 45:');
   priceTracker.emit(45.0);
 }

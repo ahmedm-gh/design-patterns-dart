@@ -4,6 +4,8 @@
 /// without modifying its class.
 library;
 
+// DART EXAMPLE
+
 // --- الواجهة الأساسية ---
 // --- Base Interface ---
 abstract class Coffee {
@@ -43,16 +45,22 @@ class SugarDecorator implements Coffee {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- ☕ تحضير القهوة | Preparing Coffee ---');
+  // --- ☕ تحضير القهوة
+  print('Preparing Coffee ---');
   Coffee order = SimpleCoffee();
-  print('1. ${order.description} | السعر: \$${order.cost}');
+  // 1. ${order.description}
+  print('السعر: \$${order.cost}');
 
   order = MilkDecorator(order);
-  print('2. إضافة حليب | Adding milk -> السعر: \$${order.cost}');
+  // 2. إضافة حليب
+  print('Adding milk -> السعر: \$${order.cost}');
 
   order = SugarDecorator(order);
-  print('3. إضافة سكر | Adding sugar -> السعر: \$${order.cost}');
+  // 3. إضافة سكر
+  print('Adding sugar -> السعر: \$${order.cost}');
 
-  print('\n✅ الطلب النهائي | Final Order:');
-  print('${order.description} | الإجمالي: \$${order.cost}');
+  // \n✅ الطلب النهائي
+  print('Final Order:');
+  // ${order.description}
+  print('الإجمالي: \$${order.cost}');
 }

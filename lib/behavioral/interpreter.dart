@@ -4,6 +4,8 @@
 /// interpreter to evaluate its sentences.
 library;
 
+// DART EXAMPLE
+
 abstract class Expression {
   int interpret(Map<String, int> context);
 }
@@ -32,11 +34,15 @@ class AddExp implements Expression {
 void main() {
   // --- الاستخدام: x + y ---
   // --- Usage: x + y ---
-  print('--- 🧮 المُفسِّر | Interpreter ---');
+  // --- 🧮 المُفسِّر
+  print('Interpreter ---');
   final expression = AddExp(NumberExp('x'), NumberExp('y'));
-  print('تعبير | Expression: x + y');
-  print('مع سياق | With context: {x: 10, y: 20}');
+  // تعبير
+  print('Expression: x + y');
+  // مع سياق
+  print('With context: {x: 10, y: 20}');
 
   final result = expression.interpret({'x': 10, 'y': 20});
-  print('✅ النتيجة | Result: $result'); // 30
+  // ✅ النتيجة
+  print('Result: $result'); // 30
 }

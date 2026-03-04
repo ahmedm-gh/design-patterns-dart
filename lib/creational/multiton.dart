@@ -4,6 +4,8 @@
 /// Each key maps to exactly one instance.
 library;
 
+// DART EXAMPLE
+
 class Logger {
   static final Map<String, Logger> _instances = {};
 
@@ -23,7 +25,8 @@ class Logger {
 }
 
 void main() {
-  print('--- 👯 المُتعدِّد | Multiton ---');
+  // --- 👯 المُتعدِّد
+  print('Multiton ---');
   print('جلب مسجل المصادقة (أول مرة)...');
   final authLogger1 = Logger('auth'); // 🆕 Creating
 
@@ -33,12 +36,10 @@ void main() {
   print('جلب مسجل قاعدة البيانات...');
   final dbLogger = Logger('database'); // 🆕 Creating
 
-  print(
-    '\nهل مسجل المصادقة 1 و 2 متطابقان؟ | Are auth 1 and 2 identical? ${identical(authLogger1, authLogger2)}',
-  );
-  print(
-    'هل مسجل المصادقة وقاعدة البيانات متطابقان؟ | Are auth and db identical? ${identical(authLogger1, dbLogger)}',
-  );
+  // \nهل مسجل المصادقة 1 و 2 متطابقان؟
+  print('Are auth 1 and 2 identical? ${identical(authLogger1, authLogger2)}');
+  // هل مسجل المصادقة وقاعدة البيانات متطابقان؟
+  print('Are auth and db identical? ${identical(authLogger1, dbLogger)}');
 
   print('');
   authLogger1.log('User logged in'); // [auth] User logged in

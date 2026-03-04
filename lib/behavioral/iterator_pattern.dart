@@ -4,6 +4,8 @@
 /// exposing its underlying structure.
 library;
 
+// DART EXAMPLE
+
 class Song {
   final String title;
   final String artist;
@@ -48,7 +50,8 @@ class Playlist {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🎶 قائمة الأغاني | Playlist Iterator ---');
+  // --- 🎶 قائمة الأغاني
+  print('Playlist Iterator ---');
   final playlist = Playlist('My Favorites')
     ..add(Song('Bohemian Rhapsody', 'Queen'))
     ..add(Song('Stairway to Heaven', 'Led Zeppelin'))

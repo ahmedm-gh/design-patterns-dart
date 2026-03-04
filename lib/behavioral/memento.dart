@@ -4,6 +4,8 @@
 /// restored later without violating encapsulation.
 library;
 
+// DART EXAMPLE
+
 // --- اللقطة ---
 // --- Snapshot ---
 class EditorMemento {
@@ -33,25 +35,30 @@ class History {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 💾 التذكار (حفظ واستعادة) | Memento (Save/Restore) ---');
+  // --- 💾 التذكار (حفظ واستعادة)
+  print('Memento (Save/Restore) ---');
   final editor = Editor();
   final history = History();
 
-  print('📝 كتابة الفصل الأول... | Writing Chapter 1...');
+  // 📝 كتابة الفصل الأول...
+  print('Writing Chapter 1...');
   editor.content = 'الفصل الأول | Chapter 1';
   history.push(editor.save());
 
-  print('📝 كتابة الفصل الثاني... | Writing Chapter 2...');
+  // 📝 كتابة الفصل الثاني...
+  print('Writing Chapter 2...');
   editor.content = 'الفصل الثاني | Chapter 2';
   history.push(editor.save());
 
-  print('❌ خطأ مطبعي! | Typo made!');
+  // ❌ خطأ مطبعي!
+  print('Typo made!');
   editor.content = 'نص خاطئ! | Wrong text!';
-  print('المحتوى الحالي | Current content: ${editor.content}');
+  // المحتوى الحالي
+  print('Current content: ${editor.content}');
 
-  print('\n--- ⏪ استعادة اللقطة السابقة | Restoring previous snapshot ---');
+  // \n--- ⏪ استعادة اللقطة السابقة
+  print('Restoring previous snapshot ---');
   editor.restore(history.pop()!);
-  print(
-    '✅ المحتوى بعد الاستعادة | Content after restore: ${editor.content}',
-  ); // الفصل الثاني | Chapter 2
+  // ✅ المحتوى بعد الاستعادة
+  print('Content after restore: ${editor.content}'); // الفصل الثاني | Chapter 2
 }

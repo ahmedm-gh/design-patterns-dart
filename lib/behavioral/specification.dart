@@ -4,6 +4,8 @@
 /// that can be combined with AND, OR, and NOT operators.
 library;
 
+// DART EXAMPLE
+
 abstract class Specification<T> {
   bool isSatisfiedBy(T candidate);
 
@@ -62,7 +64,8 @@ class InCategory extends Specification<Product> {
 }
 
 void main() {
-  print('--- 📋 المواصفة | Specification ---');
+  // --- 📋 المواصفة
+  print('Specification ---');
   final products = [
     const Product('Phone', 999, 'Electronics'),
     const Product('Book', 15, 'Education'),
@@ -70,7 +73,8 @@ void main() {
     const Product('Pen', 2, 'Education'),
   ];
 
-  print('المنتجات المتاحة | Available products:');
+  // المنتجات المتاحة
+  print('Available products:');
   products.forEach((p) => print('  - \$p'));
 
   // قواعد عمل قابلة للتركيب
@@ -79,7 +83,8 @@ void main() {
   print('Filter rule: Electronics AND price <= 50');
   final cheapElectronics = CheapProduct(50).and(InCategory('Electronics'));
 
-  print('\n✅ الإلكترونيات الرخيصة المطابقة | Matching Cheap Electronics:');
+  // \n✅ الإلكترونيات الرخيصة المطابقة
+  print('Matching Cheap Electronics:');
   products
       .where(cheapElectronics.isSatisfiedBy)
       .forEach((p) => print('  -> \$p'));

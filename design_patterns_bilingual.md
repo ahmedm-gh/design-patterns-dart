@@ -102,7 +102,8 @@ class CupertinoFactory implements WidgetFactory {
 // --- الاستخدام ---
 // --- Usage ---
 void buildUI(WidgetFactory factory) {
-  print('--- 🛠️ بناء واجهة المستخدم | Building UI ---');
+  // --- 🛠️ بناء واجهة المستخدم
+  print('Building UI ---');
   final button = factory.createButton();
   final textField = factory.createTextField();
   print('🔘 ${button.render()}');
@@ -110,10 +111,12 @@ void buildUI(WidgetFactory factory) {
 }
 
 void main() {
-  print('🍎 استخدام مصنع آبل | Using CupertinoFactory:');
+  // 🍎 استخدام مصنع آبل
+  print('Using CupertinoFactory:');
   buildUI(CupertinoFactory());
 
-  print('\n🤖 استخدام مصنع جوجل | Using MaterialFactory:');
+  // \n🤖 استخدام مصنع جوجل
+  print('Using MaterialFactory:');
   buildUI(MaterialFactory());
 }
 ```
@@ -185,8 +188,10 @@ class PizzaBuilder {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🍕 بناء بيتزا مخصصة | Building Custom Pizza ---');
-  print('جارٍ إضافة المكونات... | Adding ingredients...');
+  // --- 🍕 بناء بيتزا مخصصة
+  print('Building Custom Pizza ---');
+  // جارٍ إضافة المكونات...
+  print('Adding ingredients...');
   
   final pizza = PizzaBuilder()
       .setSize('Large')
@@ -195,7 +200,8 @@ void main() {
       .addTopping('Olives')
       .build();
 
-  print('✅ النتيجة النهائية | Final Result: $pizza');
+  // ✅ النتيجة النهائية
+  print('Final Result: $pizza');
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/creational/builder.dart)
@@ -253,7 +259,8 @@ class PushNotification implements Notification {
 // --- دالّة المصنع ---
 // --- Factory Method ---
 Notification createNotification(String type) {
-  print('--- 🏭 إنشاء إشعار من نوع ($type) | Creating ($type) notification ---');
+  // --- 🏭 إنشاء إشعار من نوع ($type)
+  print('Creating ($type) notification ---');
   return switch (type) {
     'email' => EmailNotification(),
     'sms'   => SmsNotification(),
@@ -325,21 +332,26 @@ class GameConfig {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- ⚙️ إنشاء الإعدادات الافتراضية | Creating Default Config ---');
+  // --- ⚙️ إنشاء الإعدادات الافتراضية
+  print('Creating Default Config ---');
   final defaultConfig = GameConfig(
     difficulty: 'Normal',
     maxPlayers: 4,
     enabledModes: ['Survival', 'Creative'],
   );
-  print('الافتراضي | Default: ${defaultConfig.enabledModes}');
+  // الافتراضي
+  print('Default: ${defaultConfig.enabledModes}');
 
-  print('\n--- 🔄 استنساخ وتعديل | Cloning and Modifying ---');
+  // \n--- 🔄 استنساخ وتعديل
+  print('Cloning and Modifying ---');
   final customConfig = defaultConfig.clone()
     ..difficulty = 'Hard'
     ..enabledModes.add('Adventure');
 
-  print('الافتراضي (لم يتأثر) | Default (unaffected): ${defaultConfig.enabledModes}');
-  print('المُخصَّص (تم تغييره) | Custom (changed): ${customConfig.enabledModes}');
+  // الافتراضي (لم يتأثر)
+  print('Default (unaffected): ${defaultConfig.enabledModes}');
+  // المُخصَّص (تم تغييره)
+  print('Custom (changed): ${customConfig.enabledModes}');
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/creational/prototype.dart)
@@ -392,20 +404,26 @@ class AppConfig {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🌍 طلب نسخة الإعدادات الأولى | Requesting first config instance ---');
+  // --- 🌍 طلب نسخة الإعدادات الأولى
+  print('Requesting first config instance ---');
   final config1 = AppConfig();
   
-  print('--- 🌍 طلب نسخة أخرى | Requesting second config instance ---');
+  // --- 🌍 طلب نسخة أخرى
+  print('Requesting second config instance ---');
   final config2 = AppConfig();
   
-  print('\nتعديل النسخة الأولى... | Modifying first instance...');
+  // \nتعديل النسخة الأولى...
+  print('Modifying first instance...');
   config1.debugMode = true;
 
-  print('\nهل النسختان متطابقتان في الذاكرة؟ | Are instances identical in memory?');
+  // \nهل النسختان متطابقتان في الذاكرة؟
+  print('Are instances identical in memory?');
   print(identical(config1, config2)); // true — نفس النسخة | same instance
   
-  print('تأثير التعديل على النسخة الثانية | Modification effect on second instance:');
-  print('وضع التصحيح | Debug Mode = ${config2.debugMode}'); // true
+  // تأثير التعديل على النسخة الثانية
+  print('Modification effect on second instance:');
+  // وضع التصحيح
+  print('Debug Mode = ${config2.debugMode}'); // true
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/creational/singleton.dart)
@@ -470,9 +488,11 @@ class FileLoggerAdapter implements JsonLogger {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🔌 استخدام المُحوِّل | Using Adapter ---');
+  // --- 🔌 استخدام المُحوِّل
+  print('Using Adapter ---');
   final JsonLogger logger = FileLoggerAdapter(LegacyFileLogger());
-  print('إرسال بيانات JSON... | Sending JSON data...');
+  // إرسال بيانات JSON...
+  print('Sending JSON data...');
   logger.logJson({'event': 'login', 'user': 'ahmad'});
 }
 ```
@@ -539,8 +559,10 @@ class UrgentNotification extends NotificationManager {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🌁 جسر الإشعارات | Notification Bridge ---');
-  print('تجهيز إشعار عاجل عبر الرسائل القصيرة... | Preparing urgent SMS...');
+  // --- 🌁 جسر الإشعارات
+  print('Notification Bridge ---');
+  // تجهيز إشعار عاجل عبر الرسائل القصيرة...
+  print('Preparing urgent SMS...');
   final urgentSms = UrgentNotification(SmsSender());
   urgentSms.notify('الخادم توقف! | Server down!');
 }
@@ -607,16 +629,20 @@ class Folder implements FileSystemEntity {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🗂️ حساب حجم المجلدات | Calculating Folders Size ---');
+  // --- 🗂️ حساب حجم المجلدات
+  print('Calculating Folders Size ---');
   final root = Folder('root')
     ..add(File('readme.md', 100))
     ..add(Folder('src')
       ..add(File('main.dart', 500))
       ..add(File('utils.dart', 300)));
 
-  print('حجم "readme.md" هو 100 | Size of readme.md = 100');
-  print('حجم المجلد الداخلي "src" هو 800 | Size of src = 800');
-  print('📁 إجمالي حجم المجلد الأم | Total root size: ${root.getSize()} byte'); // 900
+  // حجم "readme.md" هو 100
+  print('Size of readme.md = 100');
+  // حجم المجلد الداخلي "src" هو 800
+  print('Size of src = 800');
+  // 📁 إجمالي حجم المجلد الأم
+  print('Total root size: ${root.getSize()} byte'); // 900
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/structural/composite.dart)
@@ -683,18 +709,24 @@ class SugarDecorator implements Coffee {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- ☕ تحضير القهوة | Preparing Coffee ---');
+  // --- ☕ تحضير القهوة
+  print('Preparing Coffee ---');
   Coffee order = SimpleCoffee();
-  print('1. ${order.description} | السعر: \$${order.cost}');
+  // 1. ${order.description}
+  print('السعر: \$${order.cost}');
   
   order = MilkDecorator(order);
-  print('2. إضافة حليب | Adding milk -> السعر: \$${order.cost}');
+  // 2. إضافة حليب
+  print('Adding milk -> السعر: \$${order.cost}');
   
   order = SugarDecorator(order);
-  print('3. إضافة سكر | Adding sugar -> السعر: \$${order.cost}');
+  // 3. إضافة سكر
+  print('Adding sugar -> السعر: \$${order.cost}');
 
-  print('\n✅ الطلب النهائي | Final Order:');
-  print('${order.description} | الإجمالي: \$${order.cost}');
+  // \n✅ الطلب النهائي
+  print('Final Order:');
+  // ${order.description}
+  print('الإجمالي: \$${order.cost}');
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/structural/decorator.dart)
@@ -733,7 +765,8 @@ class VideoDecoder {
 
 class ScreenRenderer {
   void render(String video, String audio) =>
-      print('▶ عرض | Playing: $video + $audio');
+      // ▶ عرض
+  print('Playing: $video + $audio');
 }
 
 // --- الواجهة المُبسَّطة ---
@@ -754,7 +787,8 @@ class MediaPlayer {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🎬 بدء تشغيل الفيلم | Starting Movie ---');
+  // --- 🎬 بدء تشغيل الفيلم
+  print('Starting Movie ---');
   MediaPlayer().play('movie.mp4');
 }
 ```
@@ -804,16 +838,20 @@ class StyleFactory {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🦋 استخدام وزن الذبابة | Using Flyweight ---');
+  // --- 🦋 استخدام وزن الذبابة
+  print('Using Flyweight ---');
   final factory = StyleFactory();
   
-  print('طلب تنسيق (Arial, 12)... | Requesting style...');
+  // طلب تنسيق (Arial, 12)...
+  print('Requesting style...');
   final s1 = factory.getStyle('Arial', 12);
   
-  print('طلب نفس التنسيق مرة أخرى... | Requesting same style again...');
+  // طلب نفس التنسيق مرة أخرى...
+  print('Requesting same style again...');
   final s2 = factory.getStyle('Arial', 12);
   
-  print('\nهل هما نفس الكائن في الذاكرة؟ | Are they the same object in memory?');
+  // \nهل هما نفس الكائن في الذاكرة؟
+  print('Are they the same object in memory?');
   print(identical(s1, s2)); // true — نفس الكائن في الذاكرة | same object in memory
 }
 ```
@@ -848,7 +886,8 @@ abstract class Database {
 
 class RealDatabase implements Database {
   RealDatabase() {
-    print('⏳ جاري الاتصال... | Connecting...');
+    // ⏳ جاري الاتصال...
+  print('Connecting...');
   }
   @override
   String query(String sql) => 'نتائج | Results: $sql';
@@ -862,7 +901,8 @@ class DatabaseProxy implements Database {
     // التهيئة الكسولة — الاتصال عند أول استعلام فقط
     // Lazy initialization — connects on first query only
     _db ??= RealDatabase();
-    print('📋 تسجيل | Logging: $sql');
+    // 📋 تسجيل
+  print('Logging: $sql');
     return _db!.query(sql);
   }
 }
@@ -871,12 +911,14 @@ class DatabaseProxy implements Database {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🛡️ استخدام الوكيل | Using Proxy ---');
+  // --- 🛡️ استخدام الوكيل
+  print('Using Proxy ---');
   final db = DatabaseProxy(); // لم يتصل بعد | Not connected yet
   print('تم إنشاء الوكيل، لكن لم يتم الاتصال بقاعدة البيانات بعد.');
   print('Proxy created, but database not connected yet.\n');
   
-  print('إرسال أول استعلام... | Sending first query...');
+  // إرسال أول استعلام...
+  print('Sending first query...');
   print(db.query('SELECT * FROM users'));
 }
 ```
@@ -948,18 +990,25 @@ class HumanSupport extends SupportHandler {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- ⛓️ سلسلة المسؤولية | Chain of Responsibility ---');
+  // --- ⛓️ سلسلة المسؤولية
+  print('Chain of Responsibility ---');
   final bot = BotSupport();
   bot.setNext(HumanSupport());
 
-  print('\nإرسال طلب استعادة كلمة المرور | Requesting password reset:');
-  print('النتيجة | Result: ${bot.handle('password_reset')}');
+  // \nإرسال طلب استعادة كلمة المرور
+  print('Requesting password reset:');
+  // النتيجة
+  print('Result: ${bot.handle('password_reset')}');
   
-  print('\nإرسال طلب فواتير | Requesting billing details:');
-  print('النتيجة | Result: ${bot.handle('billing')}');
+  // \nإرسال طلب فواتير
+  print('Requesting billing details:');
+  // النتيجة
+  print('Result: ${bot.handle('billing')}');
   
-  print('\nإرسال طلب غير معروف | Requesting unknown issue:');
-  print('النتيجة | Result: ${bot.handle('unknown')}');
+  // \nإرسال طلب غير معروف
+  print('Requesting unknown issue:');
+  // النتيجة
+  print('Result: ${bot.handle('unknown')}');
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/behavioral/chain_of_responsibility.dart)
@@ -1011,7 +1060,8 @@ class TypeCommand implements Command {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 📝 محرر النصوص بالأوامر | Text Editor with Commands ---');
+  // --- 📝 محرر النصوص بالأوامر
+  print('Text Editor with Commands ---');
   final editor = TextEditor();
   final commands = <Command>[];
 
@@ -1024,11 +1074,14 @@ void main() {
   cmd2.execute();
   
   commands.addAll([cmd1, cmd2]);
-  print('✅ المحتوى الحالي | Current Content: "${editor.content}"'); // Hello World!
+  // ✅ المحتوى الحالي
+  print('Current Content: "${editor.content}"'); // Hello World!
 
-  print('\n--- ⏪ تراجع | Undo ---');
+  // \n--- ⏪ تراجع
+  print('Undo ---');
   commands.removeLast().undo();
-  print('✅ المحتوى بعد التراجع | Content after undo: "${editor.content}"'); // Hello
+  // ✅ المحتوى بعد التراجع
+  print('Content after undo: "${editor.content}"'); // Hello
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/behavioral/command.dart)
@@ -1081,13 +1134,17 @@ class AddExp implements Expression {
 void main() {
   // --- الاستخدام: x + y ---
   // --- Usage: x + y ---
-  print('--- 🧮 المُفسِّر | Interpreter ---');
+  // --- 🧮 المُفسِّر
+  print('Interpreter ---');
   final expression = AddExp(NumberExp('x'), NumberExp('y'));
-  print('تعبير | Expression: x + y');
-  print('مع سياق | With context: {x: 10, y: 20}');
+  // تعبير
+  print('Expression: x + y');
+  // مع سياق
+  print('With context: {x: 10, y: 20}');
   
   final result = expression.interpret({'x': 10, 'y': 20});
-  print('✅ النتيجة | Result: $result'); // 30
+  // ✅ النتيجة
+  print('Result: $result'); // 30
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/behavioral/interpreter.dart)
@@ -1154,7 +1211,8 @@ class Playlist {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🎶 قائمة الأغاني | Playlist Iterator ---');
+  // --- 🎶 قائمة الأغاني
+  print('Playlist Iterator ---');
   final playlist = Playlist('My Favorites')
     ..add(Song('Bohemian Rhapsody', 'Queen'))
     ..add(Song('Stairway to Heaven', 'Led Zeppelin'))
@@ -1214,22 +1272,26 @@ class User {
 
   void send(String message) => _room?.sendMessage(message, this);
   void receive(String message, String from) =>
-      print('$name تلقّى من | received from $from: $message');
+      // $name تلقّى من
+  print('received from $from: $message');
 }
 
 
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 💬 غرفة الدردشة | Chat Room Mediator ---');
+  // --- 💬 غرفة الدردشة
+  print('Chat Room Mediator ---');
   final room = ChatRoom();
   final ali = User('Ali');
   final sara = User('Sara');
   
-  print('تسجيل علي وسارة في الغرفة... | Registering Ali and Sara...');
+  // تسجيل علي وسارة في الغرفة...
+  print('Registering Ali and Sara...');
   room..register(ali)..register(sara);
 
-  print('\nعلي يُرسل رسالة | Ali sends a message:');
+  // \nعلي يُرسل رسالة
+  print('Ali sends a message:');
   ali.send('مرحبًا! | Hello!');
 }
 ```
@@ -1283,25 +1345,32 @@ class History {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 💾 التذكار (حفظ واستعادة) | Memento (Save/Restore) ---');
+  // --- 💾 التذكار (حفظ واستعادة)
+  print('Memento (Save/Restore) ---');
   final editor = Editor();
   final history = History();
 
-  print('📝 كتابة الفصل الأول... | Writing Chapter 1...');
+  // 📝 كتابة الفصل الأول...
+  print('Writing Chapter 1...');
   editor.content = 'الفصل الأول | Chapter 1';
   history.push(editor.save());
 
-  print('📝 كتابة الفصل الثاني... | Writing Chapter 2...');
+  // 📝 كتابة الفصل الثاني...
+  print('Writing Chapter 2...');
   editor.content = 'الفصل الثاني | Chapter 2';
   history.push(editor.save());
 
-  print('❌ خطأ مطبعي! | Typo made!');
+  // ❌ خطأ مطبعي!
+  print('Typo made!');
   editor.content = 'نص خاطئ! | Wrong text!';
-  print('المحتوى الحالي | Current content: ${editor.content}');
+  // المحتوى الحالي
+  print('Current content: ${editor.content}');
 
-  print('\n--- ⏪ استعادة اللقطة السابقة | Restoring previous snapshot ---');
+  // \n--- ⏪ استعادة اللقطة السابقة
+  print('Restoring previous snapshot ---');
   editor.restore(history.pop()!);
-  print('✅ المحتوى بعد الاستعادة | Content after restore: ${editor.content}'); // الفصل الثاني | Chapter 2
+  // ✅ المحتوى بعد الاستعادة
+  print('Content after restore: ${editor.content}'); // الفصل الثاني | Chapter 2
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/behavioral/memento.dart)
@@ -1344,21 +1413,28 @@ class EventEmitter<T> {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 👀 المُراقِب | Observer ---');
+  // --- 👀 المُراقِب
+  print('Observer ---');
   final priceTracker = EventEmitter<double>();
 
-  print('إضافة مراقب للسعر... | Adding price observer...');
-  priceTracker.on((price) => print('📊 السعر الجديد | New price: \$$price'));
+  // إضافة مراقب للسعر...
+  print('Adding price observer...');
+  priceTracker.on((price) => // 📊 السعر الجديد
+  print('New price: \$$price'));
   
-  print('إضافة مراقب للتنبيهات... | Adding alert observer...');
+  // إضافة مراقب للتنبيهات...
+  print('Adding alert observer...');
   priceTracker.on((price) {
-    if (price < 50) print('� تنبيه: السعر منخفض جدًا! | Alert: Price is too low!');
+    if (price < 50) // � تنبيه: السعر منخفض جدًا!
+  print('Alert: Price is too low!');
   });
 
-  print('\nتحديث السعر إلى 75 | Updating price to 75:');
+  // \nتحديث السعر إلى 75
+  print('Updating price to 75:');
   priceTracker.emit(75.0);
   
-  print('\nتحديث السعر إلى 45 | Updating price to 45:');
+  // \nتحديث السعر إلى 45
+  print('Updating price to 45:');
   priceTracker.emit(45.0);
 }
 ```
@@ -1404,7 +1480,8 @@ class ProcessingState implements OrderState {
 class DeliveredState implements OrderState {
   @override
   void next(Order order) =>
-      print('اكتمل بالفعل! | Already completed!');
+      // اكتمل بالفعل!
+  print('Already completed!');
   @override
   String get status => 'تم التوصيل | Delivered';
 }
@@ -1418,17 +1495,23 @@ class Order {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 📦 تتبع حالة الطلب | Order State Tracker ---');
+  // --- 📦 تتبع حالة الطلب
+  print('Order State Tracker ---');
   final order = Order();
-  print('الحالة الأولى | Initial State: ${order.state.status}');
+  // الحالة الأولى
+  print('Initial State: ${order.state.status}');
   
-  print('\nتحديث الحالة... | Proceeding to next state...');
+  // \nتحديث الحالة...
+  print('Proceeding to next state...');
   order.proceed();
-  print('الحالة الجديدة | New State: ${order.state.status}');
+  // الحالة الجديدة
+  print('New State: ${order.state.status}');
   
-  print('\nتحديث الحالة... | Proceeding to next state...');
+  // \nتحديث الحالة...
+  print('Proceeding to next state...');
   order.proceed();
-  print('الحالة النهائية | Final State: ${order.state.status}');
+  // الحالة النهائية
+  print('Final State: ${order.state.status}');
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/behavioral/state.dart)
@@ -1484,17 +1567,23 @@ class Sorter {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🧠 الاستراتيجية | Strategy ---');
+  // --- 🧠 الاستراتيجية
+  print('Strategy ---');
   final data = [3, 1, 2, 9, 5, 7];
-  print('البيانات الأصلية | Original data: $data');
+  // البيانات الأصلية
+  print('Original data: $data');
 
-  print('\n⏳ الفرز باستخدام "الفقاعات" | Sorting using "Bubble Sort":');
+  // \n⏳ الفرز باستخدام "الفقاعات"
+  print('Sorting using "Bubble Sort":');
   final sorter = Sorter(bubbleSort);
-  print('النتيجة | Result: ${sorter.sort(data)}');
+  // النتيجة
+  print('Result: ${sorter.sort(data)}');
 
-  print('\n⚡ التبديل إلى "الفرز السريع" للبيانات | Swapping to "Quick Sort":');
+  // \n⚡ التبديل إلى "الفرز السريع" للبيانات
+  print('Swapping to "Quick Sort":');
   sorter.strategy = quickSort;
-  print('النتيجة | Result: ${sorter.sort(data)}');
+  // النتيجة
+  print('Result: ${sorter.sort(data)}');
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/behavioral/strategy.dart)
@@ -1529,7 +1618,8 @@ abstract class DataExporter {
   List<String> fetchData();          // عملية أوّلية | Primitive operation
   String format(List<String> data);  // عملية أوّلية | Primitive operation
   void save(String output) =>
-      print('💾 حفظ | Saved: $output'); // خُطّاف | Hook
+      // 💾 حفظ
+  print('Saved: $output'); // خُطّاف | Hook
 }
 
 class CsvExporter extends DataExporter {
@@ -1553,10 +1643,12 @@ class JsonExporter extends DataExporter {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 📄 أسلوب القالب (تصدير كـ CSV) | Template Method (CSV Export) ---');
+  // --- 📄 أسلوب القالب (تصدير كـ CSV)
+  print('Template Method (CSV Export) ---');
   CsvExporter().export();
   
-  print('\n--- � أسلوب القالب (تصدير كـ JSON) | Template Method (JSON Export) ---');
+  // \n--- � أسلوب القالب (تصدير كـ JSON)
+  print('Template Method (JSON Export) ---');
   JsonExporter().export();
 }
 ```
@@ -1615,20 +1707,24 @@ abstract class ShapeVisitor {
 class AreaCalculator implements ShapeVisitor {
   @override
   void visitCircle(Circle c) =>
-      print('مساحة الدائرة | Circle area: ${3.14159 * c.radius * c.radius}');
+      // مساحة الدائرة
+  print('Circle area: ${3.14159 * c.radius * c.radius}');
 
   @override
   void visitRectangle(Rectangle r) =>
-      print('مساحة المستطيل | Rectangle area: ${r.width * r.height}');
+      // مساحة المستطيل
+  print('Rectangle area: ${r.width * r.height}');
 }
 
 
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🚶‍♂️ الزائر (حساب المساحات) | Visitor (Area Calculation) ---');
+  // --- 🚶‍♂️ الزائر (حساب المساحات)
+  print('Visitor (Area Calculation) ---');
   final shapes = <Shape>[Circle(5), Rectangle(4, 6)];
-  print('الأشكال: دائرة (5)، مستطيل (4x6) | Shapes: Circle(5), Rectangle(4, 6)\n');
+  // الأشكال: دائرة (5)، مستطيل (4x6)
+  print('Shapes: Circle(5), Rectangle(4, 6)\n');
   
   final calculator = AreaCalculator();
 
@@ -1720,7 +1816,8 @@ class ConnectionPool {
 
 
 void main() {
-  print('--- ♻️ تجمُّع الكائنات | Object Pool ---');
+  // --- ♻️ تجمُّع الكائنات
+  print('Object Pool ---');
   final pool = ConnectionPool(maxSize: 2);
 
   print('طلب أول اتصال...');
@@ -1728,16 +1825,20 @@ void main() {
   print('طلب ثاني اتصال...');
   final conn2 = pool.acquire(); // ⏳ Creating connection #2
   
-  print('\nتنفيذ استعلام... | Executing query...');
+  // \nتنفيذ استعلام...
+  print('Executing query...');
   print(conn1.query('SELECT * FROM users'));
 
-  print('\nإعادة الاتصال الأول للتجمُّع... | Releasing first connection...');
+  // \nإعادة الاتصال الأول للتجمُّع...
+  print('Releasing first connection...');
   pool.release(conn1);          // 🔓 Released connection #1
   
-  print('طلب اتصال ثالث... | Requesting third connection...');
+  // طلب اتصال ثالث...
+  print('Requesting third connection...');
   final conn3 = pool.acquire(); // ♻️ Reusing connection #1
 
-  print('هل الاتصال 3 هو نفسه 1؟ | Is conn3 same as conn1? ${identical(conn1, conn3)}'); // true
+  // هل الاتصال 3 هو نفسه 1؟
+  print('Is conn3 same as conn1? ${identical(conn1, conn3)}'); // true
   pool.release(conn2);
   pool.release(conn3);
 }
@@ -1804,18 +1905,22 @@ class UserService {
 
 
 void main() {
-  print('--- 💉 حقن الاعتمادية | Dependency Injection ---');
+  // --- 💉 حقن الاعتمادية
+  print('Dependency Injection ---');
   // إنتاج: حقن الخدمة الحقيقية | Production: inject real service
-  print('إنتاج: استخدام خدمة البريد الحقيقية | Production: using SMTP');
+  // إنتاج: استخدام خدمة البريد الحقيقية
+  print('Production: using SMTP');
   UserService(SmtpEmailService()).register('user@example.com');
 
   print('\n---\n');
 
   // اختبار: حقن خدمة وهمية | Testing: inject fake service
-  print('اختبار: استخدام خدمة بريد وهمية | Testing: using Fake service');
+  // اختبار: استخدام خدمة بريد وهمية
+  print('Testing: using Fake service');
   final fakeEmail = FakeEmailService();
   UserService(fakeEmail).register('test@example.com');
-  print('قائمة المُرسل إليهم (وهمي) | Sent list (fake): ${fakeEmail.sent}');
+  // قائمة المُرسل إليهم (وهمي)
+  print('Sent list (fake): ${fakeEmail.sent}');
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/creational/dependency_injection.dart)
@@ -1866,7 +1971,8 @@ class Logger {
 
 
 void main() {
-  print('--- 👯 المُتعدِّد | Multiton ---');
+  // --- 👯 المُتعدِّد
+  print('Multiton ---');
   print('جلب مسجل المصادقة (أول مرة)...');
   final authLogger1 = Logger('auth');    // 🆕 Creating
   
@@ -1876,8 +1982,10 @@ void main() {
   print('جلب مسجل قاعدة البيانات...');
   final dbLogger = Logger('database');   // 🆕 Creating
 
-  print('\nهل مسجل المصادقة 1 و 2 متطابقان؟ | Are auth 1 and 2 identical? ${identical(authLogger1, authLogger2)}');
-  print('هل مسجل المصادقة وقاعدة البيانات متطابقان؟ | Are auth and db identical? ${identical(authLogger1, dbLogger)}');
+  // \nهل مسجل المصادقة 1 و 2 متطابقان؟
+  print('Are auth 1 and 2 identical? ${identical(authLogger1, authLogger2)}');
+  // هل مسجل المصادقة وقاعدة البيانات متطابقان؟
+  print('Are auth and db identical? ${identical(authLogger1, dbLogger)}');
 
   print('');
   authLogger1.log('User logged in');   // [auth] User logged in
@@ -1939,16 +2047,21 @@ extension NumListStats on List<num> {
 
 void main() {
   print('--- 🧩 كائن الامتداد (Extensions) ---');
-  print('1. امتداد على النصوص | String Extension:');
+  // 1. امتداد على النصوص
+  print('String Extension:');
   print('النص الأصلي: "hello world" -> بعد التكبير: "${'hello world'.titleCase}"');
   print('النص الأصلي: "Long text here" -> القص (8): "${'Long text here'.truncate(8)}"');
   print('هل "user@mail.com" بريد إلكتروني؟ ${'user@mail.com'.isEmail}');
 
-  print('\n2. امتداد على القوائم | List Extension:');
+  // \n2. امتداد على القوائم
+  print('List Extension:');
   final List<num> scores = [85, 92, 78, 95, 88];
-  print('الدرجات | Scores: $scores');
-  print('المجموع | Sum: ${scores.sum}');       // Sum: 438
-  print('المتوسط | Average: ${scores.average}'); // Average: 87.6
+  // الدرجات
+  print('Scores: $scores');
+  // المجموع
+  print('Sum: ${scores.sum}');       // Sum: 438
+  // المتوسط
+  print('Average: ${scores.average}'); // Average: 87.6
 }
 ```
 > 📄 [الكود المصدري | View source code](lib/structural/extension_object.dart)
@@ -2009,18 +2122,24 @@ class Money {
 
 
 void main() {
-  print('--- 💎 كائن القيمة | Value Object ---');
+  // --- 💎 كائن القيمة
+  print('Value Object ---');
   const price = Money(29.99, 'SAR');
   const tax = Money(4.50, 'SAR');
   
-  print('السعر | Price: $price');
-  print('الضريبة | Tax: $tax');
+  // السعر
+  print('Price: $price');
+  // الضريبة
+  print('Tax: $tax');
   
   final total = price + tax;
-  print('\nالإجمالي | Total: $total'); // Total: 34.49 SAR
-  print('الضعف | Double price: ${price * 2}'); // 59.98 SAR
+  // \nالإجمالي
+  print('Total: $total'); // Total: 34.49 SAR
+  // الضعف
+  print('Double price: ${price * 2}'); // 59.98 SAR
 
-  print('\nالمساواة بالقيمة؟ | Value equality?');
+  // \nالمساواة بالقيمة؟
+  print('Value equality?');
   final m1 = const Money(10, 'SAR');
   final m2 = const Money(10, 'SAR');
   print('هل (10 SAR) == (10 SAR)؟ ${m1 == m2}'); // true
@@ -2091,7 +2210,8 @@ class PaymentService {
 
 
 void main() {
-  print('--- 👻 الكائن الفارغ | Null Object ---');
+  // --- 👻 الكائن الفارغ
+  print('Null Object ---');
   // مع تسجيل | With logging
   print('1. الدفع مع استخدام مسجل (Logger) حقيقي:');
   PaymentService(logger: ConsoleLogger()).processPayment(99.99);
@@ -2192,7 +2312,8 @@ class InCategory extends Specification<Product> {
 
 
 void main() {
-  print('--- 📋 المواصفة | Specification ---');
+  // --- 📋 المواصفة
+  print('Specification ---');
   final products = [
     const Product('Phone', 999, 'Electronics'),
     const Product('Book', 15, 'Education'),
@@ -2200,7 +2321,8 @@ void main() {
     const Product('Pen', 2, 'Education'),
   ];
   
-  print('المنتجات المتاحة | Available products:');
+  // المنتجات المتاحة
+  print('Available products:');
   products.forEach((p) => print('  - \$p'));
 
   // قواعد عمل قابلة للتركيب
@@ -2209,7 +2331,8 @@ void main() {
   print('Filter rule: Electronics AND price <= 50');
   final cheapElectronics = CheapProduct(50).and(InCategory('Electronics'));
 
-  print('\n✅ الإلكترونيات الرخيصة المطابقة | Matching Cheap Electronics:');
+  // \n✅ الإلكترونيات الرخيصة المطابقة
+  print('Matching Cheap Electronics:');
   products.where(cheapElectronics.isSatisfiedBy).forEach((p) => print('  -> \$p'));
 }
 ```
@@ -2281,20 +2404,25 @@ class FakeAnalytics implements AnalyticsService {
 
 
 void main() {
-  print('--- 📍 مُحدِّد الخدمات | Service Locator ---');
+  // --- 📍 مُحدِّد الخدمات
+  print('Service Locator ---');
   final locator = ServiceLocator();
 
   // تسجيل | Register
-  print('تسجيل خدمة Firebase... | Registering Firebase service...');
+  // تسجيل خدمة Firebase...
+  print('Registering Firebase service...');
   locator.register<AnalyticsService>(FirebaseAnalytics());
 
   // استرجاع من أي مكان | Retrieve from anywhere
-  print('استرجاع الخدمة وتتبع حدث... | Retrieving service and tracking...');
+  // استرجاع الخدمة وتتبع حدث...
+  print('Retrieving service and tracking...');
   locator.get<AnalyticsService>().track('page_view');
 
-  print('\n--- للاختبار | For Testing ---');
+  // \n--- للاختبار
+  print('For Testing ---');
   // للاختبار: تبديل التنفيذ | For testing: swap
-  print('تبديل التنفيذ إلى خدمة وهمية... | Swapping to fake service...');
+  // تبديل التنفيذ إلى خدمة وهمية...
+  print('Swapping to fake service...');
   locator.reset();
   locator.register<AnalyticsService>(FakeAnalytics());
   locator.get<AnalyticsService>().track('page_view');
@@ -2365,24 +2493,31 @@ class InMemoryUserRepository implements UserRepository {
 
 
 void main() {
-  print('--- 🗄️ المستودع | Repository ---');
-  print('تهيئة مستودع في الذاكرة... | Initializing in-memory repo...');
+  // --- 🗄️ المستودع
+  print('Repository ---');
+  // تهيئة مستودع في الذاكرة...
+  print('Initializing in-memory repo...');
   final UserRepository repo = InMemoryUserRepository();
 
-  print('\nحفظ مستخدمين جدد... | Saving new users...');
+  // \nحفظ مستخدمين جدد...
+  print('Saving new users...');
   repo.save(const User(id: 1, name: 'Ali', email: 'ali@mail.com'));
   repo.save(const User(id: 2, name: 'Sara', email: 'sara@mail.com'));
 
-  print('جميع المستخدمين | All users:');
+  // جميع المستخدمين
+  print('All users:');
   repo.findAll().forEach((u) => print('  - \$u'));
   
-  print('\nالبحث عن المستخدم رقم 1 | Find user #1:');
+  // \nالبحث عن المستخدم رقم 1
+  print('Find user #1:');
   print('  -> \${repo.findById(1)}');
 
-  print('\nحذف المستخدم رقم 2... | Deleting user #2...');
+  // \nحذف المستخدم رقم 2...
+  print('Deleting user #2...');
   repo.delete(2);
   
-  print('المستخدمون بعد الحذف | Users after delete:');
+  // المستخدمون بعد الحذف
+  print('Users after delete:');
   repo.findAll().forEach((u) => print('  - \$u'));
 }
 ```

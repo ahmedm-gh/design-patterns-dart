@@ -4,6 +4,8 @@
 /// processes it or forwards it to the next handler.
 library;
 
+// DART EXAMPLE
+
 abstract class SupportHandler {
   SupportHandler? _next;
 
@@ -40,16 +42,23 @@ class HumanSupport extends SupportHandler {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- ⛓️ سلسلة المسؤولية | Chain of Responsibility ---');
+  // --- ⛓️ سلسلة المسؤولية
+  print('Chain of Responsibility ---');
   final bot = BotSupport();
   bot.setNext(HumanSupport());
 
-  print('\nإرسال طلب استعادة كلمة المرور | Requesting password reset:');
-  print('النتيجة | Result: ${bot.handle('password_reset')}');
+  // \nإرسال طلب استعادة كلمة المرور
+  print('Requesting password reset:');
+  // النتيجة
+  print('Result: ${bot.handle('password_reset')}');
 
-  print('\nإرسال طلب فواتير | Requesting billing details:');
-  print('النتيجة | Result: ${bot.handle('billing')}');
+  // \nإرسال طلب فواتير
+  print('Requesting billing details:');
+  // النتيجة
+  print('Result: ${bot.handle('billing')}');
 
-  print('\nإرسال طلب غير معروف | Requesting unknown issue:');
-  print('النتيجة | Result: ${bot.handle('unknown')}');
+  // \nإرسال طلب غير معروف
+  print('Requesting unknown issue:');
+  // النتيجة
+  print('Result: ${bot.handle('unknown')}');
 }

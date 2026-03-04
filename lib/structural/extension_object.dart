@@ -4,6 +4,8 @@
 /// Dart's `extension` methods provide first-class support for this.
 library;
 
+// DART EXAMPLE
+
 // إضافة قدرات لـ String
 // Adding capabilities to String
 extension StringFormatting on String {
@@ -30,7 +32,8 @@ extension NumListStats on List<num> {
 
 void main() {
   print('--- 🧩 كائن الامتداد (Extensions) ---');
-  print('1. امتداد على النصوص | String Extension:');
+  // 1. امتداد على النصوص
+  print('String Extension:');
   print(
     'النص الأصلي: "hello world" -> بعد التكبير: "${'hello world'.titleCase}"',
   );
@@ -39,9 +42,13 @@ void main() {
   );
   print('هل "user@mail.com" بريد إلكتروني؟ ${'user@mail.com'.isEmail}');
 
-  print('\n2. امتداد على القوائم | List Extension:');
+  // \n2. امتداد على القوائم
+  print('List Extension:');
   final List<num> scores = [85, 92, 78, 95, 88];
-  print('الدرجات | Scores: $scores');
-  print('المجموع | Sum: ${scores.sum}'); // Sum: 438
-  print('المتوسط | Average: ${scores.average}'); // Average: 87.6
+  // الدرجات
+  print('Scores: $scores');
+  // المجموع
+  print('Sum: ${scores.sum}'); // Sum: 438
+  // المتوسط
+  print('Average: ${scores.average}'); // Average: 87.6
 }

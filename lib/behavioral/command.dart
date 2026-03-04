@@ -4,6 +4,8 @@
 /// execution, undo/redo, and logging.
 library;
 
+// DART EXAMPLE
+
 abstract class Command {
   void execute();
   void undo();
@@ -31,7 +33,8 @@ class TypeCommand implements Command {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 📝 محرر النصوص بالأوامر | Text Editor with Commands ---');
+  // --- 📝 محرر النصوص بالأوامر
+  print('Text Editor with Commands ---');
   final editor = TextEditor();
   final commands = <Command>[];
 
@@ -44,13 +47,12 @@ void main() {
   cmd2.execute();
 
   commands.addAll([cmd1, cmd2]);
-  print(
-    '✅ المحتوى الحالي | Current Content: "${editor.content}"',
-  ); // Hello World!
+  // ✅ المحتوى الحالي
+  print('Current Content: "${editor.content}"'); // Hello World!
 
-  print('\n--- ⏪ تراجع | Undo ---');
+  // \n--- ⏪ تراجع
+  print('Undo ---');
   commands.removeLast().undo();
-  print(
-    '✅ المحتوى بعد التراجع | Content after undo: "${editor.content}"',
-  ); // Hello
+  // ✅ المحتوى بعد التراجع
+  print('Content after undo: "${editor.content}"'); // Hello
 }

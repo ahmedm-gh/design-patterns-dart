@@ -4,6 +4,8 @@
 /// lifetime and provides a global access point to it.
 library;
 
+// DART EXAMPLE
+
 class AppConfig {
   // Dart يضمن التهيئة مرة واحدة
   // Dart guarantees static final fields are initialized once
@@ -24,24 +26,24 @@ class AppConfig {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print(
-    '--- 🌍 طلب نسخة الإعدادات الأولى | Requesting first config instance ---',
-  );
+  // --- 🌍 طلب نسخة الإعدادات الأولى
+  print('Requesting first config instance ---');
   final config1 = AppConfig();
 
-  print('--- 🌍 طلب نسخة أخرى | Requesting second config instance ---');
+  // --- 🌍 طلب نسخة أخرى
+  print('Requesting second config instance ---');
   final config2 = AppConfig();
 
-  print('\nتعديل النسخة الأولى... | Modifying first instance...');
+  // \nتعديل النسخة الأولى...
+  print('Modifying first instance...');
   config1.debugMode = true;
 
-  print(
-    '\nهل النسختان متطابقتان في الذاكرة؟ | Are instances identical in memory?',
-  );
+  // \nهل النسختان متطابقتان في الذاكرة؟
+  print('Are instances identical in memory?');
   print(identical(config1, config2)); // true — نفس النسخة | same instance
 
-  print(
-    'تأثير التعديل على النسخة الثانية | Modification effect on second instance:',
-  );
-  print('وضع التصحيح | Debug Mode = ${config2.debugMode}'); // true
+  // تأثير التعديل على النسخة الثانية
+  print('Modification effect on second instance:');
+  // وضع التصحيح
+  print('Debug Mode = ${config2.debugMode}'); // true
 }

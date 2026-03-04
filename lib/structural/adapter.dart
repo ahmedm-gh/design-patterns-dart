@@ -4,6 +4,8 @@
 /// by the client. Acts as a compatibility bridge.
 library;
 
+// DART EXAMPLE
+
 // --- الواجهة المتوقعة ---
 // --- Target Interface ---
 abstract class JsonLogger {
@@ -32,8 +34,10 @@ class FileLoggerAdapter implements JsonLogger {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🔌 استخدام المُحوِّل | Using Adapter ---');
+  // --- 🔌 استخدام المُحوِّل
+  print('Using Adapter ---');
   final JsonLogger logger = FileLoggerAdapter(LegacyFileLogger());
-  print('إرسال بيانات JSON... | Sending JSON data...');
+  // إرسال بيانات JSON...
+  print('Sending JSON data...');
   logger.logJson({'event': 'login', 'user': 'ahmad'});
 }

@@ -4,6 +4,8 @@
 /// create their own, improving testability and flexibility.
 library;
 
+// DART EXAMPLE
+
 abstract class EmailService {
   void send(String to, String body);
 }
@@ -36,16 +38,20 @@ class UserService {
 }
 
 void main() {
-  print('--- 💉 حقن الاعتمادية | Dependency Injection ---');
+  // --- 💉 حقن الاعتمادية
+  print('Dependency Injection ---');
   // إنتاج: حقن الخدمة الحقيقية | Production: inject real service
-  print('إنتاج: استخدام خدمة البريد الحقيقية | Production: using SMTP');
+  // إنتاج: استخدام خدمة البريد الحقيقية
+  print('Production: using SMTP');
   UserService(SmtpEmailService()).register('user@example.com');
 
   print('\n---\n');
 
   // اختبار: حقن خدمة وهمية | Testing: inject fake service
-  print('اختبار: استخدام خدمة بريد وهمية | Testing: using Fake service');
+  // اختبار: استخدام خدمة بريد وهمية
+  print('Testing: using Fake service');
   final fakeEmail = FakeEmailService();
   UserService(fakeEmail).register('test@example.com');
-  print('قائمة المُرسل إليهم (وهمي) | Sent list (fake): ${fakeEmail.sent}');
+  // قائمة المُرسل إليهم (وهمي)
+  print('Sent list (fake): ${fakeEmail.sent}');
 }

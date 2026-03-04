@@ -4,6 +4,8 @@
 /// An alternative to Dependency Injection for simpler setups.
 library;
 
+// DART EXAMPLE
+
 class ServiceLocator {
   static final ServiceLocator _instance = ServiceLocator._internal();
   final _singletons = <Type, Object>{};
@@ -42,20 +44,25 @@ class FakeAnalytics implements AnalyticsService {
 }
 
 void main() {
-  print('--- 📍 مُحدِّد الخدمات | Service Locator ---');
+  // --- 📍 مُحدِّد الخدمات
+  print('Service Locator ---');
   final locator = ServiceLocator();
 
   // تسجيل | Register
-  print('تسجيل خدمة Firebase... | Registering Firebase service...');
+  // تسجيل خدمة Firebase...
+  print('Registering Firebase service...');
   locator.register<AnalyticsService>(FirebaseAnalytics());
 
   // استرجاع من أي مكان | Retrieve from anywhere
-  print('استرجاع الخدمة وتتبع حدث... | Retrieving service and tracking...');
+  // استرجاع الخدمة وتتبع حدث...
+  print('Retrieving service and tracking...');
   locator.get<AnalyticsService>().track('page_view');
 
-  print('\n--- للاختبار | For Testing ---');
+  // \n--- للاختبار
+  print('For Testing ---');
   // للاختبار: تبديل التنفيذ | For testing: swap
-  print('تبديل التنفيذ إلى خدمة وهمية... | Swapping to fake service...');
+  // تبديل التنفيذ إلى خدمة وهمية...
+  print('Swapping to fake service...');
   locator.reset();
   locator.register<AnalyticsService>(FakeAnalytics());
   locator.get<AnalyticsService>().track('page_view');

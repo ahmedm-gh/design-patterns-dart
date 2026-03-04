@@ -4,6 +4,8 @@
 /// from scratch.
 library;
 
+// DART EXAMPLE
+
 class GameConfig {
   String difficulty;
   int maxPlayers;
@@ -29,23 +31,24 @@ class GameConfig {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- ⚙️ إنشاء الإعدادات الافتراضية | Creating Default Config ---');
+  // --- ⚙️ إنشاء الإعدادات الافتراضية
+  print('Creating Default Config ---');
   final defaultConfig = GameConfig(
     difficulty: 'Normal',
     maxPlayers: 4,
     enabledModes: ['Survival', 'Creative'],
   );
-  print('الافتراضي | Default: ${defaultConfig.enabledModes}');
+  // الافتراضي
+  print('Default: ${defaultConfig.enabledModes}');
 
-  print('\n--- 🔄 استنساخ وتعديل | Cloning and Modifying ---');
+  // \n--- 🔄 استنساخ وتعديل
+  print('Cloning and Modifying ---');
   final customConfig = defaultConfig.clone()
     ..difficulty = 'Hard'
     ..enabledModes.add('Adventure');
 
-  print(
-    'الافتراضي (لم يتأثر) | Default (unaffected): ${defaultConfig.enabledModes}',
-  );
-  print(
-    'المُخصَّص (تم تغييره) | Custom (changed): ${customConfig.enabledModes}',
-  );
+  // الافتراضي (لم يتأثر)
+  print('Default (unaffected): ${defaultConfig.enabledModes}');
+  // المُخصَّص (تم تغييره)
+  print('Custom (changed): ${customConfig.enabledModes}');
 }

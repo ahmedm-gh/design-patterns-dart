@@ -4,6 +4,8 @@
 /// decide which class to instantiate.
 library;
 
+// DART EXAMPLE
+
 // --- واجهة المُنتَج ---
 // --- Product Interface ---
 abstract class Notification {
@@ -30,9 +32,8 @@ class PushNotification implements Notification {
 // --- دالّة المصنع ---
 // --- Factory Method ---
 Notification createNotification(String type) {
-  print(
-    '--- 🏭 إنشاء إشعار من نوع ($type) | Creating ($type) notification ---',
-  );
+  // --- 🏭 إنشاء إشعار من نوع ($type)
+  print('Creating ($type) notification ---');
   return switch (type) {
     'email' => EmailNotification(),
     'sms' => SmsNotification(),

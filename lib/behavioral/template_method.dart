@@ -4,6 +4,8 @@
 /// override specific steps.
 library;
 
+// DART EXAMPLE
+
 abstract class DataExporter {
   // أسلوب القالب — الهيكل الثابت
   // Template Method — the fixed skeleton
@@ -15,7 +17,9 @@ abstract class DataExporter {
 
   List<String> fetchData(); // عملية أوّلية | Primitive operation
   String format(List<String> data); // عملية أوّلية | Primitive operation
-  void save(String output) => print('💾 حفظ | Saved: $output'); // خُطّاف | Hook
+  void save(String output) =>
+      // 💾 حفظ
+      print('Saved: $output'); // خُطّاف | Hook
 }
 
 class CsvExporter extends DataExporter {
@@ -38,13 +42,11 @@ class JsonExporter extends DataExporter {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print(
-    '--- 📄 أسلوب القالب (تصدير كـ CSV) | Template Method (CSV Export) ---',
-  );
+  // --- 📄 أسلوب القالب (تصدير كـ CSV)
+  print('Template Method (CSV Export) ---');
   CsvExporter().export();
 
-  print(
-    '\n--- � أسلوب القالب (تصدير كـ JSON) | Template Method (JSON Export) ---',
-  );
+  // \n--- � أسلوب القالب (تصدير كـ JSON)
+  print('Template Method (JSON Export) ---');
   JsonExporter().export();
 }

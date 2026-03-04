@@ -4,6 +4,8 @@
 /// operations without modifying element classes.
 library;
 
+// DART EXAMPLE
+
 // --- العناصر ---
 // --- Elements ---
 abstract class Shape {
@@ -38,21 +40,23 @@ abstract class ShapeVisitor {
 class AreaCalculator implements ShapeVisitor {
   @override
   void visitCircle(Circle c) =>
-      print('مساحة الدائرة | Circle area: ${3.14159 * c.radius * c.radius}');
+      // مساحة الدائرة
+      print('Circle area: ${3.14159 * c.radius * c.radius}');
 
   @override
   void visitRectangle(Rectangle r) =>
-      print('مساحة المستطيل | Rectangle area: ${r.width * r.height}');
+      // مساحة المستطيل
+      print('Rectangle area: ${r.width * r.height}');
 }
 
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🚶‍♂️ الزائر (حساب المساحات) | Visitor (Area Calculation) ---');
+  // --- 🚶‍♂️ الزائر (حساب المساحات)
+  print('Visitor (Area Calculation) ---');
   final shapes = <Shape>[Circle(5), Rectangle(4, 6)];
-  print(
-    'الأشكال: دائرة (5)، مستطيل (4x6) | Shapes: Circle(5), Rectangle(4, 6)\n',
-  );
+  // الأشكال: دائرة (5)، مستطيل (4x6)
+  print('Shapes: Circle(5), Rectangle(4, 6)\n');
 
   final calculator = AreaCalculator();
 

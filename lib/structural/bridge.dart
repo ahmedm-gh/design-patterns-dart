@@ -4,6 +4,8 @@
 /// can vary independently. Uses composition instead of inheritance.
 library;
 
+// DART EXAMPLE
+
 // --- التنفيذ ---
 // --- Implementor ---
 abstract class MessageSender {
@@ -41,8 +43,10 @@ class UrgentNotification extends NotificationManager {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🌁 جسر الإشعارات | Notification Bridge ---');
-  print('تجهيز إشعار عاجل عبر الرسائل القصيرة... | Preparing urgent SMS...');
+  // --- 🌁 جسر الإشعارات
+  print('Notification Bridge ---');
+  // تجهيز إشعار عاجل عبر الرسائل القصيرة...
+  print('Preparing urgent SMS...');
   final urgentSms = UrgentNotification(SmsSender());
   urgentSms.notify('الخادم توقف! | Server down!');
 }

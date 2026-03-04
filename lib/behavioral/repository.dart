@@ -4,6 +4,8 @@
 /// decoupling domain logic from storage details.
 library;
 
+// DART EXAMPLE
+
 class User {
   final int id;
   final String name;
@@ -39,23 +41,30 @@ class InMemoryUserRepository implements UserRepository {
 }
 
 void main() {
-  print('--- 🗄️ المستودع | Repository ---');
-  print('تهيئة مستودع في الذاكرة... | Initializing in-memory repo...');
+  // --- 🗄️ المستودع
+  print('Repository ---');
+  // تهيئة مستودع في الذاكرة...
+  print('Initializing in-memory repo...');
   final UserRepository repo = InMemoryUserRepository();
 
-  print('\nحفظ مستخدمين جدد... | Saving new users...');
+  // \nحفظ مستخدمين جدد...
+  print('Saving new users...');
   repo.save(const User(id: 1, name: 'Ali', email: 'ali@mail.com'));
   repo.save(const User(id: 2, name: 'Sara', email: 'sara@mail.com'));
 
-  print('جميع المستخدمين | All users:');
+  // جميع المستخدمين
+  print('All users:');
   repo.findAll().forEach((u) => print('  - \$u'));
 
-  print('\nالبحث عن المستخدم رقم 1 | Find user #1:');
+  // \nالبحث عن المستخدم رقم 1
+  print('Find user #1:');
   print('  -> \${repo.findById(1)}');
 
-  print('\nحذف المستخدم رقم 2... | Deleting user #2...');
+  // \nحذف المستخدم رقم 2...
+  print('Deleting user #2...');
   repo.delete(2);
 
-  print('المستخدمون بعد الحذف | Users after delete:');
+  // المستخدمون بعد الحذف
+  print('Users after delete:');
   repo.findAll().forEach((u) => print('  - \$u'));
 }

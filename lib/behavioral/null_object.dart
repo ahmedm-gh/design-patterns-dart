@@ -4,6 +4,8 @@
 /// eliminating the need for null checks.
 library;
 
+// DART EXAMPLE
+
 abstract class Logger {
   void log(String message);
 }
@@ -38,7 +40,8 @@ class PaymentService {
 }
 
 void main() {
-  print('--- 👻 الكائن الفارغ | Null Object ---');
+  // --- 👻 الكائن الفارغ
+  print('Null Object ---');
   // مع تسجيل | With logging
   print('1. الدفع مع استخدام مسجل (Logger) حقيقي:');
   PaymentService(logger: ConsoleLogger()).processPayment(99.99);

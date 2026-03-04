@@ -4,6 +4,8 @@
 /// not its identity. Two value objects with the same data are equal.
 library;
 
+// DART EXAMPLE
+
 class Money {
   final double amount;
   final String currency;
@@ -32,18 +34,24 @@ class Money {
 }
 
 void main() {
-  print('--- 💎 كائن القيمة | Value Object ---');
+  // --- 💎 كائن القيمة
+  print('Value Object ---');
   const price = Money(29.99, 'SAR');
   const tax = Money(4.50, 'SAR');
 
-  print('السعر | Price: $price');
-  print('الضريبة | Tax: $tax');
+  // السعر
+  print('Price: $price');
+  // الضريبة
+  print('Tax: $tax');
 
   final total = price + tax;
-  print('\nالإجمالي | Total: $total'); // Total: 34.49 SAR
-  print('الضعف | Double price: ${price * 2}'); // 59.98 SAR
+  // \nالإجمالي
+  print('Total: $total'); // Total: 34.49 SAR
+  // الضعف
+  print('Double price: ${price * 2}'); // 59.98 SAR
 
-  print('\nالمساواة بالقيمة؟ | Value equality?');
+  // \nالمساواة بالقيمة؟
+  print('Value equality?');
   final m1 = const Money(10, 'SAR');
   final m2 = const Money(10, 'SAR');
   print('هل (10 SAR) == (10 SAR)؟ ${m1 == m2}'); // true

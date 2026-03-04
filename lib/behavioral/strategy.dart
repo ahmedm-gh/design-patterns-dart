@@ -4,6 +4,8 @@
 /// to swap them at runtime.
 library;
 
+// DART EXAMPLE
+
 typedef SortStrategy = List<int> Function(List<int> data);
 
 // --- استراتيجية الفقاعات ---
@@ -36,15 +38,21 @@ class Sorter {
 void main() {
   // --- الاستخدام ---
   // --- Usage ---
-  print('--- 🧠 الاستراتيجية | Strategy ---');
+  // --- 🧠 الاستراتيجية
+  print('Strategy ---');
   final data = [3, 1, 2, 9, 5, 7];
-  print('البيانات الأصلية | Original data: $data');
+  // البيانات الأصلية
+  print('Original data: $data');
 
-  print('\n⏳ الفرز باستخدام "الفقاعات" | Sorting using "Bubble Sort":');
+  // \n⏳ الفرز باستخدام "الفقاعات"
+  print('Sorting using "Bubble Sort":');
   final sorter = Sorter(bubbleSort);
-  print('النتيجة | Result: ${sorter.sort(data)}');
+  // النتيجة
+  print('Result: ${sorter.sort(data)}');
 
-  print('\n⚡ التبديل إلى "الفرز السريع" للبيانات | Swapping to "Quick Sort":');
+  // \n⚡ التبديل إلى "الفرز السريع" للبيانات
+  print('Swapping to "Quick Sort":');
   sorter.strategy = quickSort;
-  print('النتيجة | Result: ${sorter.sort(data)}');
+  // النتيجة
+  print('Result: ${sorter.sort(data)}');
 }
